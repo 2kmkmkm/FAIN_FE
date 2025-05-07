@@ -1,11 +1,7 @@
 import back from "../../assets/back.svg";
 import { useNavigate } from "react-router-dom";
 
-type TitleProps = {
-  title: string;
-};
-
-export default function Header({ title }: TitleProps) {
+export default function Header({ title }: { title: string }) {
   const nav = useNavigate();
 
   return (

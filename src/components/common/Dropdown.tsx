@@ -4,16 +4,24 @@ import arrow from "../../assets/arrow.svg";
 type DropdownButtonProps = {
   category: string;
   onClick: () => void;
+  isSmall?: boolean;
 };
 
-const DropdownButton = ({ category, onClick }: DropdownButtonProps) => {
+const DropdownButton = ({
+  category,
+  onClick,
+  isSmall,
+}: DropdownButtonProps) => {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="bg-white text-darkgray
-          outline outline-2 outline-offset-[-2px] p-3.5 rounded-[20px] body-m
-       outline-[#EFEFEF] w-full h-fit flex items-center justfiy-between overflow-hidden"
+      className={`${
+        isSmall
+          ? "outline-1 outline-offset-[-1px] px-2 py-1.5 rounded-[5px] body-s"
+          : "outline-2 outline-offset-[-2px] p-3.5 rounded-[20px] body-m"
+      } bg-white text-darkgray outline 
+       outline-[#EFEFEF] w-full h-fit flex items-center justfiy-between overflow-hidden`}
     >
       <div className="flex">{category}</div>
       <img src={arrow} className="w-4" />
@@ -49,9 +57,14 @@ const DropdownMenu = ({ list, onSelect }: DropdownMenuProps) => {
 type DropdownProps = {
   list: string[];
   category: string;
+  isSmall?: boolean;
 };
 
-export default function Dropdown({ list, category }: DropdownProps) {
+export default function Dropdown({
+  list,
+  category,
+  isSmall = false,
+}: DropdownProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedValue, setSelectedValue] = useState<string>(category);
 
@@ -65,6 +78,7 @@ export default function Dropdown({ list, category }: DropdownProps) {
       <DropdownButton
         category={selectedValue}
         onClick={() => setIsOpen((prev) => !prev)}
+        isSmall={isSmall}
       />
       {isOpen && <DropdownMenu list={list} onSelect={handleSelect} />}
     </div>
