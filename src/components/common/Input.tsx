@@ -3,7 +3,7 @@ type InputProps = {
   placeholder: string;
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  edit?: boolean;
+  isEdit?: boolean;
 };
 
 export default function Input({
@@ -11,12 +11,12 @@ export default function Input({
   placeholder,
   value,
   onChange,
-  edit = false,
+  isEdit = false,
 }: InputProps) {
   return (
     <div
       className={`w-full h-fit   bg-[#F9F9F9] outline outline-[#EFEFEF] flex justify-start items-center overflow-hidde ${
-        edit
+        isEdit
           ? "outline-1 outline-offset-[-1px] roudned-[5px] px-2 py-1.5 body-s"
           : "outline-2 outline-offset-[-2px] rounded-[20px] p-3.5 body-m"
       }`}

@@ -1,28 +1,12 @@
-import Input from "./components/common/Input";
-import { useState } from "react";
+import Button from "./components/common/Button";
 
 export default function App() {
-  const [value, setValue] = useState<string>("");
-
-  const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
-
   return (
     <>
-      <Input
-        type="text"
-        placeholder="아이디"
-        value={value}
-        onChange={onChangeValue}
-      />
-      <Input
-        type="text"
-        placeholder="아이디"
-        value={value}
-        onChange={onChangeValue}
-        edit
-      />
+      <Button onClick={() => {}} label="로그인" />
+      <Button onClick={() => {}} label="취소" isCancel />
+      <Button onClick={() => {}} label="확인" isSmall />
+      <Button onClick={() => {}} label="닫기" isSmall isCancel />
     </>
   );
 }
