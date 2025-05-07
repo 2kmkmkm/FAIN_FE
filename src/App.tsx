@@ -1,6 +1,5 @@
-import Header from "./components/common/Header";
-import { Route, Routes } from "react-router-dom";
+import Navigation from "./components/common/Navigation";
 
 export default function App() {
-  return <Header title="안녕" />;
+  return <Navigation />;
 }
