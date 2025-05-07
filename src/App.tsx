@@ -1,7 +1,6 @@
-import Dropdown from "./components/common/Dropdown";
-
-const list = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+import Header from "./components/common/Header";
+import { Route, Routes } from "react-router-dom";
 
 export default function App() {
-  return <Dropdown list={list} category="혈액형" />;
+  return <Header title="안녕" />;
 }
