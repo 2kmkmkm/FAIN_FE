@@ -1,12 +1,7 @@
-import Button from "./components/common/Button";
+import Dropdown from "./components/common/Dropdown";
+
+const list = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
 export default function App() {
-  return (
-    <>
-      <Button onClick={() => {}} label="로그인" />
-      <Button onClick={() => {}} label="취소" isCancel />
-      <Button onClick={() => {}} label="확인" isSmall />
-      <Button onClick={() => {}} label="닫기" isSmall isCancel />
-    </>
-  );
+  return <Dropdown list={list} category="혈액형" />;
 }
