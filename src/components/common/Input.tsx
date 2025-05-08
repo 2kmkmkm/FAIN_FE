@@ -1,24 +1,26 @@
 type InputProps = {
-  type: string;
+  type?: string;
   placeholder: string;
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   isEdit?: boolean;
+  required?: boolean;
 };
 
 export default function Input({
-  type,
+  type = "text",
   placeholder,
   value,
   onChange,
   isEdit = false,
+  required = false,
 }: InputProps) {
   return (
     <div
-      className={`w-full h-fit   bg-[#F9F9F9] outline outline-[#EFEFEF] flex justify-start items-center overflow-hidde ${
+      className={`w-full h-fit bg-[#F9F9F9] outline outline-[#EFEFEF] flex justify-start items-center overflow-hidde ${
         isEdit
           ? "outline-1 outline-offset-[-1px] roudned-[5px] px-2 py-1.5 body-s"
-          : "outline-2 outline-offset-[-2px] rounded-[20px] p-3.5 body-m"
+          : "outline-2 outline-offset-[-2px] rounded-[20px] px-4 py-3.5 body-m"
       }`}
     >
       <input
@@ -27,6 +29,7 @@ export default function Input({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        required={required}
       />
     </div>
   );
