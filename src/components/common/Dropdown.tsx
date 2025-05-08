@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import arrow from "../../assets/arrow.svg";
 
 type DropdownButtonProps = {
@@ -19,7 +19,7 @@ const DropdownButton = ({
       className={`${
         isSmall
           ? "outline-1 outline-offset-[-1px] px-2 py-1.5 rounded-[5px] body-s"
-          : "outline-2 outline-offset-[-2px] p-3.5 rounded-[20px] body-m"
+          : "outline-2 outline-offset-[-2px] px-4 py-3 rounded-[20px] body-m"
       } bg-white text-darkgray outline 
        outline-[#EFEFEF] w-full h-fit flex items-center justfiy-between overflow-hidden`}
     >
@@ -73,8 +73,24 @@ export default function Dropdown({
     setIsOpen(false);
   };
 
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <div className="text-darkgray">
+    <div ref={dropdownRef} className="text-darkgray">
       <DropdownButton
         category={selectedValue}
         onClick={() => setIsOpen((prev) => !prev)}

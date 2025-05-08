@@ -1,22 +1,20 @@
+import type { ButtonHTMLAttributes } from "react";
+
 type ButtonProps = {
-  type?: "submit" | "button";
-  onClick?: () => void;
   label: string;
   isCancel?: boolean;
   isSmall?: boolean;
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function Button({
-  type = "button",
-  onClick,
   label,
   isCancel = false,
   isSmall = false,
+  ...rest
 }: ButtonProps) {
   return (
     <button
-      type={type}
-      onClick={onClick}
+      {...rest}
       className={`${isCancel ? "bg-white text-main" : "bg-main text-white"} ${
         isSmall
           ? "outline-1 outline-offset-[-1px] py-2 rounded-[10px] body-s"

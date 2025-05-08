@@ -23,12 +23,12 @@ export default function LoginPage() {
 
   return (
     <Page>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 justify-center items-center min-h-screen">
         <div className="flex flex-col pb-5 justify-center items-center">
           <img src={logo_img} className="w-52" />
           <img src={logo_word} className="w-32" />
         </div>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5 px-2">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <div className="flex flex-col gap-2.5">
             <Input
               type="text"
@@ -56,7 +56,7 @@ export default function LoginPage() {
               <button
                 type="button"
                 className="text-[#535353] body-s"
-                onClick={() => nav("/singup")}
+                onClick={() => nav("/signup")}
               >
                 회원가입
               </button>

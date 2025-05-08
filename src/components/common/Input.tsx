@@ -1,36 +1,27 @@
-type InputProps = {
-  type?: string;
-  placeholder: string;
-  value: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+import { forwardRef } from "react";
+
+type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   isEdit?: boolean;
-  required?: boolean;
 };
 
-export default function Input({
-  type = "text",
-  placeholder,
-  value,
-  onChange,
-  isEdit = false,
-  required = false,
-}: InputProps) {
-  return (
-    <div
-      className={`w-full h-fit bg-[#F9F9F9] outline outline-[#EFEFEF] flex justify-start items-center overflow-hidde ${
-        isEdit
-          ? "outline-1 outline-offset-[-1px] roudned-[5px] px-2 py-1.5 body-s"
-          : "outline-2 outline-offset-[-2px] rounded-[20px] px-4 py-3.5 body-m"
-      }`}
-    >
-      <input
-        className="w-full h-full focus:outline-none bg-transparent"
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        required={required}
-      />
-    </div>
-  );
-}
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ isEdit = false, ...rest }: InputProps, ref) => {
+    return (
+      <div
+        className={`w-full h-fit bg-[#F9F9F9] outline outline-[#EFEFEF] flex justify-start items-center ${
+          isEdit
+            ? "outline-1 outline-offset-[-1px] rounded-[5px] px-2 py-1.5 body-s"
+            : "outline-2 outline-offset-[-2px] rounded-[20px] px-4 py-3.5 body-m"
+        }`}
+      >
+        <input
+          className="w-full h-full focus:outline-none bg-transparent"
+          ref={ref}
+          {...rest}
+        />
+      </div>
+    );
+  }
+);
+
+export default Input;
