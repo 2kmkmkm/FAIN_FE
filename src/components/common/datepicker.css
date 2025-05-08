@@ -1,0 +1,13 @@
+.react-datepicker-ignore-onclickoutside {
+    background-color: transparent;    
+  }
+
+.react-datepicker-ignore-onclickoutside:focus {
+    outline: none;  
+    border: none;     
+  }
+
+  .react-datepicker__input-container input {
+    background-color: transparent;
+    height: 18px;
+  }

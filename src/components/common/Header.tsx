@@ -20,7 +20,7 @@ export default function Header({ title, isBack = false }: HeaderProps) {
       >
         <img src={back} className="w-2.5" />
       </button>
-      <div className="title text-center flex-1">{title}</div>
+      <div className="heading-m text-center flex-1">{title}</div>
       <button
         type="button"
         className="invisible flex w-5 justify-center items-center"
