@@ -1,5 +1,4 @@
 import Header from "../components/common/Header";
-import Page from "../components/common/Page";
 import GuardianForm from "../components/signup/GuardianForm";
 import PatientBasicForm from "../components/signup/PatientBasicForm";
 import PatientPhysicalForm from "../components/signup/PatientPhysicalForm";
@@ -65,7 +64,7 @@ export default function SignupPage() {
   return (
     <>
       <Header title="회원가입" isBack />
-      <Page>
+      <div className="px-14 flex flex-col">
         <form onSubmit={handleSubmit} className="flex flex-col pt-6 pb-8 gap-7">
           <GuardianForm
             guardian={guardian}
@@ -98,7 +97,7 @@ export default function SignupPage() {
             }}
           />
         )}
-      </Page>
+      </div>
     </>
   );
 }
