@@ -3,8 +3,12 @@ import PatientInfo from "../components/emergency/PatientInfo";
 import Report from "../components/emergency/Report";
 import Hospital from "../components/emergency/Hospital";
 import call from "../assets/call.svg";
+import ResponseModal from "../modals/ResponseModal";
+import { useState } from "react";
 
 export default function EmergencyPage() {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   return (
     <>
       <Header title="낙상 감지" isBack />
@@ -24,11 +28,15 @@ export default function EmergencyPage() {
             <img src={call} className="w-4 flex justify-center" />
             <div className="body-m-bold text-white w-fit">119</div>
           </button>
-          <button className="outline outline-2 outline-offset-[-2px] outline-placeholder py-3 rounded-[20px] flex justify-center items-center">
+          <button
+            className="outline outline-2 outline-offset-[-2px] outline-placeholder py-3 rounded-[20px] flex justify-center items-center"
+            onClick={() => setIsModalOpen(true)}
+          >
             <div className="body-m-bold text-placeholder">닫기</div>
           </button>
         </div>
       </div>
+      {isModalOpen && <ResponseModal />}
     </>
   );
 }
