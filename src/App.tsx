@@ -9,7 +9,7 @@ import EmergencyPage from "./pages/EmergencyPage";
 export default function App() {
   const nav = useNavigate();
 
-  const [isEmergency, setIsEmergency] = useState<boolean>(true);
+  const [isEmergency, setIsEmergency] = useState<boolean>(false);
 
   const handleEmergency = () => {
     setIsEmergency(false);
@@ -18,7 +18,6 @@ export default function App() {
 
   return (
     <>
-      {" "}
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
