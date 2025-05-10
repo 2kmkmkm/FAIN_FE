@@ -4,7 +4,7 @@ type ModalProps = {
   img?: string;
   title?: string;
   contents: string;
-  btnList: { label: string; isCancel: boolean; onClick: () => void }[];
+  btnList: { label: string; isCancel?: boolean; onClick: () => void }[];
 };
 
 export default function Modal({ img, title, contents, btnList }: ModalProps) {
@@ -14,7 +14,7 @@ export default function Modal({ img, title, contents, btnList }: ModalProps) {
         <div className="flex flex-col gap-3">
           <div className="flex flex-row pt-1 justify-start items-center gap-2">
             <img src={img} className="w-7" />
-            <div className="heading-m">{title}</div>
+            <div className="heading-s">{title}</div>
           </div>
           <div className="w-full py-5 flex flex-col justify-start items-start">
             <div className="body-m text-center">{contents}</div>
