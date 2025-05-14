@@ -25,3 +25,11 @@ export const formatBirthInfo = (birth: string): { formattedDate: string; age: nu
 
   return { formattedDate, age };
 };
+
+export const formatDay = (date: Date): string => {
+  const day = date.getDate(); 
+  const dayOfWeek = date.getDay(); 
+  const weekNames = ["일", "월", "화", "수", "목", "금", "토"];
+
+  return `${day}(${weekNames[dayOfWeek]})`;
+};

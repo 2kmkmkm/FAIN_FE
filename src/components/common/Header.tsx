@@ -10,7 +10,10 @@ export default function Header({ title, isBack = false }: HeaderProps) {
   const nav = useNavigate();
 
   return (
-    <div className="w-full h-20 px-5 bg-white flex justify-between items-center shadow-[0px_2px_50px_0px_rgba(0,0,0,0.05)">
+    <div
+      className="w-full h-16 px-5 bg-white flex justify-between items-center shadow-[0_2px_10px_rgba(0,0,0,0.12)]
+"
+    >
       <button
         type="button"
         className={`flex w-5 justify-center items-center ${
