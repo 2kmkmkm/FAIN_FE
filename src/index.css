@@ -12,11 +12,17 @@
   .title {
     @apply text-base font-semibold;
   }
-  .body-s {
+  .body-xs {
     @apply text-xs font-normal;
   }
+  .body-xs-bold {
+    @apply text-xs font-semibold;
+  }
+  .body-s {
+    @apply text-sm font-normal;
+  }
   .body-s-bold {
-    @apply text-xs font-extrabold;
+    @apply text-sm font-semibold;
   }
   .body-m {
     @apply text-base font-normal;
@@ -24,6 +30,9 @@
   .body-m-bold {
     @apply text-base font-semibold;
   }
+  .body-p {  
+    @apply text-sm font-normal leading-6;
+}
 }
 
 @font-face {
