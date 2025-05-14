@@ -1,6 +1,7 @@
 import ai from "../../assets/ai.svg";
 import copy from "../../assets/copy.svg";
 import arrow_down from "../../assets/arrow_down.svg";
+import { copyToClipboard } from "../../utils/copyUtils";
 import { useState, useRef, useEffect } from "react";
 
 export default function Report({ content }: { content: string }) {
@@ -9,6 +10,15 @@ export default function Report({ content }: { content: string }) {
 
   const visibleRef = useRef<HTMLParagraphElement>(null);
   const hiddenRef = useRef<HTMLParagraphElement>(null);
+
+  const handleCopy = async () => {
+    const success = await copyToClipboard(content);
+    if (success) {
+      alert("복사되었습니다.");
+    } else {
+      alert("복사 실패");
+    }
+  };
 
   useEffect(() => {
     const checkLines = () => {
@@ -22,14 +32,14 @@ export default function Report({ content }: { content: string }) {
 
       if (lines > 5) {
         setIsTruncated(true);
+      } else {
+        setIsTruncated(false);
       }
     };
 
-    // 렌더 이후 줄 수 정확히 측정
-    const timeout = setTimeout(checkLines, 0);
-
-    return () => clearTimeout(timeout);
-  }, [content]);
+    requestAnimationFrame(checkLines);
+    return () => {};
+  }, [content, isExpanded]);
 
   return (
     <div className="flex flex-col gap-5">
@@ -38,7 +48,7 @@ export default function Report({ content }: { content: string }) {
           <img src={ai} className="w-5 h-5" />
           <div className="title">AI 리포트</div>
         </div>
-        <button className="flex w-fit">
+        <button className="flex w-fit" onClick={handleCopy}>
           <img src={copy} className="w-5" />
         </button>
       </div>
