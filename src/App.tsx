@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import StreamingPage from "./pages/StreamingPage";
 import EmergencyPage from "./pages/EmergencyPage";
+import AnlaysisPage from "./pages/AnalysisPage";
 
 export default function App() {
   const nav = useNavigate();
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/streaming" element={<StreamingPage />} />
         <Route path="/emergency" element={<EmergencyPage />} />
+        <Route path="/analysis" element={<AnlaysisPage />} />
       </Routes>
       {isEmergency && <EmergencyModal onClick={handleEmergency} />}
     </>

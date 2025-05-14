@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import arrow from "../../assets/arrow.svg";
+import arrow_down from "../../assets/arrow_down.svg";
 
 type DropdownButtonProps = {
   category: string;
@@ -24,7 +24,7 @@ const DropdownButton = ({
        outline-[#EFEFEF] w-full h-fit flex items-center justfiy-between overflow-hidden`}
     >
       <div className="flex">{category}</div>
-      <img src={arrow} className="w-4" />
+      <img src={arrow_down} className="w-4" />
     </button>
   );
 };
