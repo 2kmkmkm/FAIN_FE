@@ -1,12 +1,14 @@
 import ai from "../../assets/ai.svg";
 import copy from "../../assets/copy.svg";
 import arrow_down from "../../assets/arrow_down.svg";
+import Toast from "../common/Toast";
 import { copyToClipboard } from "../../utils/copyUtils";
 import { useState, useRef, useEffect } from "react";
 
 export default function Report({ content }: { content: string }) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [isTruncated, setIsTruncated] = useState<boolean>(false);
+  const [toast, setToast] = useState<boolean>(false);
 
   const visibleRef = useRef<HTMLParagraphElement>(null);
   const hiddenRef = useRef<HTMLParagraphElement>(null);
@@ -14,9 +16,9 @@ export default function Report({ content }: { content: string }) {
   const handleCopy = async () => {
     const success = await copyToClipboard(content);
     if (success) {
-      alert("복사되었습니다.");
+      setToast(true);
     } else {
-      alert("복사 실패");
+      setToast(false);
     }
   };
 
@@ -84,6 +86,7 @@ export default function Report({ content }: { content: string }) {
           {content}
         </p>
       </div>
+      {toast && <Toast setToast={setToast} text="복사가 완료되었습니다" />}
     </div>
   );
 }
