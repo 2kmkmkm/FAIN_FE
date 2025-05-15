@@ -9,9 +9,7 @@ export type GuardianInfo = {
   export type PatientBasicInfo = {
     name: string;
     birth: string;
-    zone_code: string;
-    road_address: string;
-    detail_address: string;
+    address: string;
   };
   
   export type PatientPhysicalInfo = {
@@ -50,3 +48,26 @@ export type GuardianInfo = {
     handleMedicalChange: InputChangeHandler;
   };
   
+  export const GUARDIAN_INFO_CONFIG = [
+  { label: "아이디", key: "user_id" },
+  { label: "이름", key: "f_name" },
+  { label: "연락처", key: "f_tel" },
+];
+
+export const PATIENT_INFO_CONFIG = [
+  { label: "이름", key: "name" },
+  { label: "생년월일", key: "birth" },
+  { label: "주소", key: "address" },
+  { label: "신장", key: "height" },
+  { label: "체중", key: "weight" },
+  { label: "혈액형", key: "bloodType" },
+  { label: "질환", key: "disease" },
+  { label: "알러지", key: "allergy" },
+  { label: "복용약", key: "medicine" },
+  { label: "주요 병원", key: "hospital" },
+];
+
+export const UNIT_MAP: Record<string, string> = {
+  height: "cm",
+  weight: "kg",
+};

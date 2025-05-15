@@ -7,7 +7,7 @@ export default function PatientPhysicalForm({
   handlePhysicalChange,
 }: PatientPhysicalFormProps) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2.5">
       <div className="title pl-2">환자 신체 정보</div>
       <div className="flex flex-col gap-2.5">
         <Input

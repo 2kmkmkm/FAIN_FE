@@ -11,7 +11,7 @@ export default function Header({ title, isBack = false }: HeaderProps) {
 
   return (
     <div
-      className="w-full h-16 px-5 bg-white flex justify-between items-center shadow-[0_2px_10px_rgba(0,0,0,0.12)]
+      className="w-full py-3.5 px-5 bg-white flex justify-between items-center shadow-[0_2px_10px_rgba(0,0,0,0.12)]
 "
     >
       <button

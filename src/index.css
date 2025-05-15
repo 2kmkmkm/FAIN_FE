@@ -7,7 +7,7 @@
     @apply text-xl font-semibold;
   }
   .heading-m {
-    @apply text-2xl font-semibold;
+    @apply text-[1.3rem] font-semibold;
   }
   .title {
     @apply text-base font-semibold;
@@ -48,4 +48,8 @@
   margin: 0px;
   width: 100%;
   box-sizing: border-box;
+}
+
+html {
+  color: #242424;
 }

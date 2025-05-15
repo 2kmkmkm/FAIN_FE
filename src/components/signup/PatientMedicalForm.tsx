@@ -12,7 +12,7 @@ export default function PatientMedicalForm({
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2.5">
       <div className="pl-2 flex flex-row items-center gap-2">
         <div className="title flex w-fit">환자 의료 정보</div>
         <div className="relative w-fit">
