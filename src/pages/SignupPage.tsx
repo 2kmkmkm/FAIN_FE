@@ -26,9 +26,7 @@ export default function SignupPage() {
   const [basic, handleBasicChange] = useFormState({
     name: "",
     birth: "",
-    zone_code: "",
-    road_address: "",
-    detail_address: "",
+    address: "",
   });
 
   const [medical, handleMedicalChange] = useFormState({

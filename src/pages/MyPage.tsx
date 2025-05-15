@@ -6,29 +6,42 @@ import {
   PATIENT_INFO_CONFIG,
   UNIT_MAP,
 } from "../type/userType";
+import { formatBirthInfo } from "../utils/dateUtils";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const guardianData = {
-  guardianId: "2kmkmkm",
-  guardianName: "이경민",
-  guardianPhone: "010-2911-6480",
+  user_id: "2kmkmkm",
+  f_name: "이경민",
+  f_tel: "010-2911-6480",
 };
 
 const patientData = {
   name: "홍길동",
   birth: "2024-05-24",
-  address: "광주광역시 북구 용봉로 77",
+  address: "(61188) 광주광역시 북구 용봉로 77 공과대학 7호관 215호",
   height: 180,
   weight: 70,
   bloodType: "A+",
   disease: "고혈압",
   allergy: "꽃가루",
-  medication: "혈압약",
-  mainHospital: "전남대병원",
+  medicine: "혈압약",
+  hospital: "전남대병원",
 };
 
 export default function MyPage() {
   const nav = useNavigate();
+
+  const [processedPatientData, setProcessedPatientData] = useState(patientData);
+
+  useEffect(() => {
+    const { formattedDate, age } = formatBirthInfo(patientData.birth);
+
+    setProcessedPatientData({
+      ...patientData,
+      birth: `${formattedDate} (만 ${age}세)`,
+    });
+  }, []);
 
   return (
     <>
@@ -47,7 +60,7 @@ export default function MyPage() {
           <InfoBox
             title="환자 정보"
             config={PATIENT_INFO_CONFIG}
-            data={patientData}
+            data={processedPatientData}
             unitMap={UNIT_MAP}
             editable
             onEdit={() => nav("/edit/patient")}

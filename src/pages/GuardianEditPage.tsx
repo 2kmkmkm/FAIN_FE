@@ -2,11 +2,16 @@ import Button from "../components/common/Button";
 import Header from "../components/common/Header";
 import Input from "../components/common/Input";
 
+const data = {
+  user_id: "2kmkmkm",
+  f_name: "이경민",
+  f_tel: "010-2911-6480",
+};
+
 export default function GuardianEditPage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
-
   return (
     <>
       <Header title="보호자 정보 수정" isBack />
@@ -14,15 +19,15 @@ export default function GuardianEditPage() {
         <form className="flex flex-col gap-7" onSubmit={handleSubmit}>
           <div className="flex flex-row">
             <div className="text-placeholder body-m w-28">아이디</div>
-            <div className="body-m">2kmkmkm</div>
+            <div className="body-m">{data.user_id}</div>
           </div>
           <div className="flex flex-row">
             <div className="text-placeholder body-m w-28">이름</div>
-            <Input isEdit />
+            <Input isEdit defaultValue={data.f_name} />
           </div>
           <div className="flex flex-row">
-            <div className="text-placeholder body-m w-28">전화번호</div>
-            <Input isEdit />
+            <div className="text-placeholder body-m w-28">연락처</div>
+            <Input isEdit defaultValue={data.f_tel} type="tel" />
           </div>
           <div
             className="fixed bottom-8

@@ -3,7 +3,7 @@ import Input from "../common/Input";
 import search from "../../assets/search.svg";
 import type { PatientBasicFormProps } from "../../type/userType";
 import { formatDateToString, parseStringToDate } from "../../utils/dateUtils";
-import type { ChangeEvent } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 
 export default function PatientBasicForm({
   basic,
@@ -20,8 +20,18 @@ export default function PatientBasicForm({
     } as ChangeEvent<HTMLInputElement>);
   };
 
+  const [zoneCode, setZoneCode] = useState("");
+  const [roadAddress, setRoadAddress] = useState("");
+  const [detailAddress, setDetailAddress] = useState("");
+  const [address, setAddress] = useState("");
+
+  useEffect(() => {
+    const formatted = `(${zoneCode}) ${roadAddress} ${detailAddress}`;
+    setAddress(formatted.trim());
+  }, [zoneCode, roadAddress, detailAddress]);
+
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2.5">
       <div className="title pl-2">환자 기본 정보</div>
       <div className="flex flex-col gap-2.5">
         <Input
@@ -47,8 +57,8 @@ export default function PatientBasicForm({
             name="zone_code"
             placeholder="우편번호"
             type="number"
-            value={basic.zone_code}
-            onChange={handleBasicChange}
+            value={zoneCode}
+            onChange={(e) => setZoneCode(e.target.value)}
           />
           <button className="bg-main text-white body-s w-14 px-1.5 rounded-[10px] flex justify-center items-center">
             <img src={search} className="w-6" />
@@ -57,14 +67,14 @@ export default function PatientBasicForm({
         <Input
           name="road_address"
           placeholder="주소"
-          value={basic.road_address}
-          onChange={handleBasicChange}
+          value={roadAddress}
+          onChange={(e) => setRoadAddress(e.target.value)}
         />
         <Input
           name="detail_address"
           placeholder="상세 주소"
-          value={basic.detail_address}
-          onChange={handleBasicChange}
+          value={detailAddress}
+          onChange={(e) => setDetailAddress(e.target.value)}
         />
       </div>
     </div>

@@ -18,7 +18,7 @@ export default function InfoBox({
   onEdit,
 }: InfoBoxProps) {
   return (
-    <div className="flex flex-col gap-7">
+    <div className="flex flex-col gap-6">
       <div className="flex justify-between">
         <div className="title">{title}</div>
         {editable && onEdit && (
@@ -28,7 +28,7 @@ export default function InfoBox({
         )}
       </div>
 
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-4">
         {config.map(({ key, label }) => {
           const value = data[key];
           const formatted =
@@ -37,7 +37,7 @@ export default function InfoBox({
               : "-";
 
           return (
-            <div key={key} className="flex gap-5 items-start">
+            <div key={key} className="flex gap-3.5 items-center">
               <div className="w-24 text-placeholder body-s pt-[2px]">
                 {label}
               </div>

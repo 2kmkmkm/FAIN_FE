@@ -15,7 +15,7 @@ export default function LoginPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // 로그인 api
+
     if (!id) setError("아이디를 입력하세요");
     else if (!password) setError("비밀번호를 입력하세요");
   };

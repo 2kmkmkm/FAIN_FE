@@ -6,7 +6,7 @@ export default function GuardianForm({
   handleGuardianChange,
 }: GuardianFormProps) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2.5">
       <div className="title pl-2">보호자 정보</div>
       <div className="flex flex-col gap-2.5">
         <div className="flex flex-row gap-2 h-full">
@@ -16,7 +16,7 @@ export default function GuardianForm({
             value={guardian.user_id}
             onChange={handleGuardianChange}
           />
-          <button className="bg-main text-white body-s w-14 px-1.5 rounded-[10px] flex justify-center items-center">
+          <button className="bg-main text-white body-xs w-14 px-1.5 rounded-[10px] flex justify-center items-center">
             중복
             <br />
             확인
@@ -45,7 +45,7 @@ export default function GuardianForm({
         <Input
           name="f_tel"
           type="tel"
-          placeholder="보호자 전화번호"
+          placeholder="보호자 연락처"
           value={guardian.f_tel}
           onChange={handleGuardianChange}
         />
