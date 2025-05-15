@@ -53,6 +53,9 @@ export default function MyPage() {
             onEdit={() => nav("/edit/patient")}
           />
         </Box>
+        <button className="text-placeholder body-s-bold underline">
+          로그아웃
+        </button>
       </div>
     </>
   );
