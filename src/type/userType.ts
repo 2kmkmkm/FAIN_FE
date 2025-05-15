@@ -50,3 +50,26 @@ export type GuardianInfo = {
     handleMedicalChange: InputChangeHandler;
   };
   
+  export const GUARDIAN_INFO_CONFIG = [
+  { label: "아이디", key: "guardianId" },
+  { label: "이름", key: "guardianName" },
+  { label: "전화번호", key: "guardianPhone" },
+];
+
+export const PATIENT_INFO_CONFIG = [
+  { label: "이름", key: "name" },
+  { label: "생년월일", key: "birth" },
+  { label: "주소", key: "address" },
+  { label: "신장", key: "height" },
+  { label: "체중", key: "weight" },
+  { label: "혈액형", key: "bloodType" },
+  { label: "질환", key: "disease" },
+  { label: "알러지", key: "allergy" },
+  { label: "복용약", key: "medication" },
+  { label: "주요 병원", key: "mainHospital" },
+];
+
+export const UNIT_MAP: Record<string, string> = {
+  height: "cm",
+  weight: "kg",
+};

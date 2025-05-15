@@ -8,6 +8,9 @@ import EmergencyPage from "./pages/EmergencyPage";
 import AnlaysisPage from "./pages/AnalysisPage";
 import HistoryPage from "./pages/HistoryPage";
 import HistoryDetailPage from "./pages/HistoryDetailPage";
+import MyPage from "./pages/MyPage";
+import PatientEditPage from "./pages/PatientEditPage";
+import GuardianEditPage from "./pages/GuardianEditPage";
 
 export default function App() {
   const nav = useNavigate();
@@ -32,6 +35,9 @@ export default function App() {
           path="/history/detail/:reportId"
           element={<HistoryDetailPage />}
         />
+        <Route path="/my" element={<MyPage />} />
+        <Route path="/edit/guardian" element={<GuardianEditPage />} />
+        <Route path="/edit/patient" element={<PatientEditPage />} />
       </Routes>
       {isEmergency && <EmergencyModal onClick={handleEmergency} />}
     </>
