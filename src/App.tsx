@@ -1,6 +1,7 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import EmergencyModal from "./modals/EmergencyModal";
+import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import StreamingPage from "./pages/StreamingPage";
@@ -25,7 +26,8 @@ export default function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/streaming" element={<StreamingPage />} />
         <Route path="/emergency" element={<EmergencyPage />} />
