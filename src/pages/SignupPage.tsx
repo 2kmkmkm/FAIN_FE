@@ -91,7 +91,7 @@ export default function SignupPage() {
           <SignupModal
             onClose={() => {
               setIsModalOpen(false);
-              nav("/login");
+              nav("/");
             }}
           />
         )}
