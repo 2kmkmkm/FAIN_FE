@@ -5,7 +5,6 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
-  Tooltip,
   ResponsiveContainer,
 } from "recharts";
 
@@ -90,7 +89,6 @@ export default function Graph() {
                 );
               }}
             />
-            <Tooltip />
             <Bar dataKey="value" fill="#E57373" barSize={30} />
           </BarChart>
         </ResponsiveContainer>
