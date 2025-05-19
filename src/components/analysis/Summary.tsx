@@ -17,19 +17,19 @@ export default function Summary({
           <div className="title">월간 요약</div>
         </div>
       </div>
-      <div className="flex justify-between items-center text-center gap-3">
+      <div className="flex justify-between items-center text-center gap-3.5">
         <div className="flex flex-col justify-center items-center gap-2">
-          <div className="body-m">낙상</div>
+          <div className="body-m-bold">낙상</div>
           <div className="body-m text-darkgray">{fall}회</div>
         </div>
-        <div className="w-px h-11 bg-[#D9D9D9]"></div>
+        <div className="w-px h-12 bg-[#D9D9D9]"></div>
         <div className="flex flex-col justify-center items-center gap-2">
-          <div className="body-m">병원 이송</div>
+          <div className="body-m-bold">병원 이송</div>
           <div className="body-m text-darkgray">{ambulance}회</div>
         </div>
-        <div className="w-px h-11 bg-[#D9D9D9]"></div>
+        <div className="w-px h-12 bg-[#D9D9D9]"></div>
         <div className="flex flex-col justify-center items-center gap-2">
-          <div className="body-m">자체 조치</div>
+          <div className="body-m-bold">자체 조치</div>
           <div className="body-m text-darkgray">{guardian}회</div>
         </div>
       </div>

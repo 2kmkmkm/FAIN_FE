@@ -2,6 +2,7 @@ import graph from "../../assets/graph.svg";
 import {
   BarChart,
   Bar,
+  CartesianGrid,
   XAxis,
   YAxis,
   Tooltip,
@@ -34,31 +35,36 @@ export default function Graph() {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={formattedData}
-            margin={{ top: 10, bottom: 10, right: 5 }}
+            margin={{ top: 30, bottom: 10, right: 15 }}
           >
+            <CartesianGrid vertical={true} horizontal={true} stroke="#ddd" />
             <XAxis
               dataKey="label"
+              type="category"
+              scale="band"
+              axisLine={false}
               tickLine={false}
-              tick={{ fill: "#aaaaaa", fontSize: 12 }}
               interval={0}
+              tick={{ fill: "#aaa", fontSize: 12 }}
               label={{
                 value: "(시)",
                 position: "insideBottomRight",
                 offset: 0,
-                fill: "#aaaaaa",
+                fill: "#aaa",
                 fontSize: 12,
               }}
             />
             <YAxis
               domain={[0, "auto"]}
+              axisLine={false}
               interval={0}
               width={25}
-              tickCount={4}
+              tickLine={false}
               label={{
-                value: "(회)",
                 position: "insideTop",
-                offset: -10,
-                fill: "#aaaaaa",
+                offset: -25,
+                value: "(회)",
+                fill: "#aaa",
                 fontSize: 12,
               }}
               tick={({
@@ -74,7 +80,7 @@ export default function Graph() {
                 return (
                   <text
                     x={x - 8}
-                    y={y}
+                    y={y + 5}
                     fontSize={12}
                     fill="#aaa"
                     fillOpacity={isFirst ? 0 : 1}
@@ -83,10 +89,9 @@ export default function Graph() {
                   </text>
                 );
               }}
-              tickLine={false}
             />
             <Tooltip />
-            <Bar dataKey="value" fill="#E57373" barSize={20} />
+            <Bar dataKey="value" fill="#E57373" barSize={30} />
           </BarChart>
         </ResponsiveContainer>
       </div>

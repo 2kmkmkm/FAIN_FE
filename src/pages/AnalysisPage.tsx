@@ -32,12 +32,12 @@ export default function AnlaysisPage() {
   return (
     <>
       <Header title="분석" />
-      <div className="px-14 flex flex-col gap-7 pt-3 pb-10">
+      <div className="px-14 flex flex-col gap-7 pt-7 pb-10">
         <div className="flex flex-row justify-center items-center gap-6">
           <button className="w-3" onClick={() => handleMonthChange("prev")}>
             <img src={arrow_calendar} className="w-1.5" />
           </button>
-          <div className="w-fit title text-darkgray">
+          <div className="w-fit heading-s text-darkgray">
             {selectedYear}년 {selectedMonth}월
           </div>
           <button className="w-3" onClick={() => handleMonthChange("next")}>
