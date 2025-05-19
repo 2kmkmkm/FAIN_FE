@@ -20,7 +20,7 @@ export default function Modal({ img, title, contents, btnList }: ModalProps) {
             <div className="body-m text-center">{contents}</div>
           </div>
         </div>
-        <div className="flex justify-center items-center px-5 gap-2 pb-1">
+        <div className="flex justify-center items-center px-3 gap-2 pb-1">
           {btnList.map((item) => (
             <Button
               key={item.label}

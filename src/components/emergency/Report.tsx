@@ -44,9 +44,9 @@ export default function Report({ content }: { content: string }) {
   }, [content, isExpanded]);
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-6">
       <div className="flex flex-row px-2 justify-between items-center">
-        <div className="flex flex-row gap-2.5 items-center">
+        <div className="flex flex-row gap-2 items-center">
           <img src={ai} className="w-5 h-5" />
           <div className="title">AI 리포트</div>
         </div>

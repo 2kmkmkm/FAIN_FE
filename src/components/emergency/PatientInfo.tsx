@@ -7,7 +7,7 @@ export default function PatientInfo() {
   return (
     <div className="flex flex-col gap-7">
       <div className="flex flex-row px-2 justify-between items-center">
-        <div className="flex flex-row gap-2.5 items-center">
+        <div className="flex flex-row gap-2 items-center">
           <img src={person} className="w-5 h-5" />
           <div className="title">환자 정보</div>
         </div>

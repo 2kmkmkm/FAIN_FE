@@ -5,10 +5,10 @@ export default function ResponseModal() {
   const nav = useNavigate();
 
   const onAmbulanceClick = () => {
-    nav(-1);
+    nav("/streaming");
   };
   const onGuardianClick = () => {
-    nav(-1);
+    nav("/streaming");
   };
 
   return (
