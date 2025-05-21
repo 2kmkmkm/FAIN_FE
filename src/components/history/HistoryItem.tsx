@@ -8,7 +8,6 @@ export default function HistoryItem({
   date,
   time,
   action_type,
-  contents,
 }: HistoryProps) {
   const nav = useNavigate();
 
@@ -17,8 +16,8 @@ export default function HistoryItem({
       className="flex flex-col rounded-[20px] justify-center items-center bg-[#FBFBFB] hover:bg-[#F3F3F3]"
       onClick={() => nav(`/history/detail/${reportId}`)}
     >
-      <div className="flex items-center gap-3 px-2 py-4">
-        <img src={caution_pink} className="w-6" />
+      <div className="flex items-center gap-3 px-3 py-4">
+        <img src={caution_pink} className="w-5" />
         <div className="flex flex-col gap-1.5">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-1.5">
@@ -26,11 +25,11 @@ export default function HistoryItem({
               <div className="body-xs text-darkgray w-fit">{time}</div>
             </div>
             <div className="body-xs text-placeholder flex justify-end pr-2">
-              - {action_type}
+              {action_type}
             </div>
           </div>
-          <div className="flex w-fit text-start justfify-start items-start overflow-hidden body-s text-darkgray">
-            {contents}
+          <div className="w-full truncate whitespace-nowrap text-start items-start overflow-hidden body-s text-darkgray">
+            이경민님의 낙상이 감지되었습니다.
           </div>
         </div>
       </div>
