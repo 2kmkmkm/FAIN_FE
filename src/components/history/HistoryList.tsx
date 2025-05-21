@@ -66,14 +66,14 @@ const list = [
 export default function HistoryList() {
   if (!list || list.length === 0) {
     return (
-      <div className="text-placeholder body-m flex justify-center items-center py-5">
+      <div className="text-placeholder body-m flex justify-center items-center pt-5">
         히스토리가 없습니다.
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-3 pb-5">
+    <div className="flex flex-col gap-3">
       <HistoryMonthlyList list={list} />
     </div>
   );

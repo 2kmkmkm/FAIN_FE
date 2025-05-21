@@ -16,7 +16,10 @@ export default function GuardianForm({
             value={guardian.user_id}
             onChange={handleGuardianChange}
           />
-          <button className="bg-main text-white body-xs w-14 px-1.5 rounded-[10px] flex justify-center items-center">
+          <button
+            type="button"
+            className="bg-main text-white body-xs w-14 px-1.5 rounded-[10px] flex justify-center items-center"
+          >
             중복
             <br />
             확인

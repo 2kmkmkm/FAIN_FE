@@ -53,7 +53,7 @@ export default function LoginPage() {
             <Button type="submit" label="로그인" />
             <button
               type="button"
-              className="text-darkgray body-xs"
+              className="text-placeholder body-xs underline"
               onClick={() => nav("/signup")}
             >
               회원가입

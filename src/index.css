@@ -53,3 +53,19 @@
 html {
   color: #242424;
 }
+
+.app-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding-bottom: 0px; /* 기본값 */
+}
+
+.main-content.with-nav {
+  padding-bottom: 95px; /* Navigation 높이만큼 여유를 줌 */
+}

@@ -1,4 +1,3 @@
-import Header from "../components/common/Header";
 import PatientInfo from "../components/emergency/PatientInfo";
 import Report from "../components/emergency/Report";
 import Hospital from "../components/emergency/Hospital";
@@ -11,7 +10,6 @@ export default function EmergencyPage() {
 
   return (
     <>
-      <Header title="낙상 감지" isBack />
       <div className="flex flex-col px-14 pt-7 pb-12 gap-8 min-h-full">
         <div className="flex flex-col gap-2.5 text-center">
           <div className="body-m-bold">2025 / 04 / 02 (수) 23:40</div>

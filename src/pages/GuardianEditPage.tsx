@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Button from "../components/common/Button";
-import Header from "../components/common/Header";
 import Input from "../components/common/Input";
 import EditCompleteModal from "../modals/EditCompleteModal";
 
@@ -19,8 +18,7 @@ export default function GuardianEditPage() {
   };
   return (
     <>
-      <Header title="보호자 정보 수정" isBack />
-      <div className="flex flex-col px-12 py-10 min-h-screen">
+      <div className="flex flex-col px-12 py-10">
         <form className="flex flex-col gap-7" onSubmit={handleSubmit}>
           <div className="flex flex-row">
             <div className="text-placeholder body-m w-28">아이디</div>
