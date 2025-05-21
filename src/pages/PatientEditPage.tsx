@@ -37,7 +37,7 @@ export default function PatientEditPage() {
     setZoneCode(zoneCode);
     setRoadAddress(roadAddress);
     setDetailAddress(detailAddress);
-  }, []);
+  }, [formData.address]);
 
   useEffect(() => {
     const address = fullAddress(zoneCode, roadAddress, detailAddress);

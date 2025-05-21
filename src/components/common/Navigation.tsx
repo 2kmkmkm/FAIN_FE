@@ -11,7 +11,7 @@ import mypage_fill from "../../assets/mypage_fill.svg";
 const NavigationList = [
   {
     label: "스트리밍",
-    nav: "/straming",
+    nav: "/streaming",
     src: streaming,
     selectedSrc: streaming_fill,
   },
@@ -35,23 +35,16 @@ const NavigationList = [
   },
 ];
 
-export default function Navigation({
-  selectedMenu,
-  setSelectedMenu,
-}: {
-  selectedMenu: string;
-  setSelectedMenu: (label: string) => void;
-}) {
+export default function Navigation({ currentPath }: { currentPath: string }) {
   return (
     <div className="left-0 bottom-0 sticky w-full px-5 py-3 bg-white shadow-[0px_-4px_25px_0px_rgba(188,188,188,0.25)] flex justify-center items-center">
       {NavigationList.map((item) => {
-        const isSelected = item.label === selectedMenu;
+        const isSelected = currentPath.startsWith(item.nav);
         return (
           <Link
             key={item.label}
-            to={`${item.nav}`}
+            to={item.nav}
             className="flex flex-col text-center justify-center items-center gap-1.5"
-            onClick={() => setSelectedMenu(item.label)}
           >
             <img
               src={isSelected ? item.selectedSrc : item.src}

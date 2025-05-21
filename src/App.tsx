@@ -9,7 +9,6 @@ export default function App() {
   const loc = useLocation();
 
   const [isEmergency, setIsEmergency] = useState<boolean>(false);
-  const [selectedMenu, setSelectedMenu] = useState<string>("스트리밍");
 
   const showNavigationPaths = ["/streaming", "/analysis", "/history", "/my"];
 
@@ -22,10 +21,7 @@ export default function App() {
     <>
       <AppRoutes />
       {showNavigationPaths.some((path) => loc.pathname.startsWith(path)) && (
-        <Navigation
-          selectedMenu={selectedMenu}
-          setSelectedMenu={setSelectedMenu}
-        />
+        <Navigation currentPath={loc.pathname} />
       )}
       {isEmergency && <EmergencyModal onClick={handleEmergency} />}
     </>
