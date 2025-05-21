@@ -12,7 +12,7 @@ export default function EmergencyPage() {
   return (
     <>
       <Header title="낙상 감지" isBack />
-      <div className="flex flex-col px-14 pt-7 pb-12 gap-8">
+      <div className="flex flex-col px-14 pt-7 pb-12 gap-8 min-h-screen">
         <div className="flex flex-col gap-2.5 text-center">
           <div className="body-m-bold">2025 / 04 / 02 (수) 23:40</div>
           <div className="body-m">홍길동님의 낙상이 감지되었습니다</div>

@@ -5,7 +5,7 @@ export default function HistoryPage() {
   return (
     <>
       <Header title="히스토리" />
-      <div className="flex flex-col py-8 px-12">
+      <div className="flex flex-col py-8 px-12 min-h-screen">
         <HistoryList />
       </div>
     </>

@@ -59,7 +59,7 @@ export default function PatientEditPage() {
   return (
     <>
       <Header title="환자 정보 수정" isBack />
-      <div className="flex flex-col px-12 pt-8 pb-8">
+      <div className="flex flex-col px-12 pt-8 pb-8 min-h-screen">
         <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-5">
             {PATIENT_INFO_CONFIG.map(({ key, label }) => {
