@@ -20,7 +20,7 @@ export default function PatientMedicalForm({
           <img
             ref={infoIconRef}
             src={information}
-            className="w-4"
+            className="w-4 cursor-pointer"
             onClick={() => setIsPopupOpen(true)}
           />
           {isPopupOpen && (
@@ -58,7 +58,10 @@ export default function PatientMedicalForm({
             value={medical.hospital_name}
             onChange={handleMedicalChange}
           />
-          <button className="bg-main text-white body-s w-14 px-1.5 rounded-[10px] flex justify-center items-center">
+          <button
+            type="button"
+            className="bg-main text-white body-s w-14 px-1.5 rounded-[10px] flex justify-center items-center"
+          >
             <img src={search} className="w-7" />
           </button>
         </div>

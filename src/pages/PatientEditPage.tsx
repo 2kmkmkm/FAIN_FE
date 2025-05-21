@@ -94,7 +94,10 @@ export default function PatientEditPage() {
                             type="text"
                             onChange={(e) => setZoneCode(e.target.value)}
                           />
-                          <button className="bg-main text-white body-s w-fit px-1.5 rounded-[8px] flex justify-center items-center">
+                          <button
+                            type="button"
+                            className="bg-main text-white body-s w-fit px-1.5 rounded-[8px] flex justify-center items-center"
+                          >
                             <img src={search} className="w-5" />
                           </button>
                         </div>

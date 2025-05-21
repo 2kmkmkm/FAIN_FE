@@ -60,8 +60,11 @@ export default function PatientBasicForm({
             value={zoneCode}
             onChange={(e) => setZoneCode(e.target.value)}
           />
-          <button className="bg-main text-white body-s w-14 px-1.5 rounded-[10px] flex justify-center items-center">
-            <img src={search} className="w-6" />
+          <button
+            type="button"
+            className="bg-main text-white body-s w-14 px-1.5 rounded-[10px] flex justify-center items-center"
+          >
+            <img src={search} className="w-7" />
           </button>
         </div>
         <Input
