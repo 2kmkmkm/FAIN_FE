@@ -9,7 +9,7 @@ import {
 } from "recharts";
 
 const data = [
-  { time: "00:00", value: 1 },
+  { time: "00:00", value: 0 },
   { time: "06:00", value: 0 },
   { time: "12:00", value: 5 },
   { time: "18:00", value: 3 },
@@ -34,14 +34,14 @@ export default function Graph() {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={formattedData}
-            margin={{ top: 30, bottom: 10, right: 15 }}
+            barCategoryGap="55%"
+            margin={{ top: 30, bottom: 10 }}
           >
-            <CartesianGrid vertical={true} horizontal={true} stroke="#ddd" />
+            <CartesianGrid stroke="#ddd" vertical={false} horizontal={false} />
             <XAxis
               dataKey="label"
-              type="category"
               scale="band"
-              axisLine={false}
+              axisLine={{ stroke: "#aaa", strokeWidth: 1, strokeOpacity: 0.5 }}
               tickLine={false}
               interval={0}
               tick={{ fill: "#aaa", fontSize: 12 }}
@@ -55,9 +55,9 @@ export default function Graph() {
             />
             <YAxis
               domain={[0, "auto"]}
-              axisLine={false}
               interval={0}
-              width={25}
+              width={20}
+              axisLine={{ stroke: "#aaa", strokeWidth: 1, strokeOpacity: 0.5 }}
               tickLine={false}
               label={{
                 position: "insideTop",
@@ -78,7 +78,7 @@ export default function Graph() {
                 const isFirst = payload.value === 0;
                 return (
                   <text
-                    x={x - 8}
+                    x={x - 6}
                     y={y + 5}
                     fontSize={12}
                     fill="#aaa"
@@ -89,7 +89,7 @@ export default function Graph() {
                 );
               }}
             />
-            <Bar dataKey="value" fill="#E57373" barSize={30} />
+            <Bar dataKey="value" fill="#E57373" barSize={25} />
           </BarChart>
         </ResponsiveContainer>
       </div>
