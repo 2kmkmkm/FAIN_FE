@@ -39,8 +39,8 @@ const DropdownMenu = ({ list, isSmall, onSelect }: DropdownMenuProps) => {
   return (
     <div
       className={`${
-        isSmall ? "p-1.5 body-s" : "p-2.5 body-m"
-      } w-full h-fit bg-white rounded-2xl shadow-[0px_2px_15px_0px_rgba(111,111,111,0.20)] flex flex-col gap-2.5 z-10`}
+        isSmall ? "p-2 body-s" : "p-2.5 body-m"
+      } w-full max-h-60 overflow-y-auto bg-white rounded-2xl shadow-[0px_2px_15px_0px_rgba(111,111,111,0.20)] flex flex-col gap-2.5`}
     >
       {list &&
         list.map((item, index) => {
@@ -49,7 +49,7 @@ const DropdownMenu = ({ list, isSmall, onSelect }: DropdownMenuProps) => {
               type="button"
               key={index}
               onClick={() => onSelect(item)}
-              className="hover:bg-[#F6F6F6] px-3 py-1.5 rounded-2xl flex justify-start items-center overflow-hidden"
+              className="hover:bg-[#f4f4f4] h-fit px-2.5 py-5 rounded-2xl flex justify-start items-center overflow-hidden"
             >
               {item}
             </button>
@@ -63,18 +63,21 @@ type DropdownProps = {
   list: string[];
   category: string;
   isSmall?: boolean;
+  onSelect: (label: string) => void;
+  selectedValue: string;
 };
 
 export default function Dropdown({
   list,
   category,
+  onSelect,
+  selectedValue,
   isSmall = false,
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedValue, setSelectedValue] = useState<string>(category);
 
   const handleSelect = (label: string) => {
-    setSelectedValue(label);
+    onSelect(label);
     setIsOpen(false);
   };
 
@@ -95,14 +98,16 @@ export default function Dropdown({
   }, []);
 
   return (
-    <div ref={dropdownRef} className="text-darkgray">
+    <div ref={dropdownRef} className="text-darkgray relative">
       <DropdownButton
-        category={selectedValue}
+        category={selectedValue || category}
         onClick={() => setIsOpen((prev) => !prev)}
         isSmall={isSmall}
       />
       {isOpen && (
-        <DropdownMenu list={list} onSelect={handleSelect} isSmall={isSmall} />
+        <div className="absolute top-full left-0 mt-1 z-10 w-full">
+          <DropdownMenu list={list} onSelect={handleSelect} isSmall={isSmall} />
+        </div>
       )}
     </div>
   );
