@@ -1,6 +1,8 @@
+import { useState } from "react";
 import Button from "../components/common/Button";
 import Header from "../components/common/Header";
 import Input from "../components/common/Input";
+import EditCompleteModal from "../modals/EditCompleteModal";
 
 const data = {
   user_id: "2kmkmkm",
@@ -9,8 +11,11 @@ const data = {
 };
 
 export default function GuardianEditPage() {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsModalOpen(true);
   };
   return (
     <>
@@ -37,6 +42,7 @@ export default function GuardianEditPage() {
           </div>
         </form>
       </div>
+      {isModalOpen && <EditCompleteModal category="보호자" />}
     </>
   );
 }

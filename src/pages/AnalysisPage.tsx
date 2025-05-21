@@ -52,7 +52,7 @@ export default function AnlaysisPage() {
         <Report
           content="홍길동님의 기저질환과 여러 상황을 종합해 보았을 때, 심혈관 이상으로
           인한 급작스러운 의식 저하 가능성이 있습니다. 환자 상태를 즉시
-          확인해주세요. "
+          확인해주세요."
         />
       </div>
     </>

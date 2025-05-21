@@ -1,5 +1,6 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Navigation from "./components/common/Navigation";
 import EmergencyModal from "./modals/EmergencyModal";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
@@ -17,6 +18,7 @@ export default function App() {
   const nav = useNavigate();
 
   const [isEmergency, setIsEmergency] = useState<boolean>(false);
+  const [selectedMenu, setSelectedMenu] = useState<string>("스트리밍");
 
   const handleEmergency = () => {
     setIsEmergency(false);
@@ -41,6 +43,10 @@ export default function App() {
         <Route path="/edit/guardian" element={<GuardianEditPage />} />
         <Route path="/edit/patient" element={<PatientEditPage />} />
       </Routes>
+      <Navigation
+        selectedMenu={selectedMenu}
+        setSelectedMenu={setSelectedMenu}
+      />
       {isEmergency && <EmergencyModal onClick={handleEmergency} />}
     </>
   );

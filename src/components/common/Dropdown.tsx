@@ -31,12 +31,17 @@ const DropdownButton = ({
 
 type DropdownMenuProps = {
   list: string[];
+  isSmall: boolean;
   onSelect: (label: string) => void;
 };
 
-const DropdownMenu = ({ list, onSelect }: DropdownMenuProps) => {
+const DropdownMenu = ({ list, isSmall, onSelect }: DropdownMenuProps) => {
   return (
-    <div className="w-full h-fit p-2.5 body-m bg-white rounded-2xl shadow-[0px_2px_15px_0px_rgba(111,111,111,0.20)] flex flex-col gap-2.5 z-10">
+    <div
+      className={`${
+        isSmall ? "p-1.5 body-s" : "p-2.5 body-m"
+      } w-full h-fit bg-white rounded-2xl shadow-[0px_2px_15px_0px_rgba(111,111,111,0.20)] flex flex-col gap-2.5 z-10`}
+    >
       {list &&
         list.map((item, index) => {
           return (
@@ -96,7 +101,9 @@ export default function Dropdown({
         onClick={() => setIsOpen((prev) => !prev)}
         isSmall={isSmall}
       />
-      {isOpen && <DropdownMenu list={list} onSelect={handleSelect} />}
+      {isOpen && (
+        <DropdownMenu list={list} onSelect={handleSelect} isSmall={isSmall} />
+      )}
     </div>
   );
 }

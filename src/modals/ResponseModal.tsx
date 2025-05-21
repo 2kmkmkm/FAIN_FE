@@ -16,7 +16,7 @@ export default function ResponseModal() {
       contents="어떤 조치를 취하셨습니까?"
       btnList={[
         { label: "119 이송", onClick: onAmbulanceClick },
-        { label: "보호자 조치", isCancel: true, onClick: onGuardianClick },
+        { label: "자체 조치", isCancel: true, onClick: onGuardianClick },
       ]}
     />
   );
