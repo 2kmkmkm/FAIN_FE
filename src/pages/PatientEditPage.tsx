@@ -2,9 +2,11 @@ import Button from "../components/common/Button";
 import Header from "../components/common/Header";
 import Input from "../components/common/Input";
 import search from "../assets/search.svg";
+import Dropdown from "../components/common/Dropdown";
 import { fullAddress, parseAddress } from "../utils/addressUtils";
 import { PATIENT_INFO_CONFIG } from "../type/userType";
 import { useState, useEffect } from "react";
+import EditCompleteModal from "../modals/EditCompleteModal";
 
 const data = {
   name: "홍길동",
@@ -20,6 +22,8 @@ const data = {
 };
 
 export default function PatientEditPage() {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   const [formData, setFormData] = useState({ ...data });
 
   const [zoneCode, setZoneCode] = useState("");
@@ -49,36 +53,35 @@ export default function PatientEditPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsModalOpen(true);
   };
 
   return (
     <>
       <Header title="환자 정보 수정" isBack />
-      <div className="flex flex-col px-12 pt-8 pb-8">
-        <form className="flex flex-col gap-7" onSubmit={handleSubmit}>
+      <div className="flex flex-col px-12 pt-8 pb-8 min-h-screen">
+        <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-5">
             {PATIENT_INFO_CONFIG.map(({ key, label }) => {
               if (key === "address") return null;
 
               const value = formData[key as keyof typeof formData];
-              const inputType =
-                key === "height" || key === "weight" ? "number" : "text";
 
-              return (
-                <div key={key} className="flex flex-col gap-5">
-                  <div className="flex gap-5 items-start">
-                    <div className="w-24 text-placeholder body-s pt-[2px]">
-                      {label}
+              if (key === "birth") {
+                return (
+                  <div key={key} className="flex flex-col gap-5">
+                    <div className="flex gap-5 items-start">
+                      <div className="w-24 text-placeholder body-s pt-[2px]">
+                        {label}
+                      </div>
+                      <Input
+                        isEdit
+                        defaultValue={value}
+                        type="date"
+                        onChange={(e) => handleChange(key, e.target.value)}
+                      />
                     </div>
-                    <Input
-                      isEdit
-                      defaultValue={String(value)}
-                      type={inputType}
-                      onChange={(e) => handleChange(key, e.target.value)}
-                    />
-                  </div>
 
-                  {key === "birth" && (
                     <div className="flex gap-5 items-start">
                       <div className="w-24 text-placeholder body-s pt-[2px]">
                         주소
@@ -109,7 +112,36 @@ export default function PatientEditPage() {
                         />
                       </div>
                     </div>
-                  )}
+                  </div>
+                );
+              }
+
+              if (key === "bloodType") {
+                return (
+                  <div key={key} className="flex gap-5 items-start">
+                    <div className="w-24 text-placeholder body-s pt-[2px]">
+                      {label}
+                    </div>
+                    <Dropdown
+                      isSmall
+                      category="혈액형"
+                      list={["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]}
+                    />
+                  </div>
+                );
+              }
+
+              return (
+                <div key={key} className="flex gap-5 items-start">
+                  <div className="w-24 text-placeholder body-s pt-[2px]">
+                    {label}
+                  </div>
+                  <Input
+                    isEdit
+                    defaultValue={String(value)}
+                    type="text"
+                    onChange={(e) => handleChange(key, e.target.value)}
+                  />
                 </div>
               );
             })}
@@ -118,6 +150,7 @@ export default function PatientEditPage() {
           <Button label="수정" type="submit" />
         </form>
       </div>
+      {isModalOpen && <EditCompleteModal category="환자" />}
     </>
   );
 }

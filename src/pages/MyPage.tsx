@@ -46,7 +46,7 @@ export default function MyPage() {
   return (
     <>
       <Header title="마이페이지" />
-      <div className="flex flex-col px-12 gap-5 pt-8 pb-10">
+      <div className="flex flex-col px-12 gap-5 pt-8 pb-10 min-h-screen">
         <Box>
           <InfoBox
             title="보호자 정보"
@@ -66,9 +66,7 @@ export default function MyPage() {
             onEdit={() => nav("/edit/patient")}
           />
         </Box>
-        <button className="text-placeholder body-s-bold underline">
-          로그아웃
-        </button>
+        <button className="text-placeholder body-s underline">로그아웃</button>
       </div>
     </>
   );

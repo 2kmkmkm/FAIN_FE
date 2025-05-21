@@ -2,14 +2,14 @@ import graph from "../../assets/graph.svg";
 import {
   BarChart,
   Bar,
+  CartesianGrid,
   XAxis,
   YAxis,
-  Tooltip,
   ResponsiveContainer,
 } from "recharts";
 
 const data = [
-  { time: "00:00", value: 1 },
+  { time: "00:00", value: 0 },
   { time: "06:00", value: 0 },
   { time: "12:00", value: 5 },
   { time: "18:00", value: 3 },
@@ -34,31 +34,36 @@ export default function Graph() {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={formattedData}
-            margin={{ top: 10, bottom: 10, right: 5 }}
+            barCategoryGap="55%"
+            margin={{ top: 30, bottom: 10 }}
           >
+            <CartesianGrid stroke="#ddd" vertical={false} horizontal={false} />
             <XAxis
               dataKey="label"
+              scale="band"
+              axisLine={{ stroke: "#aaa", strokeWidth: 1, strokeOpacity: 0.5 }}
               tickLine={false}
-              tick={{ fill: "#aaaaaa", fontSize: 12 }}
               interval={0}
+              tick={{ fill: "#aaa", fontSize: 12 }}
               label={{
                 value: "(시)",
                 position: "insideBottomRight",
                 offset: 0,
-                fill: "#aaaaaa",
+                fill: "#aaa",
                 fontSize: 12,
               }}
             />
             <YAxis
               domain={[0, "auto"]}
               interval={0}
-              width={25}
-              tickCount={4}
+              width={20}
+              axisLine={{ stroke: "#aaa", strokeWidth: 1, strokeOpacity: 0.5 }}
+              tickLine={false}
               label={{
-                value: "(회)",
                 position: "insideTop",
-                offset: -10,
-                fill: "#aaaaaa",
+                offset: -25,
+                value: "(회)",
+                fill: "#aaa",
                 fontSize: 12,
               }}
               tick={({
@@ -73,8 +78,8 @@ export default function Graph() {
                 const isFirst = payload.value === 0;
                 return (
                   <text
-                    x={x - 8}
-                    y={y}
+                    x={x - 6}
+                    y={y + 5}
                     fontSize={12}
                     fill="#aaa"
                     fillOpacity={isFirst ? 0 : 1}
@@ -83,10 +88,8 @@ export default function Graph() {
                   </text>
                 );
               }}
-              tickLine={false}
             />
-            <Tooltip />
-            <Bar dataKey="value" fill="#E57373" barSize={20} />
+            <Bar dataKey="value" fill="#E57373" barSize={25} />
           </BarChart>
         </ResponsiveContainer>
       </div>

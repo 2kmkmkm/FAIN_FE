@@ -1,6 +1,8 @@
+import { useState } from "react";
 import Button from "../components/common/Button";
 import Header from "../components/common/Header";
 import Input from "../components/common/Input";
+import EditCompleteModal from "../modals/EditCompleteModal";
 
 const data = {
   user_id: "2kmkmkm",
@@ -9,13 +11,16 @@ const data = {
 };
 
 export default function GuardianEditPage() {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsModalOpen(true);
   };
   return (
     <>
       <Header title="보호자 정보 수정" isBack />
-      <div className="flex flex-col px-12 py-10">
+      <div className="flex flex-col px-12 py-10 min-h-screen">
         <form className="flex flex-col gap-7" onSubmit={handleSubmit}>
           <div className="flex flex-row">
             <div className="text-placeholder body-m w-28">아이디</div>
@@ -37,6 +42,7 @@ export default function GuardianEditPage() {
           </div>
         </form>
       </div>
+      {isModalOpen && <EditCompleteModal category="보호자" />}
     </>
   );
 }

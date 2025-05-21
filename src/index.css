@@ -4,7 +4,7 @@
 
 @layer utilities {
   .heading-s {
-    @apply text-xl font-semibold;
+    @apply text-[1.15rem] font-semibold;
   }
   .heading-m {
     @apply text-[1.3rem] font-semibold;
@@ -31,7 +31,7 @@
     @apply text-base font-semibold;
   }
   .body-p {  
-    @apply text-sm font-normal leading-6;
+    @apply text-[0.8rem] font-normal leading-6;
 }
 }
 

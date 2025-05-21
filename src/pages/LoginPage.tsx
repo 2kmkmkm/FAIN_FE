@@ -22,11 +22,11 @@ export default function LoginPage() {
 
   return (
     <div className="flex flex-col px-14 gap-6 justify-center items-center min-h-screen">
-      <div className="flex flex-col pb-5 justify-center items-center">
+      <div className="flex flex-col pb-8 justify-center items-center">
         <img src={logo_img} className="w-52" />
         <img src={logo_word} className="w-32" />
       </div>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
         <div className="flex flex-col gap-2.5">
           <Input
             type="text"
@@ -49,11 +49,11 @@ export default function LoginPage() {
           >
             {error}
           </Alert>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2.5">
             <Button type="submit" label="로그인" />
             <button
               type="button"
-              className="text-[#535353] body-s"
+              className="text-darkgray body-xs"
               onClick={() => nav("/signup")}
             >
               회원가입

@@ -3,5 +3,4 @@ export type HistoryProps = {
     date: Date,
     time: string,
     action_type: string,
-    contents: string,
 }

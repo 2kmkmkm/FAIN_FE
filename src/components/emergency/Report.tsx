@@ -44,9 +44,9 @@ export default function Report({ content }: { content: string }) {
   }, [content, isExpanded]);
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-6">
       <div className="flex flex-row px-2 justify-between items-center">
-        <div className="flex flex-row gap-2.5 items-center">
+        <div className="flex flex-row gap-2 items-center">
           <img src={ai} className="w-5 h-5" />
           <div className="title">AI 리포트</div>
         </div>
@@ -54,10 +54,10 @@ export default function Report({ content }: { content: string }) {
           <img src={copy} className="w-5" />
         </button>
       </div>
-      <div className="relative body-p  px-7 pt-7 pb-6 bg-[#F8F8F8] rounded-[20px]">
+      <div className="relative body-p px-7 pt-7 pb-7 bg-[#F8F8F8] rounded-[20px]">
         <p
           ref={visibleRef}
-          className={`transition-all duration-100 mb-4 ${
+          className={`transition-all duration-100 ${
             !isExpanded && isTruncated ? "line-clamp-5" : ""
           }
           }`}
@@ -67,7 +67,7 @@ export default function Report({ content }: { content: string }) {
 
         {isTruncated && (
           <button
-            className="flex justify-center w-full"
+            className="flex justify-center w-full pt-3.5"
             onClick={() => setIsExpanded((prev) => !prev)}
           >
             <img
