@@ -57,6 +57,20 @@ export default function SignupPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const isEmpty = [
+      ...Object.values(guardian),
+      ...Object.values(basic),
+      ...Object.values(physical),
+      ...Object.values(medical),
+    ].some((value) => value.trim() === "");
+
+    if (isEmpty) {
+      alert("모든 항목을 입력해주세요.");
+      return;
+    }
+
+    setIsModalOpen(true);
   };
 
   return (
@@ -81,11 +95,7 @@ export default function SignupPage() {
             medical={medical}
             handleMedicalChange={handleMedicalChange}
           />
-          <Button
-            type="submit"
-            label="회원가입"
-            onClick={() => setIsModalOpen(true)}
-          />
+          <Button type="submit" label="회원가입" />
         </form>
         {isModalOpen && (
           <SignupModal
