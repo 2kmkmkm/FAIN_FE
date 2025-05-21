@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import play from "../../assets/play.svg";
 import stop from "../../assets/stop.svg";
 
