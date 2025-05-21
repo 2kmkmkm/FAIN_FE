@@ -14,7 +14,9 @@ export default function Hospital() {
           <div className="body-s w-fit">광주 병원</div>
           <div className="flex flex-row gap-1.5 w-fit">
             <div className="body-s">062-000-0000</div>
-            <img src={call_green} className="w-3" />
+            <button onClick={() => (window.location.href = "tel: 01029116480")}>
+              <img src={call_green} className="w-3" />
+            </button>
           </div>
         </div>
       </Box>

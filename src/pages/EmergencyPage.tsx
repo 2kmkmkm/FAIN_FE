@@ -28,7 +28,10 @@ export default function EmergencyPage() {
         />
         <Hospital />
         <div className="flex flex-row gap-2.5">
-          <button className="bg-red py-3 rounded-[20px] flex justify-center items-center gap-3">
+          <button
+            className="bg-red py-3 rounded-[20px] flex justify-center items-center gap-3"
+            onClick={() => (window.location.href = "tel: 119")}
+          >
             <img src={call} className="w-4 flex justify-center" />
             <div className="body-m-bold text-white w-fit">119</div>
           </button>
