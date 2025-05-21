@@ -1,4 +1,3 @@
-import Header from "../components/common/Header";
 import Box from "../components/common/Box";
 import InfoBox from "../components/mypage/InfoBox";
 import {
@@ -44,30 +43,29 @@ export default function MyPage() {
   }, []);
 
   return (
-    <>
-      <Header title="마이페이지" />
-      <div className="flex flex-col px-12 gap-5 pt-8 pb-10 min-h-screen">
-        <Box>
-          <InfoBox
-            title="보호자 정보"
-            config={GUARDIAN_INFO_CONFIG}
-            data={guardianData}
-            editable
-            onEdit={() => nav("/edit/guardian")}
-          />
-        </Box>
-        <Box>
-          <InfoBox
-            title="환자 정보"
-            config={PATIENT_INFO_CONFIG}
-            data={processedPatientData}
-            unitMap={UNIT_MAP}
-            editable
-            onEdit={() => nav("/edit/patient")}
-          />
-        </Box>
-        <button className="text-placeholder body-s underline">로그아웃</button>
-      </div>
-    </>
+    <div className="flex flex-col px-12 gap-5 pt-8">
+      <Box>
+        <InfoBox
+          title="보호자 정보"
+          config={GUARDIAN_INFO_CONFIG}
+          data={guardianData}
+          editable
+          onEdit={() => nav("/edit/guardian")}
+        />
+      </Box>
+      <Box>
+        <InfoBox
+          title="환자 정보"
+          config={PATIENT_INFO_CONFIG}
+          data={processedPatientData}
+          unitMap={UNIT_MAP}
+          editable
+          onEdit={() => nav("/edit/patient")}
+        />
+      </Box>
+      <button className="text-placeholder body-xs-bold underline">
+        로그아웃
+      </button>
+    </div>
   );
 }
