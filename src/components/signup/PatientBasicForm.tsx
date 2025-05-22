@@ -24,6 +24,7 @@ export default function PatientBasicForm({
   const [roadAddress, setRoadAddress] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
   const [address, setAddress] = useState("");
+  console.log(address);
 
   useEffect(() => {
     const formatted = `(${zoneCode}) ${roadAddress} ${detailAddress}`;
