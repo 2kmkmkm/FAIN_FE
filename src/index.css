@@ -63,9 +63,9 @@ html {
 
 .main-content {
   flex: 1;
-  padding-bottom: 0px; /* 기본값 */
+  padding-bottom: 0px; 
 }
 
 .main-content.with-nav {
-  padding-bottom: 95px; /* Navigation 높이만큼 여유를 줌 */
+  padding-bottom: 95px; 
 }
