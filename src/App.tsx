@@ -5,6 +5,8 @@ import AppRoutes from "./AppRoutes";
 import Header from "./components/common/Header";
 import Navigation from "./components/common/Navigation";
 import EmergencyModal from "./modals/EmergencyModal";
+import LoadingScreen from "./components/common/LoadingScreen";
+import ScrollToTop from "./components/common/ScrollTop";
 
 export default function App() {
   const nav = useNavigate();
@@ -25,6 +27,7 @@ export default function App() {
 
   return (
     <div className="app-container">
+      <ScrollToTop />
       {currentHeader && (
         <Header title={currentHeader.title} isBack={currentHeader.isBack} />
       )}
@@ -36,6 +39,7 @@ export default function App() {
 
       {shouldShowNavigation && <Navigation currentPath={loc.pathname} />}
       {isEmergency && <EmergencyModal onClick={handleEmergency} />}
+      <LoadingScreen />
     </div>
   );
 }
