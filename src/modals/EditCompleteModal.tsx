@@ -10,6 +10,7 @@ export default function EditCompleteModal({
 
   const onClickButton = (category: string) => {
     nav("/my");
+    console.log(category);
   };
 
   return (

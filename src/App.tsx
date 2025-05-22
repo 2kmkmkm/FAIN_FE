@@ -12,8 +12,10 @@ export default function App() {
 
   const [isEmergency, setIsEmergency] = useState<boolean>(false);
 
-  const showNavigation = ["/streaming", "/analysis", "/history", "/my"];
-
+  const showNavigationPaths = ["/streaming", "/analysis", "/history", "/my"];
+  const shouldShowNavigation = showNavigationPaths.some((path) =>
+    loc.pathname.startsWith(path)
+  );
   const handleEmergency = () => {
     setIsEmergency(false);
     nav("/emergency");
@@ -26,11 +28,13 @@ export default function App() {
       {currentHeader && (
         <Header title={currentHeader.title} isBack={currentHeader.isBack} />
       )}
-      <main className={`main-content ${showNavigation ? "with-nav" : ""}`}>
+      <main
+        className={`main-content ${shouldShowNavigation ? "with-nav" : ""}`}
+      >
         <AppRoutes />
       </main>
 
-      {showNavigation && <Navigation currentPath={loc.pathname} />}
+      {shouldShowNavigation && <Navigation currentPath={loc.pathname} />}
       {isEmergency && <EmergencyModal onClick={handleEmergency} />}
     </div>
   );
