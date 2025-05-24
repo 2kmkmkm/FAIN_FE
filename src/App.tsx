@@ -25,6 +25,17 @@ export default function App() {
 
   const currentHeader = getHeaderConfig(loc.pathname);
 
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("/firebase-messaging-sw.js")
+      .then((registration) => {
+        console.log("Service Worker 등록 성공:", registration);
+      })
+      .catch((err) => {
+        console.log("Service Worker 등록 실패:", err);
+      });
+  }
+
   return (
     <div className="app-container">
       <ScrollToTop />
