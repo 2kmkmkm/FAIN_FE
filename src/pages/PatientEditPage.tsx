@@ -6,6 +6,8 @@ import { fullAddress, parseAddress } from "../utils/addressUtils";
 import { PATIENT_INFO_CONFIG } from "../type/userType";
 import { useState, useEffect } from "react";
 import EditCompleteModal from "../modals/EditCompleteModal";
+import CustomPostcode from "../components/common/CustomPostcode";
+import type { DaumPostcodeData } from "../components/common/CustomPostcode";
 
 const data = {
   name: "홍길동",
@@ -22,6 +24,7 @@ const data = {
 
 export default function PatientEditPage() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [showPostcode, setShowPostcode] = useState<boolean>(false);
   const [formData, setFormData] = useState({ ...data });
 
   const [zoneCode, setZoneCode] = useState("");
@@ -41,6 +44,12 @@ export default function PatientEditPage() {
     const address = fullAddress(zoneCode, roadAddress, detailAddress);
     setFormData((prev) => ({ ...prev, address: address }));
   }, [zoneCode, roadAddress, detailAddress]);
+
+  const handleComplete = (data: DaumPostcodeData) => {
+    setZoneCode(data.zonecode);
+    setRoadAddress(data.roadAddress);
+    setShowPostcode(false);
+  };
 
   const handleChange = (key: string, value: string) => {
     setFormData((prev) => ({
@@ -97,10 +106,14 @@ export default function PatientEditPage() {
                         <button
                           type="button"
                           className="bg-main text-white body-s w-fit px-1.5 rounded-[8px] flex justify-center items-center"
+                          onClick={() => setShowPostcode(true)}
                         >
                           <img src={search} className="w-5" />
                         </button>
                       </div>
+                      {showPostcode && (
+                        <CustomPostcode onComplete={handleComplete} />
+                      )}
                       <Input
                         isEdit
                         defaultValue={roadAddress}
