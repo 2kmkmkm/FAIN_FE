@@ -1,51 +1,43 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-type PatientState = {
-  basicInfo: {
-    name: string;
-    birth: string;
-    address: string;
-  };
-  physicalInfo: {
-    height: number;
-    weight: number;
-    bloodType: string;
-  };
-  medicalInfo: {
-    medicine: string[];
-    hospitalName: string;
-    hospitalTel: string;
-    disease: string[];
-    allergic: string[];
-  };
+export type PatientProps = {
+  name: string;
+  birth: string;
+  address: string;
+
+  height: number;
+  weight: number;
+  bloodType: string;
+
+  medicine: string[];
+  hospitalName: string;
+  hospitalTel: string;
+  disease: string[];
+  allergic: string[];
 };
 
-const initialState: PatientState = {
-  basicInfo: {
-    name: "",
-    birth: "",
-    address: "",
-  },
-  physicalInfo: {
-    height: 0,
-    weight: 0,
-    bloodType: "",
-  },
-  medicalInfo: {
-    medicine: [],
-    hospitalName: "",
-    hospitalTel: "",
-    disease: [],
-    allergic: [],
-  },
+const initialState: PatientProps = {
+  name: "",
+  birth: "",
+  address: "",
+
+  height: 0,
+  weight: 0,
+  bloodType: "",
+
+  medicine: [],
+  hospitalName: "",
+  hospitalTel: "",
+  disease: [],
+  allergic: [],
 };
 
 const patientSlice = createSlice({
   name: "patient",
   initialState,
   reducers: {
-    setPatient: (state, action: PayloadAction<Partial<PatientState>>) => {
+    setPatient: (state, action: PayloadAction<PatientProps>) => {
       return { ...state, ...action.payload };
     },
   },
