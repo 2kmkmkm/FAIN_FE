@@ -5,19 +5,33 @@ import logo_word from "../assets/logo_word.svg";
 import Alert from "../components/common/Alert";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../hooks/useRedux";
+import { loginUser } from "../app/auth";
 
 export default function LoginPage() {
-  const [id, setId] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [userId, setUserId] = useState<string>();
+  const [password, setPassword] = useState<string>();
+  const [error, setError] = useState<string>();
 
   const nav = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!id) setError("아이디를 입력하세요");
-    else if (!password) setError("비밀번호를 입력하세요");
+    if (!userId) {
+      setError("아이디를 입력하세요");
+      return;
+    } else if (!password) {
+      setError("비밀번호를 입력하세요");
+      return;
+    }
+
+    try {
+      await dispatch(loginUser({ userId, password })).unwrap();
+    } catch {
+      console.error("로그인 에러", error);
+    }
   };
 
   return (
@@ -31,9 +45,9 @@ export default function LoginPage() {
           <Input
             type="text"
             placeholder="아이디"
-            value={id}
+            value={userId}
             onChange={(e) => {
-              setId(e.target.value);
+              setUserId(e.target.value);
             }}
           />
           <Input

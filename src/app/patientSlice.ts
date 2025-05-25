@@ -10,11 +10,11 @@ export type PatientProps = {
   weight: number;
   bloodType: string;
 
-  medicine: string[];
+  medicine: string;
   hospitalName: string;
   hospitalTel: string;
-  disease: string[];
-  allergic: string[];
+  disease: string;
+  allergic: string;
 };
 
 const initialState: PatientProps = {
@@ -26,11 +26,11 @@ const initialState: PatientProps = {
   weight: 0,
   bloodType: "",
 
-  medicine: [],
+  medicine: "",
   hospitalName: "",
   hospitalTel: "",
-  disease: [],
-  allergic: [],
+  disease: "",
+  allergic: "",
 };
 
 const patientSlice = createSlice({

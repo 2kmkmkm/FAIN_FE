@@ -55,7 +55,7 @@ export default function PatientMedicalForm({
           <Input
             name="hospital_name"
             placeholder="주요 병원"
-            value={medical.hospital_name}
+            value={medical.hospitalName}
             onChange={handleMedicalChange}
           />
           <button

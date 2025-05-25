@@ -1,9 +1,9 @@
 export type GuardianInfo = {
-    user_id: string;
+    userId: string;
     password: string;
-    checkedPwd: string;
-    f_name: string;
-    f_tel: string;
+    checkedPwd?: string;
+    fName: string;
+    fTel: string;
   };
   
   export type PatientBasicInfo = {
@@ -13,16 +13,17 @@ export type GuardianInfo = {
   };
   
   export type PatientPhysicalInfo = {
-    height: string;
-    weight: string;
-    bloodtype: string;
+    height: number | undefined;
+    weight: number | undefined;
+    bloodType: string;
   };
   
   export type PatientMedicalInfo = {
     disease: string;
     allergic: string;
     medicine: string;
-    hospital_name: string;
+    hospitalName: string;
+    hospitalTel: string;
   };
   
   export type InputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -30,6 +31,7 @@ export type GuardianInfo = {
   export type GuardianFormProps = {
     guardian: GuardianInfo;
     handleGuardianChange: InputChangeHandler;
+    handleCheckId: () => void
   };
   
   export type PatientBasicFormProps = {
@@ -49,9 +51,9 @@ export type GuardianInfo = {
   };
   
   export const GUARDIAN_INFO_CONFIG = [
-  { label: "아이디", key: "user_id" },
-  { label: "이름", key: "f_name" },
-  { label: "연락처", key: "f_tel" },
+  { label: "아이디", key: "userId" },
+  { label: "이름", key: "fName" },
+  { label: "연락처", key: "fTel" },
 ];
 
 export const PATIENT_INFO_CONFIG = [
@@ -64,7 +66,8 @@ export const PATIENT_INFO_CONFIG = [
   { label: "질환", key: "disease" },
   { label: "알러지", key: "allergy" },
   { label: "복용약", key: "medicine" },
-  { label: "주요 병원", key: "hospital" },
+  { label: "주요 병원", key: "hospitalName" },
+  { label: "병원 연락처", key: "hospitalTel" },
 ];
 
 export const UNIT_MAP: Record<string, string> = {

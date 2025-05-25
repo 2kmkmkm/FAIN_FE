@@ -4,6 +4,7 @@ import type { GuardianFormProps } from "../../type/userType";
 export default function GuardianForm({
   guardian,
   handleGuardianChange,
+  handleCheckId,
 }: GuardianFormProps) {
   return (
     <div className="flex flex-col gap-2.5">
@@ -11,12 +12,13 @@ export default function GuardianForm({
       <div className="flex flex-col gap-2.5">
         <div className="flex flex-row gap-2 h-full">
           <Input
-            name="user_id"
+            name="userId"
             placeholder="아이디"
-            value={guardian.user_id}
+            value={guardian.userId}
             onChange={handleGuardianChange}
           />
           <button
+            onClick={handleCheckId}
             type="button"
             className="bg-main text-white body-xs w-14 px-1.5 rounded-[10px] flex justify-center items-center"
           >
@@ -42,14 +44,14 @@ export default function GuardianForm({
         <Input
           name="f_name"
           placeholder="보호자 이름"
-          value={guardian.f_name}
+          value={guardian.fName}
           onChange={handleGuardianChange}
         />
         <Input
           name="f_tel"
           type="tel"
           placeholder="보호자 연락처"
-          value={guardian.f_tel}
+          value={guardian.fTel}
           onChange={handleGuardianChange}
         />
       </div>
