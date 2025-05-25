@@ -10,9 +10,9 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const guardianData = {
-  user_id: "2kmkmkm",
-  f_name: "이경민",
-  f_tel: "010-2911-6480",
+  userId: "2kmkmkm",
+  fName: "이경민",
+  fTel: "010-2911-6480",
 };
 
 const patientData = {
@@ -25,7 +25,8 @@ const patientData = {
   disease: "고혈압",
   allergy: "꽃가루",
   medicine: "혈압약",
-  hospital: "전남대병원",
+  hospitalName: "전남대병원",
+  hospitalTel: "062-000-0000",
 };
 
 export default function MyPage() {

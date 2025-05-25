@@ -1,6 +1,8 @@
 import CustomDatePicker from "../common/CustomDatePicker";
 import Input from "../common/Input";
 import search from "../../assets/search.svg";
+import CustomPostcode from "../common/CustomPostcode";
+import type { DaumPostcodeData } from "../common/CustomPostcode";
 import type { PatientBasicFormProps } from "../../type/userType";
 import { formatDateToString, parseStringToDate } from "../../utils/dateUtils";
 import { useEffect, useState, type ChangeEvent } from "react";
@@ -24,12 +26,19 @@ export default function PatientBasicForm({
   const [roadAddress, setRoadAddress] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
   const [address, setAddress] = useState("");
+  const [showPostcode, setShowPostcode] = useState(false);
   console.log(address);
 
   useEffect(() => {
     const formatted = `(${zoneCode}) ${roadAddress} ${detailAddress}`;
     setAddress(formatted.trim());
   }, [zoneCode, roadAddress, detailAddress]);
+
+  const handleComplete = (data: DaumPostcodeData) => {
+    setZoneCode(data.zonecode);
+    setRoadAddress(data.roadAddress);
+    setShowPostcode(false);
+  };
 
   return (
     <div className="flex flex-col gap-2.5">
@@ -64,9 +73,11 @@ export default function PatientBasicForm({
           <button
             type="button"
             className="bg-main text-white body-s w-14 px-1.5 rounded-[10px] flex justify-center items-center"
+            onClick={() => setShowPostcode(true)}
           >
             <img src={search} className="w-7" />
           </button>
+          {showPostcode && <CustomPostcode onComplete={handleComplete} />}
         </div>
         <Input
           name="road_address"

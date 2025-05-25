@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userRecucer from "../app/userSlice";
+import guardianReducer from "../app/guardianSlice"
 import patientReducer from "../app/patientSlice"
 
 export const store = configureStore({
   reducer: {
-    user: userRecucer,
+    guardian: guardianReducer,
     patient: patientReducer
   },
 });

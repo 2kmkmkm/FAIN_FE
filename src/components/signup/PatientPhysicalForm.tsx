@@ -32,7 +32,7 @@ export default function PatientPhysicalForm({
         />
         <Dropdown
           category="혈액형"
-          selectedValue={physical.bloodtype}
+          selectedValue={physical.bloodType}
           onSelect={handleDropdownSelect}
           list={["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]}
         />
