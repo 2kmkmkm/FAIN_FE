@@ -2,11 +2,11 @@ import Box from "../common/Box";
 
 export default function PatientMedicalcInfo({
   disease,
-  allergy,
+  allergic,
   medicine,
 }: {
   disease: string;
-  allergy: string;
+  allergic: string;
   medicine: string;
 }) {
   return (
@@ -18,7 +18,7 @@ export default function PatientMedicalcInfo({
         </div>
         <div className="flex flex-row">
           <div className="body-m text-darkgray w-24">알러지</div>
-          <div className="body-m justify-end flex">{allergy}</div>
+          <div className="body-m justify-end flex">{allergic}</div>
         </div>
         <div className="flex flex-row">
           <div className="body-m text-darkgray w-24">복용약</div>
