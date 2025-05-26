@@ -1,6 +1,6 @@
 import instance from "./instance";
 
-export const getEmergencyAlert = async ():Promise<{message:string; situation_time:Date}> => {
-    const res = await instance.get('/fcm/alert');
+export const getEmergencyReport = async ():Promise<{ situation_time:Date; report:string; hospital_name: string; hospital_tel: string}> => {
+    const res = await instance.get('/reports');
     return res.data;
 }

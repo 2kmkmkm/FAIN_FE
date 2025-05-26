@@ -6,34 +6,40 @@ import ResponseModal from "../modals/ResponseModal";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../app/store";
-import { getEmergencyAlert } from "../api/emergency";
+import { getEmergencyReport } from "../api/emergency";
 import { format } from "date-fns";
 import { formatDay } from "../utils/dateUtils";
 
 export default function EmergencyPage() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [situationTime, setSituationTime] = useState<Date>();
+  const [report, setReport] = useState<string>("");
+  const [hospitalName, setHospitalName] = useState<string>("");
+  const [hospitalTel, setHospitalTel] = useState<string>("");
 
   useEffect(() => {
     const fetchEmergencyData = async () => {
       try {
-        const res = await getEmergencyAlert();
+        const res = await getEmergencyReport();
         setSituationTime(res.situation_time);
+        setReport(res.report);
+        setHospitalName(res.hospital_name);
+        setHospitalTel(res.hospital_tel);
       } catch (error) {
-        console.error("getEmergencyAlert Error: ", error);
+        console.error("getEmergencyReport Error: ", error);
       }
     };
 
     fetchEmergencyData();
   }, []);
 
-  const patient = useSelector((state: RootState) => state.patient);
-
   const formattedDate =
     situationTime &&
     `${format(situationTime, "yyyy / MM / dd")} (${formatDay(
       situationTime
     )}) ${format(situationTime, "HH:mm")}`;
+
+  const patient = useSelector((state: RootState) => state.patient);
 
   return (
     <>
@@ -53,12 +59,8 @@ export default function EmergencyPage() {
           allergic={patient.allergic}
           medicine={patient.medicine}
         />
-        <Report
-          content=" 홍길동님의 기저질환과 여러 상황을 종합해 보았을 때, 심혈관 이상으로
-          인한 급작스러운 의식 저하 가능성이 있습니다. 환자 상태를 즉시
-          확인해주세요."
-        />
-        <Hospital />
+        <Report content={report} />
+        <Hospital hospitalName={hospitalName} hospitalTel={hospitalTel} />
         <div className="flex flex-row gap-2.5">
           <button
             className="bg-red py-3 rounded-[20px] flex justify-center items-center gap-3"
