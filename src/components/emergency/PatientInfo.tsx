@@ -2,8 +2,9 @@ import person from "../../assets/person.svg";
 import copy from "../../assets/copy.svg";
 import PatientPhysicalInfo from "../streaming/PatientPhysicalInfo";
 import PatientMedicalcInfo from "../streaming/PatientMedicalInfo";
+import type { EmergencyProps } from "../../type/reportType";
 
-export default function PatientInfo() {
+export default function PatientInfo({ ...rest }: EmergencyProps) {
   return (
     <div className="flex flex-col gap-7">
       <div className="flex flex-row px-2 justify-between items-center">
@@ -16,11 +17,15 @@ export default function PatientInfo() {
         </button>
       </div>
       <div className="flex flex-col gap-5">
-        <PatientPhysicalInfo bloodtype="A+" height={180} weight={70} />
+        <PatientPhysicalInfo
+          bloodType={rest.bloodType}
+          height={rest.height}
+          weight={rest.weight}
+        />
         <PatientMedicalcInfo
-          disease="고혈압"
-          allergy="꽃가루"
-          medicine="혈압약"
+          disease={rest.disease}
+          allergic={rest.allergic}
+          medicine={rest.medicine}
         />
       </div>
     </div>
