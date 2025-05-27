@@ -8,10 +8,12 @@ import {
 import { formatBirthInfo } from "../utils/dateUtils";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "../hooks/useRedux";
+import { logout } from "../app/guardianSlice";
 
 export default function MyPage() {
   const nav = useNavigate();
+  const dispatch = useAppDispatch();
 
   const guardian = useAppSelector((state) => state.guardian);
   const patient = useAppSelector((state) => state.patient);
@@ -61,7 +63,10 @@ export default function MyPage() {
           onEdit={() => nav("/edit/patient")}
         />
       </Box>
-      <button className="text-placeholder body-xs-bold underline">
+      <button
+        className="text-placeholder body-xs-bold underline"
+        onClick={() => dispatch(logout())}
+      >
         로그아웃
       </button>
     </div>
