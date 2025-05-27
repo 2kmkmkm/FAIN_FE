@@ -6,8 +6,8 @@ export type PatientProps = {
   birth: string;
   address: string;
 
-  height: number;
-  weight: number;
+  height: number | undefined;
+  weight: number | undefined;
   bloodType: string;
 
   medicine: string;
@@ -22,8 +22,8 @@ const initialState: PatientProps = {
   birth: "",
   address: "",
 
-  height: 0,
-  weight: 0,
+  height: undefined,
+  weight: undefined,
   bloodType: "",
 
   medicine: "",
