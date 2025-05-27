@@ -8,20 +8,14 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  { time: "00:00", value: 0 },
-  { time: "06:00", value: 0 },
-  { time: "12:00", value: 5 },
-  { time: "18:00", value: 3 },
-  { time: "24:00", value: 2 },
-];
+export default function Graph({ ...rest }) {
+  const formattedData = [
+    { time: 0, value: rest.dawn },
+    { time: 6, value: rest.morning },
+    { time: 12, value: rest.afternoon },
+    { time: 18, value: rest.night },
+  ];
 
-const formattedData = data.map((d) => ({
-  ...d,
-  label: d.time.startsWith("0") ? d.time[1] : d.time.split(":")[0], // "06:00" → "6", "12:00" → "12"
-}));
-
-export default function Graph() {
   return (
     <div className="flex flex-col gap-7">
       <div className="flex flex-row px-2 justify-between items-center">
@@ -39,16 +33,19 @@ export default function Graph() {
           >
             <CartesianGrid stroke="#ddd" vertical={false} horizontal={false} />
             <XAxis
-              dataKey="label"
+              dataKey="time"
+              type="category"
               scale="band"
+              domain={[0, 24]}
+              ticks={[0, 6, 12, 18, 24]}
               axisLine={{ stroke: "#aaa", strokeWidth: 1, strokeOpacity: 0.5 }}
               tickLine={false}
               interval={0}
               tick={{ fill: "#aaa", fontSize: 12 }}
               label={{
                 value: "(시)",
-                position: "insideBottomRight",
-                offset: 0,
+                position: "insideBottom",
+                offset: -5,
                 fill: "#aaa",
                 fontSize: 12,
               }}

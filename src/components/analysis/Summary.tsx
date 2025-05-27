@@ -2,11 +2,11 @@ import pin from "../../assets/pin.svg";
 
 export default function Summary({
   fall,
-  ambulance,
+  hospital,
   guardian,
 }: {
   fall: number;
-  ambulance: number;
+  hospital: number;
   guardian: number;
 }) {
   return (
@@ -25,7 +25,7 @@ export default function Summary({
         <div className="w-px h-12 bg-[#D9D9D9]"></div>
         <div className="flex flex-col justify-center items-center gap-2">
           <div className="body-m-bold">병원 이송</div>
-          <div className="body-m text-darkgray">{ambulance}회</div>
+          <div className="body-m text-darkgray">{hospital}회</div>
         </div>
         <div className="w-px h-12 bg-[#D9D9D9]"></div>
         <div className="flex flex-col justify-center items-center gap-2">
