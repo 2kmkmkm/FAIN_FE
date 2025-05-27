@@ -8,40 +8,39 @@ import {
 import { formatBirthInfo } from "../utils/dateUtils";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-const guardianData = {
-  userId: "2kmkmkm",
-  fName: "이경민",
-  fTel: "010-2911-6480",
-};
-
-const patientData = {
-  name: "홍길동",
-  birth: "2024-05-24",
-  address: "(61188) 광주광역시 북구 용봉로 77 공과대학 7호관 215호",
-  height: 180,
-  weight: 70,
-  bloodType: "A+",
-  disease: "고혈압",
-  allergy: "꽃가루",
-  medicine: "혈압약",
-  hospitalName: "전남대병원",
-  hospitalTel: "062-000-0000",
-};
+import { useAppDispatch, useAppSelector } from "../hooks/useRedux";
+import { logout } from "../app/guardianSlice";
 
 export default function MyPage() {
   const nav = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const [processedPatientData, setProcessedPatientData] = useState(patientData);
+  const guardian = useAppSelector((state) => state.guardian);
+  const patient = useAppSelector((state) => state.patient);
+
+  const [processedPatientData, setProcessedPatientData] = useState(patient);
+  const [processedGuardianData, setProcessedGuardianData] = useState({
+    userId: guardian.userId,
+    fName: guardian.fName,
+    fTel: guardian.fTel,
+  });
 
   useEffect(() => {
-    const { formattedDate, age } = formatBirthInfo(patientData.birth);
+    const { formattedDate, age } = formatBirthInfo("2024-05-20");
 
     setProcessedPatientData({
-      ...patientData,
+      ...patient,
       birth: `${formattedDate} (만 ${age}세)`,
     });
-  }, []);
+  }, [patient]);
+
+  useEffect(() => {
+    setProcessedGuardianData({
+      userId: guardian.userId,
+      fName: guardian.fName,
+      fTel: guardian.fTel,
+    });
+  }, [guardian]);
 
   return (
     <div className="flex flex-col px-12 gap-5 pt-8">
@@ -49,7 +48,7 @@ export default function MyPage() {
         <InfoBox
           title="보호자 정보"
           config={GUARDIAN_INFO_CONFIG}
-          data={guardianData}
+          data={processedGuardianData}
           editable
           onEdit={() => nav("/edit/guardian")}
         />
@@ -64,7 +63,10 @@ export default function MyPage() {
           onEdit={() => nav("/edit/patient")}
         />
       </Box>
-      <button className="text-placeholder body-xs-bold underline">
+      <button
+        className="text-placeholder body-xs-bold underline"
+        onClick={() => dispatch(logout())}
+      >
         로그아웃
       </button>
     </div>

@@ -17,7 +17,6 @@ const initialState: GuardianProps = {
   isAuthenticated: false,
 };
 
-
 const guardianSlice = createSlice({
   name: 'guardian',
   initialState,

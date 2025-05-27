@@ -5,7 +5,7 @@ import patientReducer from "../app/patientSlice"
 export const store = configureStore({
   reducer: {
     guardian: guardianReducer,
-    patient: patientReducer
+    patient: patientReducer,
   },
 });
 

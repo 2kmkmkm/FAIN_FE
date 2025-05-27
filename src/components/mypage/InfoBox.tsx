@@ -3,7 +3,7 @@ import edit from "../../assets/edit.svg";
 type InfoBoxProps = {
   title: string;
   config: { label: string; key: string }[];
-  data: Record<string, string | number>;
+  data: Record<string, string | number | undefined>;
   unitMap?: Record<string, string>;
   editable: boolean;
   onEdit: () => void;
