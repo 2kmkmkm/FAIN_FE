@@ -1,16 +1,24 @@
 import { useIsFetching, useIsMutating } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
+import { useAppSelector } from "../../hooks/useRedux";
+import type { RootState } from "../../app/store";
 
 export default function LoadingScreen() {
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
-  const display = isFetching || isMutating ? "inherit" : "none";
+  const reduxLoading = useAppSelector(
+    (state: RootState) => state.status.isLoading
+  );
+
+  const showLoading = isFetching > 0 || isMutating > 0 || reduxLoading;
+
+  if (!showLoading) return null;
 
   return (
     <div
       style={{
         position: "absolute",
-        display,
+        display: "inherit",
         zIndex: 999,
         top: "45%",
         left: "45%",
