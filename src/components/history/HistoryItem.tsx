@@ -3,29 +3,29 @@ import type { HistoryProps } from "../../type/reportType";
 import { formatDay } from "../../utils/dateUtils";
 import { useNavigate } from "react-router-dom";
 
-export default function HistoryItem({
-  reportId,
-  date,
-  time,
-  action_type,
-}: HistoryProps) {
+export default function HistoryItem({ ...item }: HistoryProps) {
   const nav = useNavigate();
 
   return (
     <button
       className="flex flex-col rounded-[20px] justify-center items-center bg-[#FBFBFB] hover:bg-[#F3F3F3]"
-      onClick={() => nav(`/history/detail/${reportId}`)}
+      onClick={() => nav(`/history/detail/${item.report_id}`)}
     >
       <div className="flex items-center gap-3 px-3 py-4">
         <img src={caution_pink} className="w-5" />
         <div className="flex flex-col gap-1.5">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-1.5">
-              <div className="body-s-bold w-fit">{formatDay(date)}</div>
-              <div className="body-xs text-darkgray w-fit">{time}</div>
+              <div className="body-s-bold w-fit">
+                {formatDay(item.situation_time)}
+              </div>
+              <div className="body-xs text-darkgray w-fit">
+                {item.situation_time.getHours()} :{" "}
+                {item.situation_time.getMinutes()}
+              </div>
             </div>
             <div className="body-xs text-placeholder flex justify-end pr-2">
-              {action_type}
+              {item.action_type}
             </div>
           </div>
           <div className="w-full truncate whitespace-nowrap text-start items-start overflow-hidden body-s text-darkgray">
