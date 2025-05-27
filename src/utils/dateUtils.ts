@@ -33,3 +33,9 @@ export const formatDay = (date: Date): string => {
 
   return `${day}(${weekNames[dayOfWeek]})`;
 };
+
+export const formatTime = (date:Date): string => {
+  const hour = date.getHours();
+  const minute = date.getMinutes();
+  return `${hour} : ${minute}`
+}

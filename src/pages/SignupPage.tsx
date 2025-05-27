@@ -8,7 +8,7 @@ import SignupModal from "../modals/SignupModal";
 import { useState, type ChangeEvent } from "react";
 import { formatDateToString } from "../utils/dateUtils";
 import { useNavigate } from "react-router-dom";
-import { getCheckeId, postSignup } from "../api/user";
+import { getCheckId, postSignup } from "../api/user";
 import type {
   PatientMedicalInfo,
   PatientPhysicalInfo,
@@ -64,7 +64,7 @@ export default function SignupPage() {
   };
 
   const handleCheckId = async (userId: string) => {
-    const res = await getCheckeId(userId);
+    const res = await getCheckId(userId);
 
     if (res.isDuplicated) {
       alert(res.message);

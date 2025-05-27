@@ -1,7 +1,6 @@
 export type HistoryProps = {
-    reportId: number,
-    date: Date,
-    time: string,
+    report_id: number,
+    situation_time: Date,
     action_type: string,
 }
 
