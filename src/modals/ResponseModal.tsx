@@ -1,13 +1,13 @@
 import Modal from "../components/common/Modal";
 import { useNavigate } from "react-router-dom";
+import { postActionType } from "../api/emergency";
+import { useState } from "react";
 
 export default function ResponseModal() {
+  const [action, setAction] = useState<"119" | "family">();
   const nav = useNavigate();
 
-  const onAmbulanceClick = () => {
-    nav("/streaming");
-  };
-  const onGuardianClick = () => {
+  const handleActionClick = (action: "119" | "family") => {
     nav("/streaming");
   };
 

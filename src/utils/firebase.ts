@@ -14,14 +14,16 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_APP_ID,
 };
 
+console.log(firebaseConfig)
+
 const app = initializeApp(firebaseConfig);
-const messaging = getMessaging(app);
+export const messaging = getMessaging(app);
 
 // 사용자가 알림 허용 동의 요청
 Notification.requestPermission().then((permission) => {
   if (permission === "granted") {
     // FCM 토큰 요청
-    getToken(messaging, { vapidKey: process.env.WEB_PUSH_CERTIFICATE_KEY_PAIR }).then((currentToken) => {
+    getToken(messaging, { vapidKey: import.meta.env.WEB_PUSH_CERTIFICATE_KEY_PAIR }).then((currentToken) => {
       if (currentToken) {
         console.log("FCM 토큰:", currentToken);
         // 서버에 이 토큰을 저장해야 나중에 알림을 보낼 때 사용 가능
