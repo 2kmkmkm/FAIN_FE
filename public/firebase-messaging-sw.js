@@ -15,12 +15,12 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
-messaging.onBackgroundMessage(function (payload) {
-  console.log("[firebase-messaging-sw.js] 백그라운드 메시지 수신 ", payload);
-  const notificationTitle = payload.notification.title;
-  const notificationOptions = {
-    body: payload.notification.body,
-  };
-
-  self.registration.showNotification(notificationTitle, notificationOptions);
+messaging.onBackgroundMessage((payload) => {
+  console.log("백그라운드 메시지 수신:", payload);
+  const { title, body } = payload.notification;
+  self.registration.showNotification(title, {
+    body,
+    data: payload.data,
+    icon: "/icon-192x912.png",
+  });
 });

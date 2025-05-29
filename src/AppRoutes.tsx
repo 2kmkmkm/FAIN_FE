@@ -18,7 +18,7 @@ export default function AppRoutes() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/streaming" element={<StreamingPage />} />
-      <Route path="/emergency" element={<EmergencyPage />} />
+      <Route path="/emergency/:reportId" element={<EmergencyPage />} />
       <Route path="/analysis" element={<AnlaysisPage />} />
       <Route path="/history" element={<HistoryPage />} />
       <Route path="/history/detail/:reportId" element={<HistoryDetailPage />} />

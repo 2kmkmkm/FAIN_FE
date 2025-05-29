@@ -3,14 +3,17 @@ import Report from "../components/emergency/Report";
 import Hospital from "../components/emergency/Hospital";
 import call from "../assets/call.svg";
 import ResponseModal from "../modals/ResponseModal";
+import type { RootState } from "../app/store";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import type { RootState } from "../app/store";
 import { getEmergencyReport } from "../api/emergency";
 import { format } from "date-fns";
 import { formatDay } from "../utils/dateUtils";
+import { useParams } from "react-router-dom";
 
 export default function EmergencyPage() {
+  const reportId = useParams();
+
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [situationTime, setSituationTime] = useState<Date>();
   const [report, setReport] = useState<string>("");
@@ -20,7 +23,7 @@ export default function EmergencyPage() {
   useEffect(() => {
     const fetchEmergencyData = async () => {
       try {
-        const res = await getEmergencyReport();
+        const res = await getEmergencyReport(Number(reportId));
         setSituationTime(res.situation_time);
         setReport(res.report);
         setHospitalName(res.hospital_name);
@@ -31,7 +34,7 @@ export default function EmergencyPage() {
     };
 
     fetchEmergencyData();
-  }, []);
+  }, [reportId]);
 
   const formattedDate =
     situationTime &&

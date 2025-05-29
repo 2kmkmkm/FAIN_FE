@@ -31,7 +31,7 @@ export const getUserInfo = async () => {
 };
 
 export const getCheckId = async (userId: string) => {
-    const res = await instance.post(`signup/check-id?user_id=${userId}`);
+    const res = await instance.post("/signup/check", { params: { userId }});
     console.log("getCheckId: ", res.data);
     return res.data;
 }
