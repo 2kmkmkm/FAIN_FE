@@ -5,40 +5,82 @@ import CustomPostcode from "../common/CustomPostcode";
 import type { DaumPostcodeData } from "../common/CustomPostcode";
 import type { PatientBasicFormProps } from "../../type/userType";
 import { formatDateToString, parseStringToDate } from "../../utils/dateUtils";
-import { useEffect, useState, type ChangeEvent } from "react";
+import { useCallback, useEffect, useState } from "react";
+import React from "react";
 
-export default function PatientBasicForm({
+function PatientBasicForm({
   basic,
   handleBasicChange,
   handleDateChange,
 }: PatientBasicFormProps) {
-  const handleDateChangeAndClose = (date: Date | null) => {
-    handleDateChange(date);
-    handleBasicChange({
-      target: {
-        name: "birth",
-        value: formatDateToString(date),
-      },
-    } as ChangeEvent<HTMLInputElement>);
-  };
+  const [addressInfo, setAddressInfo] = useState({
+    zoneCode: "",
+    roadAddress: "",
+    detailAddress: "",
+  });
 
-  const [zoneCode, setZoneCode] = useState("");
-  const [roadAddress, setRoadAddress] = useState("");
-  const [detailAddress, setDetailAddress] = useState("");
-  const [address, setAddress] = useState("");
   const [showPostcode, setShowPostcode] = useState(false);
-  console.log(address);
 
   useEffect(() => {
-    const formatted = `(${zoneCode}) ${roadAddress} ${detailAddress}`;
-    setAddress(formatted.trim());
-  }, [zoneCode, roadAddress, detailAddress]);
+    const formattedAddress =
+      `(${addressInfo.zoneCode}) ${addressInfo.roadAddress} ${addressInfo.detailAddress}`.trim();
+    handleBasicChange({
+      target: {
+        name: "address",
+        value: formattedAddress,
+      },
+    } as React.ChangeEvent<HTMLInputElement>);
+  }, [addressInfo, handleBasicChange]);
 
-  const handleComplete = (data: DaumPostcodeData) => {
-    setZoneCode(data.zonecode);
-    setRoadAddress(data.roadAddress);
+  const handleComplete = useCallback((data: DaumPostcodeData) => {
+    setAddressInfo((prev) => ({
+      ...prev,
+      zoneCode: data.zonecode,
+      roadAddress: data.roadAddress,
+    }));
     setShowPostcode(false);
-  };
+  }, []);
+
+  const handleZoneCodeChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setAddressInfo((prev) => ({
+        ...prev,
+        zoneCode: value,
+      }));
+    },
+    []
+  );
+
+  const handleRoadAddressChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setAddressInfo((prev) => ({
+        ...prev,
+        roadAddress: value,
+      }));
+    },
+    []
+  );
+
+  const handleDetailAddressChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setAddressInfo((prev) => ({
+        ...prev,
+        detailAddress: value,
+      }));
+    },
+    []
+  );
+
+  const handleDateChangeAndClose = useCallback(
+    (date: Date | null) => {
+      handleDateChange(date);
+      setShowPostcode(false);
+    },
+    [handleDateChange]
+  );
 
   return (
     <div className="flex flex-col gap-2.5">
@@ -50,7 +92,7 @@ export default function PatientBasicForm({
           value={basic.name}
           onChange={handleBasicChange}
         />
-        <div className="relative ">
+        <div className="relative">
           <CustomDatePicker
             placeholder="생년월일"
             selectedDate={parseStringToDate(basic.birth)}
@@ -67,8 +109,8 @@ export default function PatientBasicForm({
             name="zone_code"
             placeholder="우편번호"
             type="number"
-            value={zoneCode}
-            onChange={(e) => setZoneCode(e.target.value)}
+            value={addressInfo.zoneCode}
+            onChange={handleZoneCodeChange}
           />
           <button
             type="button"
@@ -81,17 +123,19 @@ export default function PatientBasicForm({
         </div>
         <Input
           name="road_address"
-          placeholder="주소"
-          value={roadAddress}
-          onChange={(e) => setRoadAddress(e.target.value)}
+          placeholder="도로명 주소"
+          value={addressInfo.roadAddress}
+          onChange={handleRoadAddressChange}
         />
         <Input
           name="detail_address"
           placeholder="상세 주소"
-          value={detailAddress}
-          onChange={(e) => setDetailAddress(e.target.value)}
+          value={addressInfo.detailAddress}
+          onChange={handleDetailAddressChange}
         />
       </div>
     </div>
   );
 }
+
+export default React.memo(PatientBasicForm);

@@ -8,6 +8,6 @@ export default function Alert({
   className?: string;
 }) {
   return (
-    <div className={`${className} text-alert body-s flex`}>{children}</div>
+    <div className={`${className} text-alert body-xs flex`}>{children}</div>
   );
 }

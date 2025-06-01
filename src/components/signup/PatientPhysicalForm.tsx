@@ -1,16 +1,21 @@
 import Input from "../common/Input";
 import Dropdown from "../common/Dropdown";
+import React from "react";
+import { useCallback } from "react";
 import type { PatientPhysicalFormProps } from "../../type/userType";
 
-export default function PatientPhysicalForm({
+function PatientPhysicalForm({
   physical,
   handlePhysicalChange,
 }: PatientPhysicalFormProps) {
-  const handleDropdownSelect = (label: string) => {
-    handlePhysicalChange({
-      target: { name: "bloodtype", value: label },
-    } as React.ChangeEvent<HTMLInputElement>);
-  };
+  const handleDropdownSelect = useCallback(
+    (label: string) => {
+      handlePhysicalChange({
+        target: { name: "bloodType", value: label },
+      } as React.ChangeEvent<HTMLInputElement>);
+    },
+    [handlePhysicalChange]
+  );
 
   return (
     <div className="flex flex-col gap-2.5">
@@ -40,3 +45,5 @@ export default function PatientPhysicalForm({
     </div>
   );
 }
+
+export default React.memo(PatientPhysicalForm);

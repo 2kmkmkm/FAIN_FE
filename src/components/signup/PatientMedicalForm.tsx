@@ -4,8 +4,9 @@ import information from "../../assets/information.svg";
 import Popup from "../common/Popup";
 import type { PatientMedicalFormProps } from "../../type/userType";
 import { useState, useRef } from "react";
+import React from "react";
 
-export default function PatientMedicalForm({
+function PatientMedicalForm({
   medical,
   handleMedicalChange,
 }: PatientMedicalFormProps) {
@@ -53,12 +54,13 @@ export default function PatientMedicalForm({
         />
         <div className="flex flex-row gap-2 h-full">
           <Input
-            name="hospital_name"
+            name="hospitalName"
             placeholder="주요 병원"
             value={medical.hospitalName}
             onChange={handleMedicalChange}
           />
           <button
+            onClick={() => {}}
             type="button"
             className="bg-main text-white body-s w-14 px-1.5 rounded-[10px] flex justify-center items-center"
           >
@@ -69,3 +71,5 @@ export default function PatientMedicalForm({
     </div>
   );
 }
+
+export default React.memo(PatientMedicalForm);

@@ -1,7 +1,8 @@
+import React from "react";
 import Input from "../common/Input";
 import type { GuardianFormProps } from "../../type/userType";
 
-export default function GuardianForm({
+function GuardianForm({
   guardian,
   handleGuardianChange,
   handleCheckId,
@@ -42,13 +43,13 @@ export default function GuardianForm({
           onChange={handleGuardianChange}
         />
         <Input
-          name="f_name"
+          name="fName"
           placeholder="보호자 이름"
           value={guardian.fName}
           onChange={handleGuardianChange}
         />
         <Input
-          name="f_tel"
+          name="fTel"
           type="tel"
           placeholder="보호자 연락처"
           value={guardian.fTel}
@@ -58,3 +59,5 @@ export default function GuardianForm({
     </div>
   );
 }
+
+export default React.memo(GuardianForm);
