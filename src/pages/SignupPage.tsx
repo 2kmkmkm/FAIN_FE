@@ -5,7 +5,7 @@ import PatientMedicalForm from "../components/signup/PatientMedicalForm";
 import Button from "../components/common/Button";
 import useFormState from "../hooks/useFormState";
 import SignupModal from "../modals/SignupModal";
-import { useState, type ChangeEvent } from "react";
+import { useState, useCallback } from "react";
 import { formatDateToString } from "../utils/dateUtils";
 import { useNavigate } from "react-router-dom";
 import { getCheckId, postSignup } from "../api/user";
@@ -19,7 +19,6 @@ import type {
 export default function SignupPage() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isCheckedId, setIsCheckedId] = useState<boolean>(false);
-
   const nav = useNavigate();
 
   const [guardian, handleGuardianChange] = useFormState<GuardianInfo>({
@@ -50,83 +49,96 @@ export default function SignupPage() {
     bloodType: "",
   });
 
-  const handleDateChange = (date: Date | null) => {
-    if (date) {
-      const fakeEvent = {
-        target: {
-          name: "birth",
-          value: formatDateToString(date),
-        },
-      } as ChangeEvent<HTMLInputElement>;
+  const handleDateChange = useCallback(
+    (date: Date | null) => {
+      if (date) {
+        handleBasicChange({
+          target: {
+            name: "birth",
+            value: formatDateToString(date),
+          },
+        } as React.ChangeEvent<HTMLInputElement>);
+      }
+    },
+    [handleBasicChange]
+  );
 
-      handleBasicChange(fakeEvent);
+  const handleCheckId = useCallback(async () => {
+    if (!guardian.userId) {
+      alert("아이디를 입력해주세요.");
+      return;
     }
-  };
+    const res = await getCheckId(guardian.userId);
 
-  const handleCheckId = async (userId: string) => {
-    const res = await getCheckId(userId);
-
-    if (res.isDuplicated) {
+    if (!res.success) {
       alert(res.message);
       setIsCheckedId(false);
-      return;
-    } else if (!res.success) {
+    } else {
       alert(res.message);
       setIsCheckedId(true);
     }
-  };
+  }, [guardian.userId]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    const isEmpty = [
-      ...Object.values(guardian),
-      ...Object.values(basic),
-      ...Object.values(physical),
-      ...Object.values(medical),
-    ].some((value) => typeof value === "string" && value.trim() === "");
+      if (!isCheckedId) {
+        alert("아이디 중복 확인을 먼저 진행해주세요");
+        return;
+      }
 
-    if (!isCheckedId) {
-      alert("아이디 중복 확인을 먼저 진행해주세요");
-      return;
-    }
+      if (guardian.password !== guardian.checkedPwd) {
+        alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+        return;
+      }
 
-    if (isEmpty) {
-      alert("모든 항목을 입력해주세요");
-      return;
-    }
-
-    try {
-      const formData = {
-        userId: guardian.userId,
-        password: guardian.password,
-        fName: guardian.fName,
-        fTel: guardian.fTel,
-        name: basic.name,
-        birth: basic.birth,
-        address: basic.address,
-        height: Number(physical.height),
-        weight: Number(physical.weight),
-        bloodType: physical.bloodType,
-        medicine: medical.medicine,
-        hospitalName: medical.hospitalName,
-        hospitalTel: medical.hospitalTel,
-        disease: medical.disease,
-        allergic: medical.allergic,
+      const allFormValues = {
+        ...guardian,
+        ...basic,
+        ...physical,
+        ...medical,
       };
 
-      const res = await postSignup(formData);
+      const isEmpty = Object.values(allFormValues).some((value) => {
+        if (typeof value === "string") {
+          return value.trim() === "";
+        }
+        if (typeof value === "number") {
+          return value === undefined || value === null;
+        }
+        return false;
+      });
 
-      if (res.success) {
-        setIsModalOpen(true);
-      } else {
-        alert(res.message || "회원가입에 실패했습니다.");
+      if (isEmpty) {
+        alert("모든 항목을 입력해주세요");
+        return;
       }
-    } catch (err) {
-      console.error("회원가입 오류:", err);
-      alert("회원가입 중 오류가 발생했습니다.");
-    }
-  };
+
+      try {
+        const formData = {
+          ...guardian,
+          ...basic,
+          height: Number(physical.height),
+          weight: Number(physical.weight),
+          bloodType: physical.bloodType,
+          ...medical,
+        };
+
+        const res = await postSignup(formData);
+
+        if (res.success) {
+          setIsModalOpen(true);
+        } else {
+          alert(res.message || "회원가입에 실패했습니다.");
+        }
+      } catch (err) {
+        console.error("회원가입 오류:", err);
+        alert("회원가입 중 오류가 발생했습니다.");
+      }
+    },
+    [guardian, basic, physical, medical, isCheckedId]
+  );
 
   return (
     <div className="px-14 flex flex-col min-h-screen">
@@ -134,7 +146,7 @@ export default function SignupPage() {
         <GuardianForm
           guardian={guardian}
           handleGuardianChange={handleGuardianChange}
-          handleCheckId={() => handleCheckId(guardian.userId)}
+          handleCheckId={handleCheckId}
         />
         <PatientBasicForm
           basic={basic}

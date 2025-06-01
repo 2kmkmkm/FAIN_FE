@@ -9,9 +9,9 @@ import { useAppDispatch } from "../hooks/useRedux";
 import { loginUser } from "../app/auth";
 
 export default function LoginPage() {
-  const [userId, setUserId] = useState<string>();
-  const [password, setPassword] = useState<string>();
-  const [error, setError] = useState<string>();
+  const [userId, setUserId] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const nav = useNavigate();
   const dispatch = useAppDispatch();

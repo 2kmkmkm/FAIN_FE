@@ -35,7 +35,11 @@ type DropdownMenuProps = {
   onSelect: (label: string) => void;
 };
 
-const DropdownMenu = ({ list, isSmall, onSelect }: DropdownMenuProps) => {
+export const DropdownMenu = ({
+  list,
+  isSmall,
+  onSelect,
+}: DropdownMenuProps) => {
   return (
     <div
       className={`${
