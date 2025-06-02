@@ -15,7 +15,7 @@ export type GuardianInfo = {
   export type PatientPhysicalInfo = {
     height: number | undefined;
     weight: number | undefined;
-    bloodType: string;
+    bloodtype: string;
   };
   
   export type PatientMedicalInfo = {
@@ -62,7 +62,7 @@ export const PATIENT_INFO_CONFIG = [
   { label: "주소", key: "address" },
   { label: "신장", key: "height" },
   { label: "체중", key: "weight" },
-  { label: "혈액형", key: "bloodType" },
+  { label: "혈액형", key: "bloodtype" },
   { label: "질환", key: "disease" },
   { label: "알러지", key: "allergic" },
   { label: "복용약", key: "medicine" },

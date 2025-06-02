@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import EditCompleteModal from "../modals/EditCompleteModal";
 import CustomPostcode from "../components/common/CustomPostcode";
 import type { DaumPostcodeData } from "../components/common/CustomPostcode";
+import Header from "../components/common/Header";
 
 const data = {
   name: "홍길동",
@@ -65,6 +66,7 @@ export default function PatientEditPage() {
 
   return (
     <>
+      <Header title="환자 정보 수정" />
       <form
         id="patient-edit-form"
         className="flex flex-col min-h-screen px-12 py-8 gap-8"

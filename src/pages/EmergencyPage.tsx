@@ -10,6 +10,7 @@ import { getEmergencyReport } from "../api/emergency";
 import { format } from "date-fns";
 import { formatDay } from "../utils/dateUtils";
 import { useParams } from "react-router-dom";
+import Header from "../components/common/Header";
 
 export default function EmergencyPage() {
   const reportId = useParams();
@@ -46,6 +47,7 @@ export default function EmergencyPage() {
 
   return (
     <>
+      <Header title="낙상 감지" />
       <div className="flex flex-col px-14 pt-7 pb-12 gap-8 min-h-full">
         <div className="flex flex-col gap-2.5 text-center">
           <div className="body-m-bold">{formattedDate}</div>

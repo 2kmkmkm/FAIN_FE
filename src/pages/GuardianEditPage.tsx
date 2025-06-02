@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "../components/common/Button";
 import Input from "../components/common/Input";
 import EditCompleteModal from "../modals/EditCompleteModal";
+import Header from "../components/common/Header";
 
 const data = {
   user_id: "2kmkmkm",
@@ -18,6 +19,7 @@ export default function GuardianEditPage() {
   };
   return (
     <>
+      <Header title="보호자 정보 수정" />
       <div className="flex flex-col px-12 py-10">
         <form className="flex flex-col gap-7" onSubmit={handleSubmit}>
           <div className="flex flex-row">

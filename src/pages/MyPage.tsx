@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/useRedux";
 import { logout } from "../app/guardianSlice";
+import SideHeader from "../components/common/SideHeader";
 
 export default function MyPage() {
   const nav = useNavigate();
@@ -43,32 +44,35 @@ export default function MyPage() {
   }, [guardian]);
 
   return (
-    <div className="flex flex-col px-12 gap-5 pt-8">
-      <Box>
-        <InfoBox
-          title="보호자 정보"
-          config={GUARDIAN_INFO_CONFIG}
-          data={processedGuardianData}
-          editable
-          onEdit={() => nav("/edit/guardian")}
-        />
-      </Box>
-      <Box>
-        <InfoBox
-          title="환자 정보"
-          config={PATIENT_INFO_CONFIG}
-          data={processedPatientData}
-          unitMap={UNIT_MAP}
-          editable
-          onEdit={() => nav("/edit/patient")}
-        />
-      </Box>
-      <button
-        className="text-placeholder body-xs-bold underline"
-        onClick={() => dispatch(logout())}
-      >
-        로그아웃
-      </button>
-    </div>
+    <>
+      <SideHeader title="마이페이지" />
+      <div className="flex flex-col px-12 gap-5 pt-2">
+        <Box>
+          <InfoBox
+            title="보호자 정보"
+            config={GUARDIAN_INFO_CONFIG}
+            data={processedGuardianData}
+            editable
+            onEdit={() => nav("/edit/guardian")}
+          />
+        </Box>
+        <Box>
+          <InfoBox
+            title="환자 정보"
+            config={PATIENT_INFO_CONFIG}
+            data={processedPatientData}
+            unitMap={UNIT_MAP}
+            editable
+            onEdit={() => nav("/edit/patient")}
+          />
+        </Box>
+        <button
+          className="text-placeholder body-xs-bold underline"
+          onClick={() => dispatch(logout())}
+        >
+          로그아웃
+        </button>
+      </div>
+    </>
   );
 }

@@ -5,6 +5,7 @@ import PatientMedicalForm from "../components/signup/PatientMedicalForm";
 import Button from "../components/common/Button";
 import useFormState from "../hooks/useFormState";
 import SignupModal from "../modals/SignupModal";
+import Header from "../components/common/Header";
 import { useState, useCallback } from "react";
 import { formatDateToString } from "../utils/dateUtils";
 import { useNavigate } from "react-router-dom";
@@ -46,7 +47,7 @@ export default function SignupPage() {
   const [physical, handlePhysicalChange] = useFormState<PatientPhysicalInfo>({
     height: undefined,
     weight: undefined,
-    bloodType: "",
+    bloodtype: "",
   });
 
   const handleDateChange = useCallback(
@@ -121,7 +122,7 @@ export default function SignupPage() {
           ...basic,
           height: Number(physical.height),
           weight: Number(physical.weight),
-          bloodType: physical.bloodType,
+          bloodtype: physical.bloodtype,
           ...medical,
         };
 
@@ -141,36 +142,39 @@ export default function SignupPage() {
   );
 
   return (
-    <div className="px-14 flex flex-col min-h-screen">
-      <form onSubmit={handleSubmit} className="flex flex-col pt-6 pb-8 gap-7">
-        <GuardianForm
-          guardian={guardian}
-          handleGuardianChange={handleGuardianChange}
-          handleCheckId={handleCheckId}
-        />
-        <PatientBasicForm
-          basic={basic}
-          handleBasicChange={handleBasicChange}
-          handleDateChange={handleDateChange}
-        />
-        <PatientPhysicalForm
-          physical={physical}
-          handlePhysicalChange={handlePhysicalChange}
-        />
-        <PatientMedicalForm
-          medical={medical}
-          handleMedicalChange={handleMedicalChange}
-        />
-        <Button type="submit" label="회원가입" />
-      </form>
-      {isModalOpen && (
-        <SignupModal
-          onClose={() => {
-            setIsModalOpen(false);
-            nav("/login");
-          }}
-        />
-      )}
-    </div>
+    <>
+      <Header title="회원가입" />
+      <div className="px-14 flex flex-col min-h-screen">
+        <form onSubmit={handleSubmit} className="flex flex-col pt-6 pb-8 gap-7">
+          <GuardianForm
+            guardian={guardian}
+            handleGuardianChange={handleGuardianChange}
+            handleCheckId={handleCheckId}
+          />
+          <PatientBasicForm
+            basic={basic}
+            handleBasicChange={handleBasicChange}
+            handleDateChange={handleDateChange}
+          />
+          <PatientPhysicalForm
+            physical={physical}
+            handlePhysicalChange={handlePhysicalChange}
+          />
+          <PatientMedicalForm
+            medical={medical}
+            handleMedicalChange={handleMedicalChange}
+          />
+          <Button type="submit" label="회원가입" />
+        </form>
+        {isModalOpen && (
+          <SignupModal
+            onClose={() => {
+              setIsModalOpen(false);
+              nav("/login");
+            }}
+          />
+        )}
+      </div>
+    </>
   );
 }

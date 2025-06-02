@@ -1,10 +1,8 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getHeaderConfig } from "./type/headerType";
 import { messaging } from "./utils/firebase";
 import { onMessage } from "firebase/messaging";
 import AppRoutes from "./AppRoutes";
-import Header from "./components/common/Header";
 import Navigation from "./components/common/Navigation";
 import EmergencyModal from "./modals/EmergencyModal";
 import LoadingScreen from "./components/common/LoadingScreen";
@@ -35,8 +33,6 @@ export default function App() {
 
     setAlertData(null);
   };
-
-  const currentHeader = getHeaderConfig(loc.pathname);
 
   useEffect(() => {
     if ("serviceWorker" in navigator) {
@@ -75,15 +71,11 @@ export default function App() {
   return (
     <div className="app-container">
       <ScrollToTop />
-      {currentHeader && (
-        <Header title={currentHeader.title} isBack={currentHeader.isBack} />
-      )}
       <main
         className={`main-content ${shouldShowNavigation ? "with-nav" : ""}`}
       >
         <AppRoutes />
       </main>
-
       {shouldShowNavigation && <Navigation currentPath={loc.pathname} />}
       {isEmergency && <EmergencyModal onClick={handleEmergency} />}
       <LoadingScreen />

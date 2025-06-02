@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAppSelector } from "../hooks/useRedux";
 import { formatBirthInfo, formatDay, formatTime } from "../utils/dateUtils";
 import { useParams } from "react-router-dom";
+import Header from "../components/common/Header";
 
 export default function HistoryDetailPage() {
   const reportId = useParams();
@@ -37,19 +38,22 @@ export default function HistoryDetailPage() {
   } ${formatDay(situationTime)} ${formatTime(situationTime)}`;
 
   return (
-    <div className="flex flex-col px-14 pt-6 gap-7 min-h-screen">
-      <div className="flex flex-col gap-2.5 text-center">
-        <div className="body-m-bold">{formattedDate}</div>
-        <div className="body-m">{name}님의 낙상 기록</div>
+    <>
+      <Header title="히스토리" />
+      <div className="flex flex-col px-14 pt-6 gap-7 min-h-screen">
+        <div className="flex flex-col gap-2.5 text-center">
+          <div className="body-m-bold">{formattedDate}</div>
+          <div className="body-m">{name}님의 낙상 기록</div>
+        </div>
+        <div className="w-full h-40 items-center justify-center flex">
+          Streaming
+        </div>
+        <Report content={report} />
+        <div className="flex flex-row items-center">
+          <div className="text-darkgray title">조치 방법 &gt;</div>
+          <div className="text-alert title flex justify-end">{actionType}</div>
+        </div>
       </div>
-      <div className="w-full h-40 items-center justify-center flex">
-        Streaming
-      </div>
-      <Report content={report} />
-      <div className="flex flex-row items-center">
-        <div className="text-darkgray title">조치 방법 &gt;</div>
-        <div className="text-alert title flex justify-end">{actionType}</div>
-      </div>
-    </div>
+    </>
   );
 }

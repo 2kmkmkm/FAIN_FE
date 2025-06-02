@@ -4,6 +4,7 @@ import Graph from "../components/analysis/Graph";
 import Report from "../components/emergency/Report";
 import { useEffect, useState } from "react";
 import { getSummary, getGraph, getReport } from "../api/analysis";
+import SideHeader from "../components/common/SideHeader";
 
 export default function AnlaysisPage() {
   const currentYear = new Date().getFullYear();
@@ -80,25 +81,31 @@ export default function AnlaysisPage() {
   });
 
   return (
-    <div className="px-14 flex flex-col gap-7 pt-7 min-h-screen">
-      <div className="flex flex-row justify-center items-center gap-6">
-        <button className="w-3" onClick={() => handleMonthChange("prev")}>
-          <img src={arrow_calendar} className="w-1.5" />
-        </button>
-        <div className="w-fit heading-s">
-          {selectedYear}년 {selectedMonth}월
+    <>
+      <SideHeader title="분석" />
+      <div className="px-14 flex flex-col gap-7 pt-3 min-h-screen">
+        <div className="flex flex-row justify-center items-center gap-6">
+          <button className="w-3" onClick={() => handleMonthChange("prev")}>
+            <img src={arrow_calendar} className="w-1.5" />
+          </button>
+          <div className="w-fit heading-s">
+            {selectedYear}년 {selectedMonth}월
+          </div>
+          <button className="w-3" onClick={() => handleMonthChange("next")}>
+            <img
+              src={arrow_calendar}
+              className="w-1.5 transform scale-x-[-1]"
+            />
+          </button>
         </div>
-        <button className="w-3" onClick={() => handleMonthChange("next")}>
-          <img src={arrow_calendar} className="w-1.5 transform scale-x-[-1]" />
-        </button>
+        <Summary
+          fall={fallCount}
+          hospital={hospitalCount}
+          guardian={guardianCount}
+        />
+        <Graph graphData={graphData} />
+        <Report content={report} />
       </div>
-      <Summary
-        fall={fallCount}
-        hospital={hospitalCount}
-        guardian={guardianCount}
-      />
-      <Graph graphData={graphData} />
-      <Report content={report} />
-    </div>
+    </>
   );
 }
