@@ -4,8 +4,7 @@ import EditCompleteModal from "../modals/EditCompleteModal";
 import Header from "../components/common/Header";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { patchUserInfo } from "../api/user";
-import { getUserInfo } from "../api/user";
+import { getUserInfo, patchUserInfo } from "../api/user";
 import { setGuardian } from "../app/guardianSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/useRedux";
 
