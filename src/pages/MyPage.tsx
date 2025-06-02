@@ -5,9 +5,7 @@ import {
   PATIENT_INFO_CONFIG,
   UNIT_MAP,
 } from "../type/userType";
-import { formatBirthInfo } from "../utils/dateUtils";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { clearToken } from "../app/authSlice";
 import { resetGuardian } from "../app/guardianSlice";
 import { resetPatient } from "../app/patientSlice";
@@ -20,31 +18,8 @@ export default function MyPage() {
 
   const guardian = useAppSelector((state) => state.guardian);
   const patient = useAppSelector((state) => state.patient);
-
-  const [processedPatientData, setProcessedPatientData] = useState(patient);
-  const [processedGuardianData, setProcessedGuardianData] = useState({
-    userId: guardian.userId,
-    fName: guardian.fName,
-    fTel: guardian.fTel,
-  });
-
-  useEffect(() => {
-    const { formattedDate, age } = formatBirthInfo("2024-05-20");
-
-    setProcessedPatientData({
-      ...patient,
-      birth: `${formattedDate} (만 ${age}세)`,
-    });
-  }, [patient]);
-
-  useEffect(() => {
-    setProcessedGuardianData({
-      userId: guardian.userId,
-      fName: guardian.fName,
-      fTel: guardian.fTel,
-    });
-  }, [guardian]);
-
+  console.log(guardian);
+  console.log(patient);
   const handleLogout = () => {
     dispatch(clearToken());
     dispatch(resetGuardian());
@@ -59,7 +34,7 @@ export default function MyPage() {
           <InfoBox
             title="보호자 정보"
             config={GUARDIAN_INFO_CONFIG}
-            data={processedGuardianData}
+            data={guardian}
             editable
             onEdit={() => nav("/edit/guardian")}
           />
@@ -68,7 +43,7 @@ export default function MyPage() {
           <InfoBox
             title="환자 정보"
             config={PATIENT_INFO_CONFIG}
-            data={processedPatientData}
+            data={patient}
             unitMap={UNIT_MAP}
             editable
             onEdit={() => nav("/edit/patient")}
