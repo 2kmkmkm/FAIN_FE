@@ -9,6 +9,8 @@ import { formatBirthInfo } from "../utils/dateUtils";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { clearToken } from "../app/authSlice";
+import { resetGuardian } from "../app/guardianSlice";
+import { resetPatient } from "../app/patientSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/useRedux";
 import SideHeader from "../components/common/SideHeader";
 
@@ -43,6 +45,12 @@ export default function MyPage() {
     });
   }, [guardian]);
 
+  const handleLogout = () => {
+    dispatch(clearToken());
+    dispatch(resetGuardian());
+    dispatch(resetPatient());
+  };
+
   return (
     <>
       <SideHeader title="마이페이지" />
@@ -68,7 +76,7 @@ export default function MyPage() {
         </Box>
         <button
           className="text-placeholder body-xs-bold underline"
-          onClick={() => dispatch(clearToken())}
+          onClick={handleLogout}
         >
           로그아웃
         </button>

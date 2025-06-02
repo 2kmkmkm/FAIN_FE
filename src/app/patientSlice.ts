@@ -40,8 +40,9 @@ const patientSlice = createSlice({
     setPatient: (state, action: PayloadAction<PatientProps>) => {
       return { ...state, ...action.payload };
     },
+    resetPatient: () => initialState,
   },
 });
 
-export const { setPatient } = patientSlice.actions;
+export const { setPatient, resetPatient } = patientSlice.actions;
 export default patientSlice.reducer;

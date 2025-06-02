@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+import authReducer from "../app/authSlice"
 import guardianReducer from "../app/guardianSlice"
 import patientReducer from "../app/patientSlice"
-import authRecuer from "../app/authSlice"
 
 export const store = configureStore({
   reducer: {
-    auth: authRecuer,
+    auth: authReducer,
     guardian: guardianReducer,
     patient: patientReducer,
   },
