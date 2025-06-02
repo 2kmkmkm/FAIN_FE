@@ -18,12 +18,15 @@ export default function MyPage() {
 
   const guardian = useAppSelector((state) => state.guardian);
   const patient = useAppSelector((state) => state.patient);
+
   console.log(guardian);
   console.log(patient);
+
   const handleLogout = () => {
     dispatch(clearToken());
     dispatch(resetGuardian());
     dispatch(resetPatient());
+    nav("/login");
   };
 
   return (

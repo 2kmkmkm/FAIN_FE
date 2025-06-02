@@ -26,11 +26,9 @@ export default function App() {
 
   const handleEmergency = () => {
     setIsEmergency(false);
-
     if (alertData?.data.reportId) {
       nav(`/emergency/${alertData.data.reportId}`);
     }
-
     setAlertData(null);
   };
 
