@@ -9,7 +9,7 @@ export default function HistoryItem({ ...item }: HistoryProps) {
   return (
     <button
       className="flex flex-col rounded-[20px] justify-center items-center bg-[#FBFBFB] hover:bg-[#F3F3F3]"
-      onClick={() => nav(`/history/detail/${item.report_id}`)}
+      onClick={() => nav(`/history/detail/${item.reportId}`)}
     >
       <div className="flex items-center gap-3 px-3 py-4">
         <img src={caution_pink} className="w-5" />
@@ -17,15 +17,15 @@ export default function HistoryItem({ ...item }: HistoryProps) {
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-1.5">
               <div className="body-s-bold w-fit">
-                {formatDay(item.situation_time)}
+                {formatDay(item.situationTime)}
               </div>
               <div className="body-xs text-darkgray w-fit">
-                {item.situation_time.getHours()} :{" "}
-                {item.situation_time.getMinutes()}
+                {item.situationTime.getHours()} :{" "}
+                {item.situationTime.getMinutes()}
               </div>
             </div>
             <div className="body-xs text-placeholder flex justify-end pr-2">
-              {item.action_type}
+              {item.actionType}
             </div>
           </div>
           <div className="w-full truncate whitespace-nowrap text-start items-start overflow-hidden body-s text-darkgray">
