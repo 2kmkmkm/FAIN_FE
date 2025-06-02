@@ -2,9 +2,10 @@ import arrow_calendar from "../assets/arrow_calendar.svg";
 import Summary from "../components/analysis/Summary";
 import Graph from "../components/analysis/Graph";
 import Report from "../components/emergency/Report";
-import { useEffect, useState } from "react";
-import { getSummary, getGraph, getReport } from "../api/analysis";
 import SideHeader from "../components/common/SideHeader";
+import { useState } from "react";
+import { getSummary, getGraph, getReport } from "../api/analysis";
+import { useQuery } from "@tanstack/react-query";
 
 export default function AnlaysisPage() {
   const currentYear = new Date().getFullYear();
@@ -12,14 +13,6 @@ export default function AnlaysisPage() {
 
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
   const [selectedMonth, setSelectedMonth] = useState<number>(currentMonth);
-
-  const [fallCount, setFallCount] = useState<number>(0);
-  const [hospitalCount, setHospitalCount] = useState<number>(0);
-  const [guardianCount, setGuardianCount] = useState<number>(0);
-
-  const [graphData, setGraphData] = useState();
-
-  const [report, setReport] = useState<string>("");
 
   const handleMonthChange = (direction: "prev" | "next") => {
     if (direction === "prev") {
@@ -39,45 +32,19 @@ export default function AnlaysisPage() {
     }
   };
 
-  useEffect(() => {
-    const fetchSummary = async () => {
-      try {
-        const res = await getSummary(selectedYear, selectedMonth);
-        setFallCount(res.data.fall_count);
-        setHospitalCount(res.data.h_count);
-        setGuardianCount(res.data.p_count);
-      } catch (error) {
-        console.error("getSummary Error: ", error);
-      }
-    };
-
-    fetchSummary();
+  const { data: summary } = useQuery({
+    queryKey: ["summary", selectedYear, selectedMonth],
+    queryFn: () => getSummary(selectedYear, selectedMonth),
   });
 
-  useEffect(() => {
-    const fetchReport = async () => {
-      try {
-        const res = await getReport(selectedYear, selectedMonth);
-        setReport(res.data);
-      } catch (error) {
-        console.error("getReport Error: ", error);
-      }
-    };
-
-    fetchReport();
+  const { data: graphData } = useQuery({
+    queryKey: ["graph", selectedYear, selectedMonth],
+    queryFn: () => getGraph(selectedYear, selectedMonth),
   });
 
-  useEffect(() => {
-    const fetchGraph = async () => {
-      try {
-        const res = await getGraph(selectedYear, selectedMonth);
-        setGraphData(res);
-      } catch (error) {
-        console.error("getGraph Error: ", error);
-      }
-    };
-
-    fetchGraph();
+  const { data: report } = useQuery({
+    queryKey: ["report", selectedYear, selectedMonth],
+    queryFn: () => getReport(selectedYear, selectedMonth),
   });
 
   return (
@@ -99,12 +66,12 @@ export default function AnlaysisPage() {
           </button>
         </div>
         <Summary
-          fall={fallCount}
-          hospital={hospitalCount}
-          guardian={guardianCount}
+          fall={summary?.fallCount}
+          hospital={summary?.hospitalCount}
+          guardian={summary?.guardianCount}
         />
         <Graph graphData={graphData} />
-        <Report content={report} />
+        <Report content={report ?? ""} />
       </div>
     </>
   );
