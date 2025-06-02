@@ -11,7 +11,7 @@ function PatientPhysicalForm({
   const handleDropdownSelect = useCallback(
     (label: string) => {
       handlePhysicalChange({
-        target: { name: "bloodType", value: label },
+        target: { name: "bloodtype", value: label },
       } as React.ChangeEvent<HTMLInputElement>);
     },
     [handlePhysicalChange]
@@ -37,7 +37,7 @@ function PatientPhysicalForm({
         />
         <Dropdown
           category="혈액형"
-          selectedValue={physical.bloodType}
+          selectedValue={physical.bloodtype}
           onSelect={handleDropdownSelect}
           list={["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]}
         />

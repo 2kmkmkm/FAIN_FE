@@ -3,35 +3,38 @@
 @tailwind utilities;
 
 @layer utilities {
+  .heading-lg {
+    @apply text-2xl font-bold;
+  }
   .heading-s {
-    @apply text-[1.15rem] font-semibold;
+    @apply text-[1.15rem] font-bold;
   }
   .heading-m {
-    @apply text-[1.3rem] font-semibold;
+    @apply text-[1.3rem] font-bold;
   }
   .title {
-    @apply text-base font-semibold;
+    @apply text-base font-bold;
   }
   .body-xs {
-    @apply text-xs font-normal;
-  }
-  .body-xs-bold {
     @apply text-xs font-semibold;
   }
-  .body-s {
-    @apply text-sm font-normal;
+  .body-xs-bold {
+    @apply text-xs font-bold;
   }
-  .body-s-bold {
+  .body-s {
     @apply text-sm font-semibold;
   }
-  .body-m {
-    @apply text-base font-normal;
+  .body-s-bold {
+    @apply text-sm font-bold;
   }
-  .body-m-bold {
+  .body-m {
     @apply text-base font-semibold;
   }
+  .body-m-bold {
+    @apply text-base font-bold;
+  }
   .body-p {  
-    @apply text-[0.8rem] font-normal leading-6;
+    @apply text-[0.8rem] font-semibold leading-6;
 }
 }
 

@@ -4,7 +4,7 @@
   "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#E57373",
+  "theme_color": "#ffffff",
   "description": "Firebase Cloud Messaging Web App",
   "icons": [
     {
