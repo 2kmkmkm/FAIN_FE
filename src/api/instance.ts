@@ -1,6 +1,6 @@
 import axios from "axios"
 import { store } from "../app/store";
-import { logout } from "../app/guardianSlice";
+import { clearToken } from "../app/authSlice";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -11,7 +11,8 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+     const token = store.getState().auth.token;
+
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -27,7 +28,7 @@ instance.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       // TODO: 로그아웃 처리 혹은 리다이렉트
-      store.dispatch(logout());
+      store.dispatch(clearToken());
       console.warn("인증 오류 발생, 로그인 필요");
       localStorage.removeItem("token");
       window.location.href = "/login"

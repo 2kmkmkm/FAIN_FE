@@ -29,15 +29,8 @@ const guardianSlice = createSlice({
       state.fTel = fTel;
       state.isAuthenticated = isAuthenticated;
     },
-    logout: (state) => {
-      state.token= null;
-      state.userId = '';
-      state.fName = '';
-      state.fTel = '';
-      state.isAuthenticated = false;
-    },
   },
 });
 
-export const { setGuardian, logout } = guardianSlice.actions;
+export const { setGuardian } = guardianSlice.actions;
 export default guardianSlice.reducer;

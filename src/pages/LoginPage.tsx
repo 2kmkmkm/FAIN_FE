@@ -6,7 +6,7 @@ import Alert from "../components/common/Alert";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../hooks/useRedux";
-import { loginUser } from "../app/auth";
+import { loginUser } from "../app/authSlice";
 
 export default function LoginPage() {
   const [userId, setUserId] = useState<string>("");

@@ -8,8 +8,8 @@ import {
 import { formatBirthInfo } from "../utils/dateUtils";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { clearToken } from "../app/authSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/useRedux";
-import { logout } from "../app/guardianSlice";
 import SideHeader from "../components/common/SideHeader";
 
 export default function MyPage() {
@@ -68,7 +68,7 @@ export default function MyPage() {
         </Box>
         <button
           className="text-placeholder body-xs-bold underline"
-          onClick={() => dispatch(logout())}
+          onClick={() => dispatch(clearToken())}
         >
           로그아웃
         </button>
