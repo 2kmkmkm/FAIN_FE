@@ -8,9 +8,7 @@ export default function PatientBasicInfo({
   name: string;
   birth: string;
 }) {
-  // 변경 필요
-  console.log(birth);
-  const { formattedDate, age } = formatBirthInfo("2024-04-23");
+  const { formattedDate, age } = formatBirthInfo(birth);
 
   return (
     <div className="flex flex-col items-center gap-2 text-center w-full">

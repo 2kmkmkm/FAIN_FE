@@ -29,6 +29,7 @@ export default function LoginPage() {
 
     try {
       await dispatch(loginUser({ userId, password })).unwrap();
+      nav("/streaming");
     } catch {
       console.error("로그인 에러", error);
     }

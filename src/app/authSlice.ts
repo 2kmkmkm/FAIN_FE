@@ -34,15 +34,21 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (
     { userId, password }: { userId: string; password: string },
-    { dispatch }
+    { dispatch, rejectWithValue }
   ) => {
-    const res = await postLogin(userId, password); 
-    dispatch(setToken(res.token));
+    const res = await postLogin(userId, password);
+
+    if(res.status !== 200) {
+      return rejectWithValue("로그인 실패");
+    }
+    
+    dispatch(setToken(res.data.token));
 
     const info = await getUserInfo();
     dispatch(setGuardian(info.guardian));
     dispatch(setPatient(info.patient));
-    return res;
+
+    return res.data;
   }
 );
 

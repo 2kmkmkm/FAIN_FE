@@ -11,8 +11,8 @@ export const postSignup = async (formData: GuardianInfo & PatientBasicInfo & Pat
 
 export const postLogin = async (userId: string, password: string) => {
   const res = await instance.post("/login", { userId, password });
-  console.log("postLogin: ", res.data);
-  return res.data;
+  console.log("postLogin: ", res);
+  return res;
 };
 
 export const patchUserInfo = async (updatedData: {
