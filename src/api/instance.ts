@@ -23,10 +23,25 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem("token");
+  async (error) => {
+    const status = error.response?.status;
+    const originalRequest = error.config;
+    const isLoginRequest = originalRequest?.url?.includes("/login");
+
+    if (status === 401 && !isLoginRequest) {
+      const { store } = await import("../app/store");
+      const { clearToken } = await import("../app/authSlice");
+
+      store.dispatch(clearToken());
+      window.location.href = "/login";    
     }
+
+    if (error.response?.data?.message) {
+      console.error("서버 에러 메시지:", error.response.data.message);
+    } else {
+      console.error("요청 중 에러 발생:", error);
+    }
+
     return Promise.reject(error);
   }
 );
