@@ -9,20 +9,7 @@ import EditCompleteModal from "../modals/EditCompleteModal";
 import CustomPostcode from "../components/common/CustomPostcode";
 import type { DaumPostcodeData } from "../components/common/CustomPostcode";
 import Header from "../components/common/Header";
-
-const data = {
-  name: "홍길동",
-  birth: "2024-05-24",
-  address: "(61188) 광주광역시 북구 용봉로 77 공과대학 7호관 215호",
-  height: 180,
-  weight: 70,
-  bloodType: "A+",
-  disease: "고혈압",
-  allergy: "꽃가루",
-  medicine: "혈압약",
-  hospital: "전남대병원",
-};
-
+z;
 export default function PatientEditPage() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [showPostcode, setShowPostcode] = useState<boolean>(false);
