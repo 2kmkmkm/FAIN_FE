@@ -1,7 +1,7 @@
 import type { PatientPhysicalInfo } from "../../type/userType";
 
 export default function PatientPhysicalInfo({
-  bloodType,
+  bloodtype,
   height,
   weight,
 }: PatientPhysicalInfo) {
@@ -9,7 +9,7 @@ export default function PatientPhysicalInfo({
     <div className="flex justify-between items-center text-center gap-4">
       <div className="flex flex-col justify-center items-center gap-2">
         <div className="body-m-bold">혈액형</div>
-        <div className="body-m text-darkgray">{bloodType}형</div>
+        <div className="body-m text-darkgray">{bloodtype}형</div>
       </div>
       <div className="w-px h-12 bg-[#D9D9D9]"></div>
       <div className="flex flex-col justify-center items-center gap-2">

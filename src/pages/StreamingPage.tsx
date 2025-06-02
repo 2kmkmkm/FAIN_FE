@@ -16,7 +16,7 @@ export default function StreamingPage() {
         <PatientBasicInfo name={patient.name} birth={patient.birth} />
         <Streaming />
         <PatientPhysicalInfo
-          bloodtype={patient.bloodType}
+          bloodtype={patient.bloodtype}
           height={patient.height}
           weight={patient.weight}
         />

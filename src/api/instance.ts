@@ -1,6 +1,4 @@
 import axios from "axios"
-import { store } from "../app/store";
-import { logout } from "../app/guardianSlice";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -12,6 +10,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
+
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -24,14 +23,25 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      // TODO: 로그아웃 처리 혹은 리다이렉트
-      store.dispatch(logout());
-      console.warn("인증 오류 발생, 로그인 필요");
-      localStorage.removeItem("token");
-      window.location.href = "/login"
+  async (error) => {
+    const status = error.response?.status;
+    const originalRequest = error.config;
+    const isLoginRequest = originalRequest?.url?.includes("/login");
+
+    if (status === 401 && !isLoginRequest) {
+      const { store } = await import("../app/store");
+      const { clearToken } = await import("../app/authSlice");
+
+      store.dispatch(clearToken());
+      window.location.href = "/login";    
     }
+
+    if (error.response?.data?.message) {
+      console.error("서버 에러 메시지:", error.response.data.message);
+    } else {
+      console.error("요청 중 에러 발생:", error);
+    }
+
     return Promise.reject(error);
   }
 );

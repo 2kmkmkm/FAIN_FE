@@ -18,7 +18,7 @@ export default function PatientInfo({ ...rest }: EmergencyProps) {
       </div>
       <div className="flex flex-col gap-5">
         <PatientPhysicalInfo
-          bloodType={rest.bloodType}
+          bloodtype={rest.bloodtype}
           height={rest.height}
           weight={rest.weight}
         />

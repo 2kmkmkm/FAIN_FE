@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useAppSelector } from "./hooks/useRedux";
 import { messaging } from "./utils/firebase";
 import { onMessage } from "firebase/messaging";
 import AppRoutes from "./AppRoutes";
@@ -11,6 +12,7 @@ import ScrollToTop from "./components/common/ScrollTop";
 export default function App() {
   const nav = useNavigate();
   const loc = useLocation();
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
   const [isEmergency, setIsEmergency] = useState<boolean>(false);
   const [alertData, setAlertData] = useState<{
@@ -26,11 +28,9 @@ export default function App() {
 
   const handleEmergency = () => {
     setIsEmergency(false);
-
     if (alertData?.data.reportId) {
       nav(`/emergency/${alertData.data.reportId}`);
     }
-
     setAlertData(null);
   };
 
@@ -67,6 +67,19 @@ export default function App() {
       }
     });
   }, []);
+
+  useEffect(() => {
+    const isRootPath =
+      location.pathname === "/" || location.pathname === "/index.html";
+
+    if (isRootPath) {
+      if (isAuthenticated) {
+        nav("/streaming", { replace: true });
+      } else {
+        nav("/login", { replace: true });
+      }
+    }
+  }, [isAuthenticated, nav]);
 
   return (
     <div className="app-container">

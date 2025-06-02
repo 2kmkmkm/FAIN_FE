@@ -6,7 +6,7 @@ import Alert from "../components/common/Alert";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../hooks/useRedux";
-import { loginUser } from "../app/auth";
+import { loginUser } from "../app/authSlice";
 
 export default function LoginPage() {
   const [userId, setUserId] = useState<string>("");
@@ -29,7 +29,9 @@ export default function LoginPage() {
 
     try {
       await dispatch(loginUser({ userId, password })).unwrap();
+      nav("/streaming");
     } catch {
+      setError("아이디 또는 비밀번호가 올바르지 않습니다.");
       console.error("로그인 에러", error);
     }
   };
@@ -40,7 +42,7 @@ export default function LoginPage() {
         <img src={logo_img} className="w-52" />
         <img src={logo_word} className="w-32" />
       </div>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <div className="flex flex-col gap-2.5">
           <Input
             type="text"
@@ -59,7 +61,9 @@ export default function LoginPage() {
         </div>
         <div className="flex flex-col justify-center items-center">
           <Alert
-            className={`${error ? "" : "invisible"} flex justify-center h-6`}
+            className={`flex text-center justify-center items-center min-h-7 ${
+              error ? "visible" : "invisible"
+            }`}
           >
             {error}
           </Alert>

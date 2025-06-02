@@ -1,56 +1,57 @@
+import Header from "../components/common/Header";
 import Button from "../components/common/Button";
 import Input from "../components/common/Input";
 import search from "../assets/search.svg";
 import Dropdown from "../components/common/Dropdown";
-import { fullAddress, parseAddress } from "../utils/addressUtils";
-import { PATIENT_INFO_CONFIG } from "../type/userType";
-import { useState, useEffect } from "react";
 import EditCompleteModal from "../modals/EditCompleteModal";
 import CustomPostcode from "../components/common/CustomPostcode";
 import type { DaumPostcodeData } from "../components/common/CustomPostcode";
-import Header from "../components/common/Header";
-
-const data = {
-  name: "홍길동",
-  birth: "2024-05-24",
-  address: "(61188) 광주광역시 북구 용봉로 77 공과대학 7호관 215호",
-  height: 180,
-  weight: 70,
-  bloodType: "A+",
-  disease: "고혈압",
-  allergy: "꽃가루",
-  medicine: "혈압약",
-  hospital: "전남대병원",
-};
+import { fullAddress, parseAddress } from "../utils/addressUtils";
+import { PATIENT_INFO_CONFIG } from "../type/userType";
+import { useState, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../hooks/useRedux";
+import { useMutation } from "@tanstack/react-query";
+import { patchUserInfo, getUserInfo } from "../api/user";
+import { setPatient } from "../app/patientSlice";
 
 export default function PatientEditPage() {
+  const patient = useAppSelector((state) => state.patient);
+  const dispatch = useAppDispatch();
+
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [showPostcode, setShowPostcode] = useState<boolean>(false);
-  const [formData, setFormData] = useState({ ...data });
 
   const [zoneCode, setZoneCode] = useState("");
   const [roadAddress, setRoadAddress] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
 
+  const [formData, setFormData] = useState({ ...patient });
+
   useEffect(() => {
     const { zoneCode, roadAddress, detailAddress } = parseAddress(
-      formData.address
+      patient.address
     );
     setZoneCode(zoneCode);
     setRoadAddress(roadAddress);
     setDetailAddress(detailAddress);
-  }, []);
+  }, [patient.address]);
 
   useEffect(() => {
     const address = fullAddress(zoneCode, roadAddress, detailAddress);
-    setFormData((prev) => ({ ...prev, address: address }));
+    setFormData((prev) => ({ ...prev, address }));
   }, [zoneCode, roadAddress, detailAddress]);
 
-  const handleComplete = (data: DaumPostcodeData) => {
-    setZoneCode(data.zonecode);
-    setRoadAddress(data.roadAddress);
-    setShowPostcode(false);
-  };
+  const mutation = useMutation({
+    mutationFn: () => patchUserInfo({ patient: formData }),
+    onSuccess: async () => {
+      const { patient: newPatient } = await getUserInfo();
+      dispatch(setPatient(newPatient));
+      setIsModalOpen(true);
+    },
+    onError: (err) => {
+      console.error("환자 정보 수정 실패:", err);
+    },
+  });
 
   const handleChange = (key: string, value: string) => {
     setFormData((prev) => ({
@@ -59,9 +60,15 @@ export default function PatientEditPage() {
     }));
   };
 
+  const handleComplete = (data: DaumPostcodeData) => {
+    setZoneCode(data.zonecode);
+    setRoadAddress(data.roadAddress);
+    setShowPostcode(false);
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsModalOpen(true);
+    mutation.mutate();
   };
 
   return (
@@ -69,13 +76,13 @@ export default function PatientEditPage() {
       <Header title="환자 정보 수정" />
       <form
         id="patient-edit-form"
-        className="flex flex-col min-h-screen px-12 py-8 gap-8"
+        className="flex flex-col px-12 py-8 gap-8"
         onSubmit={handleSubmit}
+        style={{ minHeight: "calc(100vh - 64px)" }}
       >
         <div className="flex flex-col gap-5">
           {PATIENT_INFO_CONFIG.map(({ key, label }) => {
             if (key === "address") return null;
-
             const value = formData[key as keyof typeof formData];
 
             if (key === "birth") {
@@ -87,7 +94,7 @@ export default function PatientEditPage() {
                     </div>
                     <Input
                       isEdit
-                      defaultValue={value}
+                      value={value}
                       type="date"
                       onChange={(e) => handleChange(key, e.target.value)}
                     />
@@ -101,7 +108,7 @@ export default function PatientEditPage() {
                       <div className="flex gap-1.5">
                         <Input
                           isEdit
-                          defaultValue={zoneCode}
+                          placeholder={zoneCode}
                           type="text"
                           onChange={(e) => setZoneCode(e.target.value)}
                         />
@@ -117,14 +124,14 @@ export default function PatientEditPage() {
                         <CustomPostcode onComplete={handleComplete} />
                       )}
                       <Input
+                        placeholder={roadAddress}
                         isEdit
-                        defaultValue={roadAddress}
                         type="text"
                         onChange={(e) => setRoadAddress(e.target.value)}
                       />
                       <Input
                         isEdit
-                        defaultValue={detailAddress}
+                        placeholder={detailAddress}
                         type="text"
                         onChange={(e) => setDetailAddress(e.target.value)}
                       />
@@ -134,7 +141,7 @@ export default function PatientEditPage() {
               );
             }
 
-            if (key === "bloodType") {
+            if (key === "bloodtype") {
               return (
                 <div key={key} className="flex gap-5 items-start">
                   <div className="w-24 text-placeholder body-s pt-[2px]">
@@ -142,9 +149,9 @@ export default function PatientEditPage() {
                   </div>
                   <Dropdown
                     isSmall
-                    category="혈액형"
-                    selectedValue={formData.bloodType}
-                    onSelect={(value) => handleChange("bloodType", value)}
+                    category={formData.bloodtype}
+                    selectedValue={formData.bloodtype}
+                    onSelect={(value) => handleChange("bloodtype", value)}
                     list={["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]}
                   />
                 </div>
@@ -158,7 +165,8 @@ export default function PatientEditPage() {
                 </div>
                 <Input
                   isEdit
-                  defaultValue={String(value)}
+                  value={value}
+                  placeholder={value}
                   type="text"
                   onChange={(e) => handleChange(key, e.target.value)}
                 />
@@ -166,7 +174,6 @@ export default function PatientEditPage() {
             );
           })}
         </div>
-
         <div className="mt-auto">
           <Button label="수정" type="submit" />
         </div>

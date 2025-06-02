@@ -9,14 +9,14 @@ export default function LoadingScreen() {
   return (
     <div
       style={{
-        position: "absolute",
+        position: "fixed",
         display,
         zIndex: 999,
         top: "45%",
         left: "45%",
       }}
     >
-      <Loader2 color="white" className="h-10 w-10 animate-spin" />
+      <Loader2 color="#E57373" className="h-10 w-10 animate-spin" />
     </div>
   );
 }

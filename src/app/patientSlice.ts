@@ -6,9 +6,9 @@ export type PatientProps = {
   birth: string;
   address: string;
 
-  height: number | undefined;
-  weight: number | undefined;
-  bloodType: string;
+  height: string;
+  weight: string;
+  bloodtype: string;
 
   medicine: string;
   hospitalName: string;
@@ -22,9 +22,9 @@ const initialState: PatientProps = {
   birth: "",
   address: "",
 
-  height: undefined,
-  weight: undefined,
-  bloodType: "",
+  height: "",
+  weight: "",
+  bloodtype: "",
 
   medicine: "",
   hospitalName: "",
@@ -40,8 +40,9 @@ const patientSlice = createSlice({
     setPatient: (state, action: PayloadAction<PatientProps>) => {
       return { ...state, ...action.payload };
     },
+    resetPatient: () => initialState,
   },
 });
 
-export const { setPatient } = patientSlice.actions;
+export const { setPatient, resetPatient } = patientSlice.actions;
 export default patientSlice.reducer;
