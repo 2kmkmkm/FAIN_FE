@@ -11,6 +11,7 @@ import { resetGuardian } from "../app/guardianSlice";
 import { resetPatient } from "../app/patientSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/useRedux";
 import SideHeader from "../components/common/SideHeader";
+import { resetStore } from "../app/store";
 
 export default function MyPage() {
   const nav = useNavigate();
@@ -26,6 +27,7 @@ export default function MyPage() {
     dispatch(clearToken());
     dispatch(resetGuardian());
     dispatch(resetPatient());
+    resetStore();
     nav("/login");
   };
 

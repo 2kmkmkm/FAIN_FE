@@ -2,16 +2,19 @@ import "./index.css";
 import App from "./App.tsx";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { store } from "./app/store.ts";
+import { store, persistor } from "./app/store.ts";
 import { Provider } from "react-redux";
 import RQProvider from "./components/common/RQProvider.tsx";
+import { PersistGate } from "redux-persist/integration/react";
 
 createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
-    <RQProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </RQProvider>
+    <PersistGate loading={null} persistor={persistor}>
+      <RQProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </RQProvider>
+    </PersistGate>
   </Provider>
 );
