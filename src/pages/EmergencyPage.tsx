@@ -57,7 +57,7 @@ export default function EmergencyPage() {
           Streaming
         </div>
         <PatientInfo
-          bloodType={patient.bloodType}
+          bloodtype={patient.bloodtype}
           height={patient.height}
           weight={patient.weight}
           disease={patient.disease}

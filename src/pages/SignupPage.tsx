@@ -45,8 +45,8 @@ export default function SignupPage() {
   });
 
   const [physical, handlePhysicalChange] = useFormState<PatientPhysicalInfo>({
-    height: undefined,
-    weight: undefined,
+    height: "",
+    weight: "",
     bloodtype: "",
   });
 
@@ -120,9 +120,7 @@ export default function SignupPage() {
         const formData = {
           ...guardian,
           ...basic,
-          height: Number(physical.height),
-          weight: Number(physical.weight),
-          bloodtype: physical.bloodtype,
+          ...physical,
           ...medical,
         };
 

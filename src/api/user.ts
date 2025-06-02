@@ -31,7 +31,7 @@ export const getUserInfo = async () => {
 };
 
 export const getCheckId = async (userId: string) => {
-    const res = await instance.get("/api/v1/signup/check-id", { params: { userId }});
+    const res = await instance.get("/signup/check-id", { params: { userId }});
     console.log("getCheckId: ", res.data);
     return res.data;
 }

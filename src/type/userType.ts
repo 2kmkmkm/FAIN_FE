@@ -13,8 +13,8 @@ export type GuardianInfo = {
   };
   
   export type PatientPhysicalInfo = {
-    height: number | undefined;
-    weight: number | undefined;
+    height: string;
+    weight: string;
     bloodtype: string;
   };
   
