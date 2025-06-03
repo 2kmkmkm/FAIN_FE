@@ -41,7 +41,7 @@ export default function SignupPage() {
     allergic: "",
     medicine: "",
     hospitalName: "",
-    hospitalTel: "0625301750",
+    hospitalTel: "",
   });
 
   const [physical, handlePhysicalChange] = useFormState<PatientPhysicalInfo>({
