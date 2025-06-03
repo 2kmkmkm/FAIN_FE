@@ -14,8 +14,8 @@ export const postActionType = async (reportId: number, action: "119" |
     return res.data.data;
 }
 
-export const postRegisterToken = async (token: string) => {
-    const res = await instance.post('/fcm/registers', { token });
+export const postRegisterToken = async (token: string, userId: string) => {
+    const res = await instance.post('/fcm/registers', { token, userId });
     console.log(res.data);
     return res.data;
 }

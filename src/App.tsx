@@ -49,22 +49,18 @@ export default function App() {
 
   useEffect(() => {
     onMessage(messaging, (payload) => {
-      console.log("포그라운드 FCM 메시지 수신:", payload);
-
-      if (payload?.data) {
-        try {
-          const parsedAlert = {
-            success: payload.data.success === "true",
-            data: JSON.parse(payload.data.data),
-            message: payload.data.message,
-          };
-
-          setAlertData(parsedAlert);
-          setIsEmergency(true);
-        } catch (err) {
-          console.error("알림 데이터 파싱 오류:", err);
-        }
+      if (!payload) {
+        console.error("알림 데이터 파싱 오류");
+        return;
       }
+
+      console.log("포그라운드 FCM 메시지 수신:", payload);
+      console.log("payload.data", payload);
+
+      setIsEmergency(true);
+
+      console.log(isEmergency);
+      console.log(alertData);
     });
   }, []);
 
@@ -80,6 +76,14 @@ export default function App() {
       }
     }
   }, [isAuthenticated, nav]);
+
+  useEffect(() => {
+    if (Notification.permission !== "granted") {
+      console.log("알림 권한이 없음. 권한 요청 필요.");
+    } else {
+      console.log("이미 알림 권한이 있음.");
+    }
+  }, []);
 
   return (
     <div className="app-container">
