@@ -100,11 +100,10 @@ function PatientBasicForm({
             inputProps={{
               name: "birth",
               value: formatDateToString(parseStringToDate(basic.birth)),
-              readOnly: true,
             }}
           />
         </div>
-        <div className="flex flex-row gap-2 h-full">
+        <div className="flex flex-row gap-2 h-fit">
           <Input
             name="zone_code"
             placeholder="우편번호"

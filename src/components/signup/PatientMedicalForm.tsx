@@ -1,5 +1,4 @@
 import Input from "../common/Input";
-import search from "../../assets/search.svg";
 import information from "../../assets/information.svg";
 import Popup from "../common/Popup";
 import type { PatientMedicalFormProps } from "../../type/userType";
@@ -52,21 +51,19 @@ function PatientMedicalForm({
           value={medical.medicine}
           onChange={handleMedicalChange}
         />
-        <div className="flex flex-row gap-2 h-full">
-          <Input
-            name="hospitalName"
-            placeholder="주요 병원"
-            value={medical.hospitalName}
-            onChange={handleMedicalChange}
-          />
-          <button
-            onClick={() => {}}
-            type="button"
-            className="bg-main text-white body-s w-14 px-1.5 rounded-[10px] flex justify-center items-center"
-          >
-            <img src={search} className="w-7" />
-          </button>
-        </div>
+
+        <Input
+          name="hospitalName"
+          placeholder="주요 병원"
+          value={medical.hospitalName}
+          onChange={handleMedicalChange}
+        />
+        <Input
+          name="hospitalTel"
+          placeholder="병원 연락처"
+          value={medical.hospitalTel}
+          onChange={handleMedicalChange}
+        />
       </div>
     </div>
   );

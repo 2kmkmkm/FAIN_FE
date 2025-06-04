@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../hooks/useRedux";
 import { loginUser } from "../app/authSlice";
+import { requestNotificationPermissionAndToken } from "../utils/firebase";
 
 export default function LoginPage() {
   const [userId, setUserId] = useState<string>("");
@@ -29,6 +30,7 @@ export default function LoginPage() {
 
     try {
       await dispatch(loginUser({ userId, password })).unwrap();
+      await requestNotificationPermissionAndToken();
       nav("/streaming");
     } catch {
       setError("아이디 또는 비밀번호가 올바르지 않습니다.");
@@ -67,11 +69,11 @@ export default function LoginPage() {
           >
             {error}
           </Alert>
-          <div className="flex flex-col gap-2.5">
+          <div className="flex flex-col gap-3">
             <Button type="submit" label="로그인" />
             <button
               type="button"
-              className="text-placeholder body-xs underline"
+              className="text-placeholder body-xs-bold underline"
               onClick={() => nav("/signup")}
             >
               회원가입

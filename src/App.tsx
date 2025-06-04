@@ -15,11 +15,7 @@ export default function App() {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
   const [isEmergency, setIsEmergency] = useState<boolean>(false);
-  const [alertData, setAlertData] = useState<{
-    success: boolean;
-    data: { reportId: number };
-    message: string;
-  } | null>(null);
+  const [reportId, setReportId] = useState<number | null>(null);
 
   const showNavigationPaths = ["/streaming", "/analysis", "/history", "/my"];
   const shouldShowNavigation = showNavigationPaths.some((path) =>
@@ -28,10 +24,10 @@ export default function App() {
 
   const handleEmergency = () => {
     setIsEmergency(false);
-    if (alertData?.data.reportId) {
-      nav(`/emergency/${alertData.data.reportId}`);
+    if (reportId) {
+      nav(`/emergency/${reportId}`);
     }
-    setAlertData(null);
+    setReportId(null);
   };
 
   useEffect(() => {
@@ -51,20 +47,23 @@ export default function App() {
     onMessage(messaging, (payload) => {
       console.log("포그라운드 FCM 메시지 수신:", payload);
 
-      if (payload?.data) {
+      if (payload) {
         try {
-          const parsedAlert = {
-            success: payload.data.success === "true",
-            data: JSON.parse(payload.data.data),
-            message: payload.data.message,
-          };
+          const id = payload.notification;
 
-          setAlertData(parsedAlert);
+          setReportId(Number(id));
           setIsEmergency(true);
         } catch (err) {
           console.error("알림 데이터 파싱 오류:", err);
         }
       }
+
+      console.log("payload.data", payload);
+
+      setIsEmergency(true);
+
+      console.log(isEmergency);
+      console.log(reportId);
     });
   }, []);
 
@@ -81,6 +80,14 @@ export default function App() {
     }
   }, [isAuthenticated, nav]);
 
+  useEffect(() => {
+    if (Notification.permission !== "granted") {
+      console.log("알림 권한이 없음. 권한 요청 필요.");
+    } else {
+      console.log("이미 알림 권한이 있음.");
+    }
+  }, []);
+
   return (
     <div className="app-container">
       <ScrollToTop />
@@ -90,7 +97,7 @@ export default function App() {
         <AppRoutes />
       </main>
       {shouldShowNavigation && <Navigation currentPath={loc.pathname} />}
-      {isEmergency && <EmergencyModal onClick={handleEmergency} />}
+      {isEmergency && reportId && <EmergencyModal onClick={handleEmergency} />}
       <LoadingScreen />
     </div>
   );

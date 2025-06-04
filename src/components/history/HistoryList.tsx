@@ -18,7 +18,7 @@ export default function HistoryList() {
 
   return (
     <div className="flex flex-col gap-3">
-      <HistoryMonthlyList {...historyList} />
+      <HistoryMonthlyList list={historyList} />
     </div>
   );
 }

@@ -17,20 +17,22 @@ export default function GuardianEditPage() {
   const [fTel, setfTel] = useState(guardian.fTel);
 
   const mutation = useMutation({
-    mutationFn: () => patchUserInfo({ guardian: { fName, fTel } }),
+    mutationFn: (updatedData: { fName: string; fTel: string }) =>
+      patchUserInfo({
+        ...guardian,
+        fName: updatedData.fName,
+        fTel: updatedData.fTel,
+      }),
     onSuccess: async () => {
       const { guardian: newGuardian } = await getUserInfo();
       dispatch(setGuardian(newGuardian));
       setIsModalOpen(true);
     },
-    onError: (err) => {
-      console.error("보호자 정보 수정 실패:", err);
-    },
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutation.mutate();
+    mutation.mutate({ fName, fTel });
   };
 
   return (
@@ -46,8 +48,8 @@ export default function GuardianEditPage() {
             <div className="text-placeholder body-m w-28">이름</div>
             <Input
               isEdit
-              placeholder={guardian.fName}
               value={fName}
+              placeholder={guardian.fName}
               onChange={(e) => setfName(e.target.value)}
             />
           </div>
@@ -55,9 +57,9 @@ export default function GuardianEditPage() {
             <div className="text-placeholder body-m w-28">연락처</div>
             <Input
               isEdit
+              value={fTel}
               placeholder={guardian.fTel}
               type="tel"
-              value={fTel}
               onChange={(e) => setfTel(e.target.value)}
             />
           </div>
@@ -66,7 +68,7 @@ export default function GuardianEditPage() {
           </div>
         </form>
       </div>
-      {isModalOpen && <EditCompleteModal category="보호자" />}
+      {isModalOpen && <EditCompleteModal />}
     </>
   );
 }

@@ -1,11 +1,11 @@
 import HistoryItem from "./HistoryItem";
 import type { HistoryProps } from "../../type/reportType";
 
-export default function HistoryMonthlyList({ ...rest }: HistoryProps[]) {
+export default function HistoryMonthlyList({ list }: { list: HistoryProps[] }) {
   const groupByMonth = (list: HistoryProps[]) => {
     return list.reduce((acc, item) => {
-      const monthKey = `${item.situationTime.getFullYear()}년 ${
-        item.situationTime.getMonth() + 1
+      const monthKey = `${new Date(item.situationTime).getFullYear()}년 ${
+        new Date(item.situationTime).getMonth() + 1
       }월`;
       if (!acc[monthKey]) acc[monthKey] = [];
       acc[monthKey].push(item);
@@ -13,7 +13,7 @@ export default function HistoryMonthlyList({ ...rest }: HistoryProps[]) {
     }, {} as Record<string, HistoryProps[]>);
   };
 
-  const grouped = groupByMonth(rest);
+  const grouped = groupByMonth(list);
 
   const sortedMonths = Object.keys(grouped).sort((a, b) => {
     const [yearA, monthA] = a.split("년 ").map(Number);

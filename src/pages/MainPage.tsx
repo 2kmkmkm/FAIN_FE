@@ -17,7 +17,7 @@ export default function MainPage() {
   }, [isAuthenticated, nav]);
 
   return (
-    <div className="bg-white flex flex-col justify-center items-center min-h-screen">
+    <div className="bg-back flex flex-col justify-center items-center min-h-screen">
       <img src={logo_img} className="w-52" />
       <img src={logo_word} className="w-32" />
     </div>

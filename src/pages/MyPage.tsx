@@ -34,7 +34,7 @@ export default function MyPage() {
   return (
     <>
       <SideHeader title="마이페이지" />
-      <div className="flex flex-col px-12 gap-5 pt-2">
+      <div className="flex flex-col px-10 gap-6 pb-2">
         <Box>
           <InfoBox
             title="보호자 정보"

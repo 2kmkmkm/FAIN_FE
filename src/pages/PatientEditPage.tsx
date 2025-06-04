@@ -22,27 +22,23 @@ export default function PatientEditPage() {
   const [showPostcode, setShowPostcode] = useState<boolean>(false);
 
   const [zoneCode, setZoneCode] = useState("");
-  const [roadAddress, setRoadAddress] = useState("");
-  const [detailAddress, setDetailAddress] = useState("");
+  const [restAddress, setRestAddress] = useState("");
 
   const [formData, setFormData] = useState({ ...patient });
 
   useEffect(() => {
-    const { zoneCode, roadAddress, detailAddress } = parseAddress(
-      patient.address
-    );
+    const { zoneCode, rest } = parseAddress(patient.address);
     setZoneCode(zoneCode);
-    setRoadAddress(roadAddress);
-    setDetailAddress(detailAddress);
+    setRestAddress(rest);
   }, [patient.address]);
 
   useEffect(() => {
-    const address = fullAddress(zoneCode, roadAddress, detailAddress);
+    const address = fullAddress(zoneCode, restAddress);
     setFormData((prev) => ({ ...prev, address }));
-  }, [zoneCode, roadAddress, detailAddress]);
+  }, [zoneCode, restAddress]);
 
   const mutation = useMutation({
-    mutationFn: () => patchUserInfo({ patient: formData }),
+    mutationFn: () => patchUserInfo(formData),
     onSuccess: async () => {
       const { patient: newPatient } = await getUserInfo();
       dispatch(setPatient(newPatient));
@@ -62,7 +58,7 @@ export default function PatientEditPage() {
 
   const handleComplete = (data: DaumPostcodeData) => {
     setZoneCode(data.zonecode);
-    setRoadAddress(data.roadAddress);
+    setRestAddress(data.roadAddress);
     setShowPostcode(false);
   };
 
@@ -89,13 +85,12 @@ export default function PatientEditPage() {
               return (
                 <div key={key} className="flex flex-col gap-5">
                   <div className="flex gap-5 items-start">
-                    <div className="w-24 text-placeholder body-s pt-[2px]">
-                      {label}
-                    </div>
+                    <div className="w-24 text-placeholder body-s">{label}</div>
                     <Input
                       isEdit
-                      value={value}
+                      value={formData.birth}
                       type="date"
+                      className="h-[16.67px] bg-[#F9F9F9]"
                       onChange={(e) => handleChange(key, e.target.value)}
                     />
                   </div>
@@ -108,6 +103,7 @@ export default function PatientEditPage() {
                       <div className="flex gap-1.5">
                         <Input
                           isEdit
+                          value={`(${zoneCode})`}
                           placeholder={zoneCode}
                           type="text"
                           onChange={(e) => setZoneCode(e.target.value)}
@@ -124,16 +120,11 @@ export default function PatientEditPage() {
                         <CustomPostcode onComplete={handleComplete} />
                       )}
                       <Input
-                        placeholder={roadAddress}
+                        placeholder={restAddress}
                         isEdit
+                        value={restAddress}
                         type="text"
-                        onChange={(e) => setRoadAddress(e.target.value)}
-                      />
-                      <Input
-                        isEdit
-                        placeholder={detailAddress}
-                        type="text"
-                        onChange={(e) => setDetailAddress(e.target.value)}
+                        onChange={(e) => setRestAddress(e.target.value)}
                       />
                     </div>
                   </div>
@@ -165,8 +156,8 @@ export default function PatientEditPage() {
                 </div>
                 <Input
                   isEdit
-                  value={value}
                   placeholder={value}
+                  value={value}
                   type="text"
                   onChange={(e) => handleChange(key, e.target.value)}
                 />
@@ -179,7 +170,7 @@ export default function PatientEditPage() {
         </div>
       </form>
 
-      {isModalOpen && <EditCompleteModal category="환자" />}
+      {isModalOpen && <EditCompleteModal />}
     </>
   );
 }
