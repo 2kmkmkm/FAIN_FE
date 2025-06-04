@@ -1,41 +1,27 @@
 import Report from "../components/emergency/Report";
-import { getHistoryDetail } from "../api/history";
-import { useEffect, useState } from "react";
-import { useAppSelector } from "../hooks/useRedux";
-import { formatBirthInfo, formatDay, formatTime } from "../utils/dateUtils";
-import { useParams } from "react-router-dom";
 import Header from "../components/common/Header";
+import { getHistoryDetail } from "../api/history";
+import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
+import { useAppSelector } from "../hooks/useRedux";
+import { formatDay, formatTime } from "../utils/dateUtils";
+import { useParams } from "react-router-dom";
 
 export default function HistoryDetailPage() {
-  const reportId = useParams();
-
-  const [situationTime, setSituationTime] = useState<Date>();
-  const [report, setReport] = useState<string>("");
-  const [actionType, setActionType] = useState<string>("");
-
+  const { reportId } = useParams();
   const name = useAppSelector((state) => state.patient.name);
 
-  useEffect(() => {
-    const fetchHistoryDetail = async () => {
-      try {
-        const res = await getHistoryDetail(Number(reportId));
-        console.log("fetchHistoryDetail: ", res);
-        setSituationTime(res.situation_time);
-        setReport(res.report);
-        setActionType(res.action_type);
-      } catch (error) {
-        console.error("fetchHistoryDetail Error: ", error);
-      }
-    };
-
-    fetchHistoryDetail();
+  const { data: historyDetail } = useQuery({
+    queryKey: ["historyDetail", reportId],
+    queryFn: () => getHistoryDetail(Number(reportId)),
   });
 
-  if (!situationTime) return null;
+  if (!historyDetail) return null;
 
-  const formattedDate = `${
-    formatBirthInfo(String(situationTime)).formattedDate
-  } ${formatDay(situationTime)} ${formatTime(situationTime)}`;
+  const situationTime = new Date(historyDetail.situation_time);
+  const formattedDate = `${format(situationTime, "yyyy / MM / dd")} ${formatDay(
+    situationTime
+  )} ${formatTime(situationTime)}`;
 
   return (
     <>
@@ -48,10 +34,12 @@ export default function HistoryDetailPage() {
         <div className="w-full h-40 items-center justify-center flex">
           Streaming
         </div>
-        <Report content={report} />
+        <Report content={historyDetail.report} />
         <div className="flex flex-row items-center">
           <div className="text-darkgray title">조치 방법 &gt;</div>
-          <div className="text-alert title flex justify-end">{actionType}</div>
+          <div className="text-alert title flex justify-end">
+            {historyDetail.action_type}
+          </div>
         </div>
       </div>
     </>
