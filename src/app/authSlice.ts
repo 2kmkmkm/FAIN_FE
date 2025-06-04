@@ -49,7 +49,7 @@ export const loginUser = createAsyncThunk(
       dispatch(setGuardian(info.guardian));
       dispatch(setPatient(info.patient));
 
-      await requestNotificationPermissionAndToken(userId);
+      await requestNotificationPermissionAndToken();
 
       return res.data;
     } catch {

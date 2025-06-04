@@ -20,7 +20,7 @@ console.log(firebaseConfig)
 const app = initializeApp(firebaseConfig);
 export const messaging = getMessaging(app);
 
-export const requestNotificationPermissionAndToken = async (userId:string) => {
+export const requestNotificationPermissionAndToken = async () => {
   const permission = await Notification.requestPermission();
 
   if (permission === "granted") {
@@ -32,7 +32,7 @@ export const requestNotificationPermissionAndToken = async (userId:string) => {
       if (currentToken) {
         console.log("FCM 토큰:", currentToken);
 
-        await postRegisterToken(currentToken, userId);
+        await postRegisterToken(currentToken);
       } else {
         console.warn("토큰을 가져오지 못했습니다.");
       }

@@ -15,11 +15,7 @@ export default function App() {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
   const [isEmergency, setIsEmergency] = useState<boolean>(false);
-  const [alertData, setAlertData] = useState<{
-    success: boolean;
-    data: { reportId: number };
-    message: string;
-  } | null>(null);
+  const [reportId, setReportId] = useState<number | null>(null);
 
   const showNavigationPaths = ["/streaming", "/analysis", "/history", "/my"];
   const shouldShowNavigation = showNavigationPaths.some((path) =>
@@ -28,10 +24,10 @@ export default function App() {
 
   const handleEmergency = () => {
     setIsEmergency(false);
-    if (alertData?.data.reportId) {
-      nav(`/emergency/${alertData.data.reportId}`);
+    if (reportId) {
+      nav(`/emergency/${reportId}`);
     }
-    setAlertData(null);
+    setReportId(null);
   };
 
   useEffect(() => {
@@ -49,18 +45,25 @@ export default function App() {
 
   useEffect(() => {
     onMessage(messaging, (payload) => {
-      if (!payload) {
-        console.error("알림 데이터 파싱 오류");
-        return;
+      console.log("포그라운드 FCM 메시지 수신:", payload);
+
+      if (payload) {
+        try {
+          const id = payload.notification;
+
+          setReportId(Number(id));
+          setIsEmergency(true);
+        } catch (err) {
+          console.error("알림 데이터 파싱 오류:", err);
+        }
       }
 
-      console.log("포그라운드 FCM 메시지 수신:", payload);
       console.log("payload.data", payload);
 
       setIsEmergency(true);
 
       console.log(isEmergency);
-      console.log(alertData);
+      console.log(reportId);
     });
   }, []);
 
