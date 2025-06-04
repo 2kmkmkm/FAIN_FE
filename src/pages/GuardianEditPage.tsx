@@ -17,7 +17,7 @@ export default function GuardianEditPage() {
   const [fTel, setfTel] = useState(guardian.fTel);
 
   const mutation = useMutation({
-    mutationFn: () => patchUserInfo({ guardian: { fName, fTel } }),
+    mutationFn: () => patchUserInfo(guardian),
     onSuccess: async () => {
       const { guardian: newGuardian } = await getUserInfo();
       dispatch(setGuardian(newGuardian));

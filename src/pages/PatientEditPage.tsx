@@ -42,7 +42,7 @@ export default function PatientEditPage() {
   }, [zoneCode, roadAddress, detailAddress]);
 
   const mutation = useMutation({
-    mutationFn: () => patchUserInfo({ patient: formData }),
+    mutationFn: () => patchUserInfo(formData),
     onSuccess: async () => {
       const { patient: newPatient } = await getUserInfo();
       dispatch(setPatient(newPatient));
