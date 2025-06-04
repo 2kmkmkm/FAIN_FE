@@ -154,7 +154,6 @@ export default function PatientEditPage() {
                 </div>
                 <Input
                   isEdit
-                  value={value}
                   placeholder={value}
                   type="text"
                   onChange={(e) => handleChange(key, e.target.value)}

@@ -97,7 +97,7 @@ export default function App() {
         <AppRoutes />
       </main>
       {shouldShowNavigation && <Navigation currentPath={loc.pathname} />}
-      {isEmergency && <EmergencyModal onClick={handleEmergency} />}
+      {isEmergency && reportId && <EmergencyModal onClick={handleEmergency} />}
       <LoadingScreen />
     </div>
   );

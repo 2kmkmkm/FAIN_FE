@@ -31,14 +31,11 @@ export default function HistoryDetailPage() {
           <div className="body-m-bold">{formattedDate}</div>
           <div className="body-m">{name}님의 낙상 기록</div>
         </div>
-        <div className="w-full h-40 items-center justify-center flex">
-          Streaming
-        </div>
         <Report content={historyDetail.report} />
         <div className="flex flex-row items-center">
           <div className="text-darkgray title">조치 방법 &gt;</div>
           <div className="text-alert title flex justify-end">
-            {historyDetail.action_type}
+            {historyDetail.actionType}
           </div>
         </div>
       </div>
