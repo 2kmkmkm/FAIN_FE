@@ -67,7 +67,7 @@ export const PATIENT_INFO_CONFIG = [
   { label: "알러지", key: "allergic" },
   { label: "복용약", key: "medicine" },
   { label: "주요 병원", key: "hospitalName" },
-  { label: "병원 연락처", key: "hospitalTel" },
+  { label: "병원 전화", key: "hospitalTel" },
 ];
 
 export const UNIT_MAP: Record<string, string> = {

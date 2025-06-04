@@ -38,7 +38,7 @@ export default function InfoBox({
 
           return (
             <div key={key} className="flex gap-3 items-center">
-              <div className="w-[105px] text-placeholder body-s">{label}</div>
+              <div className="w-20 text-placeholder body-s">{label}</div>
               <div className="body-s whitespace-pre-wrap break-words">
                 {formatted}
               </div>

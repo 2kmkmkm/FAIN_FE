@@ -19,7 +19,7 @@
     @apply text-xs font-medium;
   }
   .body-xs-bold {
-    @apply text-xs font-semibold;
+    @apply text-xs font-bold;
   }
   .body-s {
     @apply text-sm font-semibold;
