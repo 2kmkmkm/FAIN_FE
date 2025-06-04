@@ -16,7 +16,7 @@ firebase.initializeApp({
 const messaging = firebase.messaging();
 
 // 캐시 네임 정의 (버전 관리 용도)
-const CACHE_NAME = "your-app-cache-v1";
+const CACHE_NAME = "250604 22:40";
 
 // 설치 시, 기존 캐시 삭제하고 새 캐시 준비 (필요시)
 self.addEventListener("install", (event) => {
