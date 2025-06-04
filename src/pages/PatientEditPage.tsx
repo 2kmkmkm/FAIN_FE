@@ -22,24 +22,20 @@ export default function PatientEditPage() {
   const [showPostcode, setShowPostcode] = useState<boolean>(false);
 
   const [zoneCode, setZoneCode] = useState("");
-  const [roadAddress, setRoadAddress] = useState("");
-  const [detailAddress, setDetailAddress] = useState("");
+  const [restAddress, setRestAddress] = useState("");
 
   const [formData, setFormData] = useState({ ...patient });
 
   useEffect(() => {
-    const { zoneCode, roadAddress, detailAddress } = parseAddress(
-      patient.address
-    );
+    const { zoneCode, rest } = parseAddress(patient.address);
     setZoneCode(zoneCode);
-    setRoadAddress(roadAddress);
-    setDetailAddress(detailAddress);
+    setRestAddress(rest);
   }, [patient.address]);
 
   useEffect(() => {
-    const address = fullAddress(zoneCode, roadAddress, detailAddress);
+    const address = fullAddress(zoneCode, restAddress);
     setFormData((prev) => ({ ...prev, address }));
-  }, [zoneCode, roadAddress, detailAddress]);
+  }, [zoneCode, restAddress]);
 
   const mutation = useMutation({
     mutationFn: () => patchUserInfo(formData),
@@ -62,7 +58,7 @@ export default function PatientEditPage() {
 
   const handleComplete = (data: DaumPostcodeData) => {
     setZoneCode(data.zonecode);
-    setRoadAddress(data.roadAddress);
+    setRestAddress(data.roadAddress);
     setShowPostcode(false);
   };
 
@@ -123,16 +119,10 @@ export default function PatientEditPage() {
                         <CustomPostcode onComplete={handleComplete} />
                       )}
                       <Input
-                        placeholder={roadAddress}
+                        placeholder={restAddress}
                         isEdit
                         type="text"
-                        onChange={(e) => setRoadAddress(e.target.value)}
-                      />
-                      <Input
-                        isEdit
-                        placeholder={detailAddress}
-                        type="text"
-                        onChange={(e) => setDetailAddress(e.target.value)}
+                        onChange={(e) => setRestAddress(e.target.value)}
                       />
                     </div>
                   </div>

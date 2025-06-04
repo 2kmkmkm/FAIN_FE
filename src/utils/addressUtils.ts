@@ -1,9 +1,16 @@
 export const parseAddress = (address: string) => {
-  const matches = address.match(/\((.*?)\)\s(.+?)\s(.+)/);
-  if (!matches) return { zoneCode: "", roadAddress: "", detailAddress: "" };
-  const [, zoneCode, roadAddress, detailAddress] = matches;
-  return { zoneCode, roadAddress, detailAddress };
+  const match = address.match(/^\((\d{5})\)\s(.+)$/);
+
+  if (!match) {
+    return {
+      zoneCode: "",
+      rest: "",
+    };
+  }
+
+  const [, zoneCode, rest] = match;
+  return { zoneCode, rest };
 };
 
-export const fullAddress = (zoneCode: string, road: string, detail: string) =>
-  `(${zoneCode}) ${road} ${detail}`.trim();
+export const fullAddress = (zoneCode: string, rest: string) =>
+  `(${zoneCode}) ${rest}`.trim();
