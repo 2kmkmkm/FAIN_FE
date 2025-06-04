@@ -16,7 +16,7 @@ export const postLogin = async (userId: string, password: string) => {
 };
 
 export const patchUserInfo = async (updatedData: Partial<GuardianProps> & Partial<PatientProps>) => {
-  const res = await instance.patch("/guardian/profiles", updatedData);
+  const res = await instance.patch("/updateProfiles", updatedData);
   console.log("patchUserInfo:" , res.data);
   return res.data;
 };

@@ -88,7 +88,7 @@ export default function PatientEditPage() {
                     <div className="w-24 text-placeholder body-s">{label}</div>
                     <Input
                       isEdit
-                      value={value}
+                      value={formData.birth}
                       type="date"
                       className="h-[16.67px] bg-[#F9F9F9]"
                       onChange={(e) => handleChange(key, e.target.value)}
@@ -103,6 +103,7 @@ export default function PatientEditPage() {
                       <div className="flex gap-1.5">
                         <Input
                           isEdit
+                          value={`(${zoneCode})`}
                           placeholder={zoneCode}
                           type="text"
                           onChange={(e) => setZoneCode(e.target.value)}
@@ -121,6 +122,7 @@ export default function PatientEditPage() {
                       <Input
                         placeholder={restAddress}
                         isEdit
+                        value={restAddress}
                         type="text"
                         onChange={(e) => setRestAddress(e.target.value)}
                       />
@@ -155,6 +157,7 @@ export default function PatientEditPage() {
                 <Input
                   isEdit
                   placeholder={value}
+                  value={value}
                   type="text"
                   onChange={(e) => handleChange(key, e.target.value)}
                 />
@@ -167,7 +170,7 @@ export default function PatientEditPage() {
         </div>
       </form>
 
-      {isModalOpen && <EditCompleteModal category="환자" />}
+      {isModalOpen && <EditCompleteModal />}
     </>
   );
 }
