@@ -10,21 +10,101 @@ import HistoryDetailPage from "./pages/HistoryDetailPage";
 import MyPage from "./pages/MyPage";
 import PatientEditPage from "./pages/PatientEditPage";
 import GuardianEditPage from "./pages/GuardianEditPage";
+import PrivateRoute from "./routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
 
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<MainPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignupPage />} />
-      <Route path="/streaming" element={<StreamingPage />} />
-      <Route path="/emergency/:reportId" element={<EmergencyPage />} />
-      <Route path="/analysis" element={<AnlaysisPage />} />
-      <Route path="/history" element={<HistoryPage />} />
-      <Route path="/history/detail/:reportId" element={<HistoryDetailPage />} />
-      <Route path="/my" element={<MyPage />} />
-      <Route path="/edit/guardian" element={<GuardianEditPage />} />
-      <Route path="/edit/patient" element={<PatientEditPage />} />
+      <Route
+        path="/"
+        element={
+          <PublicRoute>
+            <MainPage />
+          </PublicRoute>
+        }
+      />
+      <Route
+        path="/login"
+        element={
+          <PublicRoute>
+            <LoginPage />
+          </PublicRoute>
+        }
+      />
+      <Route
+        path="/signup"
+        element={
+          <PublicRoute>
+            <SignupPage />
+          </PublicRoute>
+        }
+      />
+
+      <Route
+        path="/streaming"
+        element={
+          <PrivateRoute>
+            <StreamingPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/emergency/:reportId"
+        element={
+          <PrivateRoute>
+            <EmergencyPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/analysis"
+        element={
+          <PrivateRoute>
+            <AnlaysisPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/history"
+        element={
+          <PrivateRoute>
+            <HistoryPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/history/detail/:reportId"
+        element={
+          <PrivateRoute>
+            <HistoryDetailPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/my"
+        element={
+          <PrivateRoute>
+            <MyPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/edit/guardian"
+        element={
+          <PrivateRoute>
+            <GuardianEditPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/edit/patient"
+        element={
+          <PrivateRoute>
+            <PatientEditPage />
+          </PrivateRoute>
+        }
+      />
     </Routes>
   );
 }
