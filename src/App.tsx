@@ -47,9 +47,9 @@ export default function App() {
     onMessage(messaging, (payload) => {
       console.log("포그라운드 FCM 메시지 수신:", payload);
 
-      if (payload) {
+      if (payload.data) {
         try {
-          const id = payload.notification;
+          const id = payload.data.reportId;
 
           setReportId(Number(id));
           setIsEmergency(true);
@@ -61,9 +61,6 @@ export default function App() {
       console.log("payload.data", payload);
 
       setIsEmergency(true);
-
-      console.log(isEmergency);
-      console.log(reportId);
     });
   }, []);
 
