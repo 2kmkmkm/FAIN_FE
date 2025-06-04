@@ -4,49 +4,63 @@
 
 @layer utilities {
   .heading-lg {
-    @apply text-2xl font-bold;
+    @apply text-2xl font-semibold;
   }
   .heading-s {
-    @apply text-[1.15rem] font-bold;
+    @apply text-[1.15rem] font-semibold;
   }
   .heading-m {
-    @apply text-[1.3rem] font-extrabold;
+    @apply text-[1.3rem] font-semibold;
   }
   .title {
-    @apply text-base font-bold;
-  }
-  .body-xs {
-    @apply text-xs font-semibold;
-  }
-  .body-xs-bold {
-    @apply text-xs font-bold;
-  }
-  .body-s {
-    @apply text-sm font-bold;
-  }
-  .body-s-bold {
-    @apply text-sm font-bold;
-  }
-  .body-m {
     @apply text-base font-semibold;
   }
+  .body-xs {
+    @apply text-xs font-medium;
+  }
+  .body-xs-bold {
+    @apply text-xs font-semibold;
+  }
+  .body-s {
+    @apply text-sm font-normal;
+  }
+  .body-s-bold {
+    @apply text-sm font-semibold;
+  }
+  .body-m {
+    @apply text-base font-normal;
+  }
   .body-m-bold {
-    @apply text-base font-bold;
+    @apply text-base font-semibold;
   }
   .body-p {  
-    @apply text-[0.8rem] font-semibold leading-6;
+    @apply text-[0.8rem] font-normal leading-6;
 }
 }
 
 @font-face {
-  font-family: 'Pretendard-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff2');
+  font-family: "Pretendard";
+  src: local('Pretendard'), url('/fonts/Pretendard-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: local('Pretendard'), url('/fonts/Pretendard-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Pretendard";
+  src: local('Pretendard'), url('/fonts/Pretendard-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
 * {
-  font-family: 'Pretendard-Regular';
+  font-family: 'Pretendard';
   padding: 0px;
   margin: 0px;
   width: 100%;
