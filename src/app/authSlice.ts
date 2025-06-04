@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/tool
 import { getUserInfo, postLogin } from "../api/user";
 import { setGuardian } from "./guardianSlice";
 import { setPatient } from "./patientSlice";
-import { requestNotificationPermissionAndToken } from "../utils/firebase";
 
 type AuthState = {
   token: string | null;
@@ -48,8 +47,6 @@ export const loginUser = createAsyncThunk(
       const info = await getUserInfo();
       dispatch(setGuardian(info.guardian));
       dispatch(setPatient(info.patient));
-
-      await requestNotificationPermissionAndToken();
 
       return res.data;
     } catch {

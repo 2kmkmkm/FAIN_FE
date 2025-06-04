@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { postRegisterToken } from "../api/emergency";
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken, onMessage } from "firebase/messaging"
+import { getMessaging, getToken } from "firebase/messaging"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -43,9 +43,3 @@ export const requestNotificationPermissionAndToken = async () => {
     console.warn("알림 권한 거부됨");
   }
 };
-
-// 앱이 포그라운드에 있을 때 메시지 수신 처리
-onMessage(messaging, (payload) => {
-  console.log("메시지 수신:", payload);
-  // 화면에 알림 표시 코드 작성 가능
-});

@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../hooks/useRedux";
 import { loginUser } from "../app/authSlice";
+import { requestNotificationPermissionAndToken } from "../utils/firebase";
 
 export default function LoginPage() {
   const [userId, setUserId] = useState<string>("");
@@ -29,6 +30,7 @@ export default function LoginPage() {
 
     try {
       await dispatch(loginUser({ userId, password })).unwrap();
+      await requestNotificationPermissionAndToken();
       nav("/streaming");
     } catch {
       setError("아이디 또는 비밀번호가 올바르지 않습니다.");
