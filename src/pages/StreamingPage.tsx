@@ -12,7 +12,7 @@ export default function StreamingPage() {
   return (
     <>
       <SideHeader title="스트리밍" />
-      <div className="px-14 pt-2 flex flex-col gap-7">
+      <div className="px-11 pt-2 flex flex-col gap-7">
         <PatientBasicInfo name={patient.name} birth={patient.birth} />
         <Streaming />
         <PatientPhysicalInfo

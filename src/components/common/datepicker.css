@@ -11,3 +11,13 @@
     background-color: transparent;
     height: 18px;
   }
+
+  .react-datepicker__header {
+  background-color: white;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  display: none;
+}

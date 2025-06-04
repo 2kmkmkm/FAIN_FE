@@ -100,7 +100,6 @@ function PatientBasicForm({
             inputProps={{
               name: "birth",
               value: formatDateToString(parseStringToDate(basic.birth)),
-              readOnly: true,
             }}
           />
         </div>
