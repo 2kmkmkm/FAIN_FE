@@ -8,6 +8,7 @@ type DatePickerProps = {
   handleDateChange: (date: Date | null) => void;
   inputProps: React.InputHTMLAttributes<HTMLInputElement>;
   placeholder: string;
+  isEdit?: boolean;
 };
 
 export default function CustomDatePicker({
@@ -15,13 +16,15 @@ export default function CustomDatePicker({
   handleDateChange,
   inputProps,
   placeholder,
+  isEdit = false,
 }: DatePickerProps) {
   return (
     <DatePicker
+      popperPlacement="bottom"
       selected={selectedDate}
       onChange={handleDateChange}
       dateFormat="yyyy-MM-dd"
-      customInput={<Input {...inputProps} />}
+      customInput={<Input {...inputProps} isEdit={isEdit} />}
       placeholderText={placeholder}
       shouldCloseOnSelect
       renderCustomHeader={({ date, changeYear, changeMonth }) => {

@@ -89,13 +89,12 @@ export default function PatientEditPage() {
               return (
                 <div key={key} className="flex flex-col gap-5">
                   <div className="flex gap-5 items-start">
-                    <div className="w-24 text-placeholder body-s pt-[2px]">
-                      {label}
-                    </div>
+                    <div className="w-24 text-placeholder body-s">{label}</div>
                     <Input
                       isEdit
                       value={value}
                       type="date"
+                      className="h-[16.67px] bg-[#F9F9F9]"
                       onChange={(e) => handleChange(key, e.target.value)}
                     />
                   </div>
