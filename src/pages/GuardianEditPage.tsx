@@ -46,8 +46,7 @@ export default function GuardianEditPage() {
             <div className="text-placeholder body-m w-28">이름</div>
             <Input
               isEdit
-              placeholder={guardian.fName}
-              value={fName}
+              placeholder={fName}
               onChange={(e) => setfName(e.target.value)}
             />
           </div>
@@ -55,9 +54,8 @@ export default function GuardianEditPage() {
             <div className="text-placeholder body-m w-28">연락처</div>
             <Input
               isEdit
-              placeholder={guardian.fTel}
+              placeholder={fTel}
               type="tel"
-              value={fTel}
               onChange={(e) => setfTel(e.target.value)}
             />
           </div>

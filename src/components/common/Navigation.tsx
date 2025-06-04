@@ -37,7 +37,7 @@ const NavigationList = [
 
 export default function Navigation({ currentPath }: { currentPath: string }) {
   return (
-    <div className="fixed left-0 bottom-0 w-full px-5 h-[75px] bg-back shadow-[0px_-4px_25px_0px_rgba(188,188,188,0.25)] flex justify-center items-center">
+    <div className="fixed left-0 bottom-0 w-full px-5 h-[90px] bg-back shadow-[0px_-4px_25px_0px_rgba(188,188,188,0.25)] flex justify-start items-start pt-4">
       {NavigationList.map((item) => {
         const isSelected = currentPath.startsWith(item.nav);
         return (
