@@ -67,11 +67,11 @@ export default function LoginPage() {
           >
             {error}
           </Alert>
-          <div className="flex flex-col gap-2.5">
+          <div className="flex flex-col gap-3">
             <Button type="submit" label="로그인" />
             <button
               type="button"
-              className="text-placeholder body-xs underline"
+              className="text-placeholder body-xs-bold underline"
               onClick={() => nav("/signup")}
             >
               회원가입
