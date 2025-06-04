@@ -10,7 +10,7 @@
     @apply text-[1.15rem] font-bold;
   }
   .heading-m {
-    @apply text-[1.3rem] font-bold;
+    @apply text-[1.3rem] font-extrabold;
   }
   .title {
     @apply text-base font-bold;
@@ -22,7 +22,7 @@
     @apply text-xs font-bold;
   }
   .body-s {
-    @apply text-sm font-semibold;
+    @apply text-sm font-bold;
   }
   .body-s-bold {
     @apply text-sm font-bold;
@@ -40,8 +40,8 @@
 
 @font-face {
   font-family: 'Pretendard-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-  font-weight: 400;
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff2');
+  font-weight: 500;
   font-style: normal;
 }
 
@@ -55,6 +55,13 @@
 
 html {
   color: #242424;
+  background-color: #FBFBFB;
+}
+
+html, body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .app-container {

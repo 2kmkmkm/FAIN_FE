@@ -143,7 +143,10 @@ export default function SignupPage() {
     <>
       <Header title="회원가입" />
       <div className="px-11 flex flex-col min-h-screen">
-        <form onSubmit={handleSubmit} className="flex flex-col pt-6 pb-8 gap-7">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col pt-8 pb-10 gap-7"
+        >
           <GuardianForm
             guardian={guardian}
             handleGuardianChange={handleGuardianChange}
