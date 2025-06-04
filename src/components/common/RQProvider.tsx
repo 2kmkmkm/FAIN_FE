@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   QueryClientProvider,
   QueryClient,
   QueryCache,
   MutationCache,
 } from "@tanstack/react-query";
-import NotFoundRoute from "../../routes/NotFoundRoute"; // 예시용 에러 페이지 컴포넌트
 import { isAxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   children: React.ReactNode;
 };
 
 function RQProvider({ children }: Props) {
+  const nav = useNavigate();
   const [hasError, setHasError] = useState(false);
 
   const [client] = useState(
@@ -48,7 +49,12 @@ function RQProvider({ children }: Props) {
       })
   );
 
-  if (hasError) return <NotFoundRoute />;
+  useEffect(() => {
+    if (hasError) {
+      nav("/error");
+      setHasError(false);
+    }
+  }, [hasError, nav]);
 
   return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
 }

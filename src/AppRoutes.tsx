@@ -12,6 +12,8 @@ import PatientEditPage from "./pages/PatientEditPage";
 import GuardianEditPage from "./pages/GuardianEditPage";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
+import NotFoundRoute from "./routes/NotFoundRoute";
+import ErrorRoute from "./routes/ErrorRoute";
 
 export default function AppRoutes() {
   return (
@@ -40,7 +42,6 @@ export default function AppRoutes() {
           </PublicRoute>
         }
       />
-
       <Route
         path="/streaming"
         element={
@@ -105,6 +106,8 @@ export default function AppRoutes() {
           </PrivateRoute>
         }
       />
+      <Route path="/error" element={<ErrorRoute />} />
+      <Route path="*" element={<NotFoundRoute />} />
     </Routes>
   );
 }
