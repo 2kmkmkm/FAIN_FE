@@ -1,10 +1,12 @@
 import caution_pink from "../../assets/caution_pink.svg";
 import type { HistoryProps } from "../../type/reportType";
+import { useAppSelector } from "../../hooks/useRedux";
 import { formatDay } from "../../utils/dateUtils";
 import { useNavigate } from "react-router-dom";
 
 export default function HistoryItem({ ...item }: HistoryProps) {
   const nav = useNavigate();
+  const name = useAppSelector((state) => state.patient.name);
 
   return (
     <button
@@ -29,7 +31,7 @@ export default function HistoryItem({ ...item }: HistoryProps) {
             </div>
           </div>
           <div className="w-full truncate whitespace-nowrap text-start items-start overflow-hidden body-s text-darkgray">
-            이경민님의 낙상이 감지되었습니다.
+            {name}님의 낙상이 감지되었습니다.
           </div>
         </div>
       </div>
