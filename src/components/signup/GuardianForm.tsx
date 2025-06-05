@@ -21,7 +21,7 @@ function GuardianForm({
           <button
             onClick={handleCheckId}
             type="button"
-            className="bg-main text-white body-xs w-14 px-1.5 rounded-[10px] flex justify-center items-center"
+            className="bg-main text-white hover:bg-pink active:bg-pink body-xs w-14 px-1.5 rounded-[10px] flex justify-center items-center"
           >
             중복
             <br />

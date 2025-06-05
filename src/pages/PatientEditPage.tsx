@@ -110,7 +110,7 @@ export default function PatientEditPage() {
                         />
                         <button
                           type="button"
-                          className="bg-main text-white body-s w-fit px-1.5 rounded-[8px] flex justify-center items-center"
+                          className="hover:bg-pink active:bg-pink bg-main text-white body-s w-fit px-1.5 rounded-[8px] flex justify-center items-center"
                           onClick={() => setShowPostcode(true)}
                         >
                           <img src={search} className="w-5" />

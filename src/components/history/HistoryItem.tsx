@@ -10,7 +10,7 @@ export default function HistoryItem({ ...item }: HistoryProps) {
 
   return (
     <button
-      className="flex flex-col rounded-[20px] justify-center items-center bg-[#FBFBFB] hover:bg-[#F3F3F3]"
+      className="flex flex-col rounded-[20px] justify-center items-center bg-[#FBFBFB] hover:bg-[#F3F3F3] active:bg-[#F3F3F3]"
       onClick={() => nav(`/history/detail/${item.reportId}`)}
     >
       <div className="flex items-center gap-3 px-3 py-4">

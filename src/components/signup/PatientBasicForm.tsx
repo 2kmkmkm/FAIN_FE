@@ -113,7 +113,7 @@ function PatientBasicForm({
           />
           <button
             type="button"
-            className="bg-main text-white body-s w-14 px-1.5 rounded-[10px] flex justify-center items-center"
+            className="bg-main text-white hover:bg-pink active:bg-pink body-s w-14 px-1.5 rounded-[10px] flex justify-center items-center"
             onClick={() => setShowPostcode(true)}
           >
             <img src={search} className="w-7" />

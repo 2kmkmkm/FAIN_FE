@@ -22,7 +22,10 @@ export default function InfoBox({
       <div className="flex justify-between">
         <div className="title">{title}</div>
         {editable && onEdit && (
-          <button onClick={onEdit} className="flex w-fit justify-end">
+          <button
+            onClick={onEdit}
+            className="hover:bg-[#e9e9e9] active:bg-[#e9e9e9] flex w-fit px-1 py-1 rounded justify-end"
+          >
             <img src={edit} className="w-5" />
           </button>
         )}
