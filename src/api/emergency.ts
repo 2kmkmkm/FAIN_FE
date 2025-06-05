@@ -1,7 +1,7 @@
 import instance from "./instance";
 
 export const getEmergencyReport = async (reportId: number) => {
-    const res = await instance.get('/reports', { params: { reportId }});
+    const res = await instance.get(`/reports/${reportId}`);
     console.log("getEmergencyReport: ", res.data.data);
     return res.data.data;
 }
