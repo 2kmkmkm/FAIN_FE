@@ -10,7 +10,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { getEmergencyReport } from "../api/emergency";
 import { format } from "date-fns";
-import { formatDay } from "../utils/dateUtils";
 import { useParams } from "react-router-dom";
 import Header from "../components/common/Header";
 
@@ -33,9 +32,10 @@ export default function EmergencyPage() {
 
   const formattedDate =
     emergencyData?.situationTime &&
-    `${format(emergencyData.situationTime, "yyyy / MM / dd")} (${formatDay(
-      emergencyData.situationTime
-    )}) ${format(emergencyData.situationTime, "HH:mm")}`;
+    `${format(
+      new Date(emergencyData.situationTime),
+      "yyyy / MM / dd"
+    )} ${format(new Date(emergencyData.situationTime), "HH:mm")}`;
 
   return (
     <>
