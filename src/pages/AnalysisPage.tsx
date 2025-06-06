@@ -47,32 +47,33 @@ export default function AnlaysisPage() {
     queryFn: () => getReport(selectedYear, selectedMonth),
   });
 
-  return (
-    <>
-      <SideHeader title="분석" />
-      <div className="px-14 flex flex-col gap-7 pt-3 min-h-screen">
-        <div className="flex flex-row justify-center items-center gap-6">
-          <button className="w-3" onClick={() => handleMonthChange("prev")}>
-            <img src={arrow_calendar} className="w-1.5" />
-          </button>
-          <div className="w-fit heading-s">
-            {selectedYear}년 {selectedMonth}월
+  if (summary)
+    return (
+      <>
+        <SideHeader title="분석" />
+        <div className="px-14 flex flex-col gap-8 pt-3">
+          <div className="flex flex-row justify-center items-center gap-6">
+            <button className="w-3" onClick={() => handleMonthChange("prev")}>
+              <img src={arrow_calendar} className="w-1.5" />
+            </button>
+            <div className="w-fit heading-s">
+              {selectedYear}년 {selectedMonth}월
+            </div>
+            <button className="w-3" onClick={() => handleMonthChange("next")}>
+              <img
+                src={arrow_calendar}
+                className="w-1.5 transform scale-x-[-1]"
+              />
+            </button>
           </div>
-          <button className="w-3" onClick={() => handleMonthChange("next")}>
-            <img
-              src={arrow_calendar}
-              className="w-1.5 transform scale-x-[-1]"
-            />
-          </button>
+          <Summary
+            fall={summary?.fallCount}
+            hospital={summary?.hcount}
+            guardian={summary?.pcount}
+          />
+          <Graph graphData={graphData} />
+          <Report content={report?.aiComment ?? ""} type="analysis" />
         </div>
-        <Summary
-          fall={summary?.fallCount}
-          hospital={summary?.hcount}
-          guardian={summary?.pcount}
-        />
-        <Graph graphData={graphData} />
-        <Report content={report.aiComment ?? ""} />
-      </div>
-    </>
-  );
+      </>
+    );
 }

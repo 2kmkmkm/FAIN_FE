@@ -6,12 +6,12 @@ export const getEmergencyReport = async (reportId: number) => {
     return res.data.data;
 }
 
-export const postActionType = async (reportId: number, action: "119" | 
-    "family"
+export const patchActionType = async (reportId: number, actionType: "_119" | 
+    "FAMILY"
 ) => {
-    const res = await instance.post(`/actions/${reportId}`, { action })
-    console.log("postActionType: ",  res.data.data);
-    return res.data.data;
+    const res = await instance.patch(`/actions/${reportId}`, { actionType })
+    console.log("postActionType: ",  res.data);
+    return res.data;
 }
 
 export const postRegisterToken = async (token: string) => {

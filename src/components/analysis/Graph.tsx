@@ -10,18 +10,21 @@ import {
 
 export default function Graph({ ...rest }) {
   const formattedData = [
-    { time: 0, value: rest.dawn },
-    { time: 6, value: rest.morning },
-    { time: 12, value: rest.afternoon },
-    { time: 18, value: rest.night },
+    { time: 0, value: rest.graphData.dawn },
+    { time: 6, value: rest.graphData.morning },
+    { time: 12, value: rest.graphData.afternoon },
+    { time: 18, value: rest.graphData.night },
   ];
+
+  console.log("Rest", rest);
+  console.log(formattedData);
 
   return (
     <div className="flex flex-col gap-7">
       <div className="flex flex-row px-2 justify-between items-center">
         <div className="flex flex-row gap-2.5 items-center">
           <img src={graph} className="w-5 h-5" />
-          <div className="title">그래프</div>
+          <div className="title">낙상 그래프</div>
         </div>
       </div>
       <div className="flex h-48 body-s">
@@ -52,6 +55,7 @@ export default function Graph({ ...rest }) {
             />
             <YAxis
               domain={[0, "auto"]}
+              allowDecimals={false}
               interval={0}
               width={20}
               axisLine={{ stroke: "#aaa", strokeWidth: 1, strokeOpacity: 0.5 }}

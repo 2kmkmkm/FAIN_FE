@@ -3,10 +3,18 @@ import type { HistoryProps } from "../../type/reportType";
 import { useAppSelector } from "../../hooks/useRedux";
 import { formatDay } from "../../utils/dateUtils";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function HistoryItem({ ...item }: HistoryProps) {
   const nav = useNavigate();
   const name = useAppSelector((state) => state.patient.name);
+
+  const [action, setAction] = useState<string>("");
+
+  useEffect(() => {
+    if (item.actionType === "_119") setAction("119 조치");
+    else if (item.actionType === "FAMILY") setAction("자체 조치");
+  }, [item.actionType]);
 
   return (
     <button
@@ -19,15 +27,15 @@ export default function HistoryItem({ ...item }: HistoryProps) {
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-1.5">
               <div className="body-s-bold w-fit">
-                {formatDay(item.situationTime)}
+                {formatDay(new Date(item.situationTime))}
               </div>
               <div className="body-xs text-darkgray w-fit">
-                {item.situationTime.getHours()} :{" "}
-                {item.situationTime.getMinutes()}
+                {new Date(item.situationTime).getHours()}:
+                {new Date(item.situationTime).getMinutes()}
               </div>
             </div>
             <div className="body-xs text-placeholder flex justify-end pr-2">
-              {item.actionType}
+              {action}
             </div>
           </div>
           <div className="w-full truncate whitespace-nowrap text-start items-start overflow-hidden body-s text-darkgray">
