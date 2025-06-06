@@ -18,7 +18,7 @@ export default function Hospital({
       <Box>
         <div className="flex flex-row justify-between">
           <div className="body-s w-fit">{hospitalName}</div>
-          <div className="flex flex-row gap-1.5 w-fit items-center">
+          <div className="flex flex-row gap-2.5 w-fit items-center">
             <div className="body-s">{hospitalTel}</div>
             {hospitalTel && (
               <button

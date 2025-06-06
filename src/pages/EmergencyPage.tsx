@@ -54,7 +54,7 @@ export default function EmergencyPage() {
           allergic={patient.allergic}
           medicine={patient.medicine}
         />
-        <Report content={emergencyData.report} />
+        <Report content={emergencyData.report} type="emergency" />
         <Hospital
           hospitalName={patient.hospitalName}
           hospitalTel={patient.hospitalTel}

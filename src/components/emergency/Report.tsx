@@ -5,13 +5,38 @@ import Toast from "../common/Toast";
 import { copyToClipboard } from "../../utils/copyUtils";
 import { useState, useRef, useEffect } from "react";
 
-export default function Report({ content }: { content: string }) {
+export default function Report({
+  content,
+  type,
+}: {
+  content: string;
+  type: "analysis" | "emergency";
+}) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [isTruncated, setIsTruncated] = useState<boolean>(false);
   const [toast, setToast] = useState<boolean>(false);
+  const [analysis, setAnalysis] = useState<string>("");
+  const [action, setAction] = useState<string>("");
+  const [monthly, setMonthly] = useState<string>("");
 
   const visibleRef = useRef<HTMLParagraphElement>(null);
   const hiddenRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    const cleanReport = content.replace(/^"|"$/g, "");
+
+    if (type === "emergency") {
+      const [analysisPart, actionPart] = cleanReport.split("\\n");
+      const analysisResult = analysisPart.replace("[분석] ", "").trim();
+      const actionResult = actionPart.replace("[조치] ", "").trim();
+
+      setAnalysis(analysisResult);
+      setAction(actionResult);
+    } else if (type === "analysis") {
+      const monthlyResult = cleanReport.split("\\n").slice(1).join(" ").trim();
+      setMonthly(monthlyResult);
+    }
+  }, [content, type]);
 
   const handleCopy = async () => {
     const success = await copyToClipboard(content);
@@ -55,15 +80,28 @@ export default function Report({ content }: { content: string }) {
         </button>
       </div>
       <div className="relative body-p px-7 pt-7 pb-7 bg-[#F8F8F8] rounded-[20px]">
-        <p
+        <div
           ref={visibleRef}
           className={`transition-all duration-100 ${
             !isExpanded && isTruncated ? "line-clamp-5" : ""
           }
           }`}
         >
-          {content}
-        </p>
+          {type === "emergency" ? (
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2.5">
+                <div className="body-m-bold">[ 분석 ]</div>
+                <div className="body-s text-darkgray">{analysis}</div>
+              </div>
+              <div className="flex flex-col gap-2.5">
+                <div className="body-m-bold">[ 조치 ]</div>
+                <div className="body-s text-darkgray">{action}</div>
+              </div>
+            </div>
+          ) : (
+            <div className="body-p">{monthly}</div>
+          )}
+        </div>
 
         {isTruncated && (
           <button
