@@ -47,7 +47,9 @@ export default function AnlaysisPage() {
     queryFn: () => getReport(selectedYear, selectedMonth),
   });
 
-  if (summary)
+  console.log("typeof aiComment", typeof report?.aiCoomment);
+
+  if (summary && graphData && report)
     return (
       <>
         <SideHeader title="분석" />

@@ -16,9 +16,6 @@ export default function Graph({ ...rest }) {
     { time: 18, value: rest.graphData.night },
   ];
 
-  console.log("Rest", rest);
-  console.log(formattedData);
-
   return (
     <div className="flex flex-col gap-7">
       <div className="flex flex-row px-2 justify-between items-center">
