@@ -67,11 +67,11 @@ export default function AnlaysisPage() {
         </div>
         <Summary
           fall={summary?.fallCount}
-          hospital={summary?.hospitalCount}
-          guardian={summary?.guardianCount}
+          hospital={summary?.hcount}
+          guardian={summary?.pcount}
         />
         <Graph graphData={graphData} />
-        <Report content={report ?? ""} />
+        <Report content={report.aiComment ?? ""} />
       </div>
     </>
   );
