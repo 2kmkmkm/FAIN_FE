@@ -32,50 +32,59 @@ export default function AnlaysisPage() {
     }
   };
 
-  const { data: summary } = useQuery({
+  const { data: summary, isLoading: isSummaryLoading } = useQuery({
     queryKey: ["summary", selectedYear, selectedMonth],
     queryFn: () => getSummary(selectedYear, selectedMonth),
   });
 
-  const { data: graphData } = useQuery({
+  const { data: graphData, isLoading: isGraphLoading } = useQuery({
     queryKey: ["graph", selectedYear, selectedMonth],
     queryFn: () => getGraph(selectedYear, selectedMonth),
   });
 
-  const { data: report } = useQuery({
+  const { data: report, isLoading: isReportLoading } = useQuery({
     queryKey: ["report", selectedYear, selectedMonth],
     queryFn: () => getReport(selectedYear, selectedMonth),
   });
 
-  console.log("typeof aiComment", typeof report?.aiCoomment);
+  const isLoading = isSummaryLoading || isGraphLoading || isReportLoading;
 
-  if (summary && graphData && report)
-    return (
-      <>
-        <SideHeader title="분석" />
-        <div className="px-14 flex flex-col gap-8 pt-3">
-          <div className="flex flex-row justify-center items-center gap-6">
-            <button className="w-3" onClick={() => handleMonthChange("prev")}>
-              <img src={arrow_calendar} className="w-1.5" />
-            </button>
-            <div className="w-fit heading-s">
-              {selectedYear}년 {selectedMonth}월
-            </div>
-            <button className="w-3" onClick={() => handleMonthChange("next")}>
-              <img
-                src={arrow_calendar}
-                className="w-1.5 transform scale-x-[-1]"
-              />
-            </button>
+  if (isLoading) return null;
+
+  return (
+    <>
+      <SideHeader title="분석" />
+      <div className="px-10 flex flex-col gap-8">
+        <div className="flex flex-row justify-center items-center gap-6">
+          <button className="w-3" onClick={() => handleMonthChange("prev")}>
+            <img src={arrow_calendar} className="w-1.5" />
+          </button>
+          <div className="w-fit heading-s">
+            {selectedYear}년 {selectedMonth}월
           </div>
-          <Summary
-            fall={summary?.fallCount}
-            hospital={summary?.hcount}
-            guardian={summary?.pcount}
-          />
-          <Graph graphData={graphData} />
-          <Report content={report?.aiComment ?? ""} type="analysis" />
+          <button className="w-3" onClick={() => handleMonthChange("next")}>
+            <img
+              src={arrow_calendar}
+              className="w-1.5 transform scale-x-[-1]"
+            />
+          </button>
         </div>
-      </>
-    );
+        {summary && graphData && report ? (
+          <>
+            <Summary
+              fall={summary?.fallCount}
+              hospital={summary?.hcount}
+              guardian={summary?.pcount}
+            />
+            <Graph graphData={graphData} />
+            <Report content={report?.aiComment ?? ""} type="analysis" />
+          </>
+        ) : (
+          <div className="pt-5 body-m text-placeholder flex justify-center marker:text-center">
+            해당 월에 낙상 데이터가 없습니다.
+          </div>
+        )}
+      </div>
+    </>
+  );
 }

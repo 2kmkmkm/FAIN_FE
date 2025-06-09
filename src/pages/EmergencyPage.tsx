@@ -4,14 +4,16 @@ import Hospital from "../components/emergency/Hospital";
 import call from "../assets/call.svg";
 import ResponseModal from "../modals/ResponseModal";
 import Streaming from "../components/streaming/Streaming";
+import Header from "../components/common/Header";
 import type { RootState } from "../app/store";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { getEmergencyReport } from "../api/emergency";
 import { format } from "date-fns";
+import { formatTime } from "../utils/dateUtils";
 import { useParams } from "react-router-dom";
-import Header from "../components/common/Header";
+import { ko } from "date-fns/locale";
 
 export default function EmergencyPage() {
   const { reportId } = useParams();
@@ -30,12 +32,13 @@ export default function EmergencyPage() {
 
   if (!emergencyData) return null;
 
-  const formattedDate =
-    emergencyData?.situationTime &&
-    `${format(
-      new Date(emergencyData.situationTime),
-      "yyyy / MM / dd"
-    )} ${format(new Date(emergencyData.situationTime), "HH:mm")}`;
+  const situationTime = new Date(emergencyData.situationTime);
+
+  const formattedDate = `${format(situationTime, "yyyy / MM / dd", {
+    locale: ko,
+  })} (${format(situationTime, "EEE", { locale: ko })}) ${formatTime(
+    situationTime
+  )}`;
 
   return (
     <>

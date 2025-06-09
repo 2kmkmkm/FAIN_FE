@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import { useAppSelector } from "../hooks/useRedux";
 import { formatTime } from "../utils/dateUtils";
 import { useParams } from "react-router-dom";
+import { ko } from "date-fns/locale";
 
 export default function HistoryDetailPage() {
   const { reportId } = useParams();
@@ -19,10 +20,12 @@ export default function HistoryDetailPage() {
   if (!historyDetail) return null;
 
   const situationTime = new Date(historyDetail.situationTime);
-  const formattedDate = `${format(
-    situationTime,
-    "yyyy / MM / dd"
-  )} ${formatTime(situationTime)}`;
+
+  const formattedDate = `${format(situationTime, "yyyy / MM / dd", {
+    locale: ko,
+  })} (${format(situationTime, "EEE", { locale: ko })}) ${formatTime(
+    situationTime
+  )}`;
 
   return (
     <>
