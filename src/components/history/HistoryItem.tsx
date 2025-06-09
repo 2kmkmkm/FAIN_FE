@@ -14,6 +14,7 @@ export default function HistoryItem({ ...item }: HistoryProps) {
   useEffect(() => {
     if (item.actionType === "_119") setAction("119 조치");
     else if (item.actionType === "FAMILY") setAction("보호자 조치");
+    else setAction("");
   }, [item.actionType]);
 
   return (
