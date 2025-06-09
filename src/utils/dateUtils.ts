@@ -40,8 +40,8 @@ export const formatDay = (date: Date): string => {
   return `${day}(${weekNames[dayOfWeek]})`;
 };
 
-export const formatTime = (date:Date): string => {
-  const hour = date.getHours();
-  const minute = date.getMinutes();
-  return `${hour}:${minute}`
-}
+export const formatTime = (date: Date): string => {
+  const hour = String(date.getHours()).padStart(2, "0");
+  const minute = String(date.getMinutes()).padStart(2, "0");
+  return `${hour}:${minute}`;
+};
