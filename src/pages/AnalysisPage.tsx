@@ -54,7 +54,7 @@ export default function AnlaysisPage() {
   return (
     <>
       <SideHeader title="분석" />
-      <div className="px-10 flex flex-col gap-8 pt-3">
+      <div className="px-10 flex flex-col gap-8">
         <div className="flex flex-row justify-center items-center gap-6">
           <button className="w-3" onClick={() => handleMonthChange("prev")}>
             <img src={arrow_calendar} className="w-1.5" />
