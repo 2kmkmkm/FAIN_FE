@@ -30,13 +30,13 @@ export default function HistoryDetailPage() {
   return (
     <>
       <Header title="히스토리" />
-      <div className="flex flex-col px-14 pt-6 gap-10 min-h-screen">
+      <div className="flex flex-col px-10 pt-6 gap-10 min-h-screen">
         <div className="flex flex-col gap-2 text-center">
           <div className="body-m-bold">{formattedDate}</div>
           <div className="body-m">{name}님의 낙상 기록</div>
         </div>
         <Report content={historyDetail.report} type="emergency" />
-        <div className="flex flex-row items-center">
+        <div className="flex flex-row items-center px-3">
           <div className="text-darkgray title">조치 방법 &gt;</div>
           <div className="text-alert title flex justify-end">
             {historyDetail.actionType}

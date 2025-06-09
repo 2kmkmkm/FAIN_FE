@@ -24,12 +24,12 @@ export default function Summary({
         </div>
         <div className="w-px h-12 bg-[#D9D9D9]"></div>
         <div className="flex flex-col justify-center items-center gap-2">
-          <div className="body-m-bold">병원 이송</div>
+          <div className="body-m-bold">119 이송</div>
           <div className="body-m text-darkgray">{hospital}회</div>
         </div>
         <div className="w-px h-12 bg-[#D9D9D9]"></div>
         <div className="flex flex-col justify-center items-center gap-2">
-          <div className="body-m-bold">자체 조치</div>
+          <div className="body-m-bold">보호자 조치</div>
           <div className="body-m text-darkgray">{guardian}회</div>
         </div>
       </div>
