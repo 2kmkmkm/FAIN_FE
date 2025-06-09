@@ -32,20 +32,24 @@ export default function AnlaysisPage() {
     }
   };
 
-  const { data: summary } = useQuery({
+  const { data: summary, isLoading: isSummaryLoading } = useQuery({
     queryKey: ["summary", selectedYear, selectedMonth],
     queryFn: () => getSummary(selectedYear, selectedMonth),
   });
 
-  const { data: graphData } = useQuery({
+  const { data: graphData, isLoading: isGraphLoading } = useQuery({
     queryKey: ["graph", selectedYear, selectedMonth],
     queryFn: () => getGraph(selectedYear, selectedMonth),
   });
 
-  const { data: report } = useQuery({
+  const { data: report, isLoading: isReportLoading } = useQuery({
     queryKey: ["report", selectedYear, selectedMonth],
     queryFn: () => getReport(selectedYear, selectedMonth),
   });
+
+  const isLoading = isSummaryLoading || isGraphLoading || isReportLoading;
+
+  if (isLoading) return null;
 
   return (
     <>
