@@ -4,6 +4,7 @@ import { useAppSelector } from "../../hooks/useRedux";
 import { formatDay } from "../../utils/dateUtils";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { formatTime } from "../../utils/dateUtils";
 
 export default function HistoryItem({ ...item }: HistoryProps) {
   const nav = useNavigate();
@@ -12,10 +13,12 @@ export default function HistoryItem({ ...item }: HistoryProps) {
   const [action, setAction] = useState<string>("");
 
   useEffect(() => {
-    if (item.actionType === "_119") setAction("119 조치");
+    if (item.actionType === "_119") setAction("119 이송");
     else if (item.actionType === "FAMILY") setAction("보호자 조치");
     else setAction("");
   }, [item.actionType]);
+
+  const formattedTime = new Date(item.situationTime);
 
   return (
     <button
@@ -31,8 +34,7 @@ export default function HistoryItem({ ...item }: HistoryProps) {
                 {formatDay(new Date(item.situationTime))}
               </div>
               <div className="body-xs text-darkgray w-fit">
-                {new Date(item.situationTime).getHours()}:
-                {new Date(item.situationTime).getMinutes()}
+                {formatTime(formattedTime)}
               </div>
             </div>
             <div className="body-xs text-placeholder flex justify-end pr-2">

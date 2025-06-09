@@ -91,11 +91,11 @@ export default function Report({
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-2.5">
                 <div className="body-m-bold">[ 분석 ]</div>
-                <div className="body-s text-darkgray">{analysis}</div>
+                <div className="body-p text-darkgray">{analysis}</div>
               </div>
               <div className="flex flex-col gap-2.5">
                 <div className="body-m-bold">[ 조치 ]</div>
-                <div className="body-s text-darkgray">{action}</div>
+                <div className="body-p text-darkgray">{action}</div>
               </div>
             </div>
           ) : (
