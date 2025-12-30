@@ -1,54 +1,132 @@
-# React + TypeScript + Vite
+# FAIN 👵🏻
+AI 기반 노인 낙상 감지 스마트 헬스케어 웹 애플리케이션
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Overview
+FAIN은 소프트웨어공학종합프로젝트(캡스톤디자인)로 진행한  
+**AI + 엣지 컴퓨팅 기반 노인 낙상 감지 시스템**입니다.
 
-Currently, two official plugins are available:
+실시간 영상 스트리밍을 통해 보호자가 환자의 상태를 확인할 수 있으며,  
+AI 서버에서 낙상 상황을 감지하면 **FCM 기반 푸시 알림**으로 즉시 보호자에게 전달됩니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+또한, 환자의 신체·의료 정보와 낙상 데이터를 기반으로  
+**LangChain + GPT를 활용한 AI 분석 리포트**를 자동 생성하여  
+낙상 위험 분석 및 대응 방향을 제공하는 스마트 헬스케어 앱입니다.
 
-## Expanding the ESLint configuration
+PWA 기술을 적용하여 설치형 웹앱 형태로 제공되며,  
+웹·모바일 환경 모두에서 접근성과 사용성을 확보했습니다.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 👥 Team
+- AI 3명
+- 프론트엔드/디자인 1명
+- 백엔드 2명
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🧑‍💻 My Role
+- 프로젝트 **기획, 디자인, 프론트엔드 전반 단독 담당**
+- Figma를 활용한 UI/UX 설계 및 디자인 시스템 구성
+- React + TypeScript 기반 프론트엔드 구조 설계 및 구현
+- Redux-toolkit을 활용한 인증 정보 및 UI 전역 상태 관리
+- Tanstack-query를 활용한 서버 데이터 페칭, 캐싱, 동기화 처리
+- PWA 적용을 통한 설치형 웹앱 및 오프라인 대응
+- FCM(Firebase Cloud Messaging)을 활용한 낙상 알림 푸시 기능 구현
+- 실시간 영상 스트리밍 UI 및 상태 표시 기능 구현
+- axios 기반 비동기 API 통신 및 예외 처리
+- Recharts를 활용한 낙상 및 활동 데이터 시각화
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠 Tech Stack
+Design  
+- Figma  
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Frontend  
+- React  
+- TypeScript  
+- Redux-toolkit  
+- Tanstack-query  
+- Axios  
+- PWA  
+- FCM  
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+Styling & Visualization  
+- Tailwind CSS  
+- Recharts  
+
+External API  
+- Daum Postcode API  
+
+Build & Deploy  
+- Vite  
+- Vercel  
+
+Collaboration  
+- GitHub  
+- Notion  
+- Discord  
+
+## ✨ Key Features
+- 로그인 및 회원가입
+  - 보호자 계정 생성 시 JWT 토큰 발급
+  - 환자의 기본 정보, 신체 정보, 의료 정보 입력
+
+- 실시간 스트리밍 페이지
+  - 보호자가 환자의 상태를 **실시간 영상 스트리밍**으로 확인
+  - 스트리밍 화면 내 낙상 발생 여부 및 상태 표시
+
+- 낙상 감지 알림
+  - AI 서버에서 낙상 인식 시 백엔드로 이벤트 전달
+  - FCM을 통해 보호자에게 실시간 푸시 알림 전송
+
+- AI 리포트 기능
+  - 환자 정보를 기반으로 낙상 분석 및 대응 조치 요약 리포트 제공
+  - LangChain + GPT를 활용한 자동 생성
+
+- 분석 페이지
+  - 월별 낙상 데이터 및 활동 기록을 그래프로 시각화
+  - 데이터 기반 AI 리포트 자동 생성
+
+- 히스토리 페이지
+  - 과거 낙상 발생 이력 조회
+  - 날짜, 감지 유형, 조치 내역 등 상세 정보 확인
+
+- 마이페이지
+  - 보호자 및 환자 프로필, 의료 정보 수정 및 업데이트
+
+## 🔍 What I Focused On
+- **프론트엔드 아키텍처 설계**
+  - Redux(전역 UI·인증 상태)와 Tanstack-query(서버 상태)의 역할을 명확히 분리
+- **실시간성**
+  - 스트리밍, 낙상 감지, 푸시 알림까지 이어지는 실시간 흐름 안정화
+- **접근성과 사용성**
+  - 고령자 및 보호자 사용 환경을 고려한 단순하고 직관적인 UI
+- **PWA 환경 안정화**
+  - 설치형 웹앱에서 발생하는 해상도·권한 이슈 해결
+
+## 🧯 Troubleshooting
+- 디자이너 부재로 인한 디자인 직접 수행
+  - Figma로 전체 UI/UX 기획 및 디자인 시스템 정립
+  - Tailwind CSS 커스텀 클래스를 활용한 공통 컴포넌트 설계
+
+- Redux-toolkit과 Tanstack-query 역할 혼동
+  - 전역 상태와 서버 상태를 동시에 관리하며 충돌 발생
+  - Redux는 인증·UI 상태, Query는 서버 데이터로 책임 분리
+
+- FCM + PWA 환경 연동 복잡성
+  - Service Worker 생명주기, 브라우저 권한 이슈 발생
+  - 공식 문서 분석 및 테스트 반복으로 안정화
+
+- PWA 설치형 앱에서 UI 깨짐 문제
+  - Tailwind 반응형 유틸리티 적극 활용
+  - 다양한 모바일 해상도 대응 및 뷰포트 단위 최적화
+
+## 🌱 What I Learned
+- 프론트엔드 전반을 단독으로 책임지며  
+  기획, 디자인, 개발, 배포까지 전 과정을 완주
+- AI·컴퓨터 비전·헬스케어가 결합된 복합 시스템을  
+  프론트엔드 관점에서 설계한 다학제적 개발 경험
+- LangChain + GPT, FCM, PWA 등 최신 기술을 실제 서비스에 적용하며  
+  빠른 기술 학습 및 문제 해결 능력 향상
+- 연구 기반 문제 정의부터 구현, 결과 해석까지 이어지는  
+  **연구형 프로젝트 사이클 경험**
+
+## 🏆 Result
+- 서비스 디자인, 개발, 배포 전 과정을 단독 수행
+- 소프트웨어공학종합프로젝트(캡스톤 디자인) **A+ 성적 취득**
+- 실제 서비스 수준의 완성도를 갖춘 스마트 헬스케어 프로젝트 완성
